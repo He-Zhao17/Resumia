@@ -1,0 +1,18 @@
+{
+    "name": "final_project",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "author": "Hongzhi Zhao 10478411, Chenyang Xu - 10476888, Qifan Shi - 10474283, He Zhao - 20009673",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+      "express": "^4.18.2",
+      "express-handlebars": "6.0.6",
+      "mongodb": "^4.10.0",
+      "handlebars": "4.7.7",
+      "axios": "1.1.3"
+    }
+  }
