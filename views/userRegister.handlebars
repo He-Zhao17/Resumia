@@ -1,0 +1,23 @@
+<section>
+<h1>Register</h1>
+<p style="color: red;">{{error}}</p>
+<form id="registration-form" action="/register" method="POST">
+    <label for="emailInput">
+        Username
+        <input type="text" id = "emailInput" name="emailInput" placeholder="email">
+    </label>
+    <label for="passwordInput">
+        Password
+        <input type="password" id = "passwordInput" name="passwordInput" placeholder="password">
+    </label>
+    <label for="userTypeInput">
+        Password
+        <select id = "userTypeInput" name="userTypeInput" >
+            <option value="true">Applicant</option>
+            <option value="false">HR</option>
+        </select>
+    </label>
+    <button id="submitButton" type="submit">Register</button>
+</form>
+<a href="/">Already have an account? Click here to log-in</a>
+</section>
