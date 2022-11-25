@@ -18,5 +18,8 @@ const getCollectionFn = (collection) => {
 /* Now, you can list your collections here: 
 NOTE: YOU WILL NEED TO CHANGE THE CODE BELOW TO HAVE THE COLLECTION(S) REQUIRED BY THE ASSIGNMENT */
 module.exports = {
-  movies: getCollectionFn("movies"),
+  appliction: getCollectionFn("applictions"),
+  user: getCollectionFn("users"),
+  jobpost: getCollectionFn("jobposts"),
+  resume: getCollectionFn("resume")
 };
