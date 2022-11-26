@@ -85,8 +85,6 @@ router
       );
       console.log(createInfo);
       if (createInfo) {
-        req.session.userId = createInfo.userId;
-        req.session.userType = createInfo.userType;
         res.redirect("/");
       } else {
         return res.status(500).json({ error: "Internal Server Error" });
