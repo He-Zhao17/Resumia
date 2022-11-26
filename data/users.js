@@ -4,7 +4,10 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 const helpers = require("../helper/helpers");
 
-const createUser = async (email, password, isApplicant) => {
+const createUser = async (email, password, isApplicant,firstname,lastname,gander,city,state,country,age,phone,address,website) => {
+  if(!email||!password||!isApplicant||!firstname||!lastname){
+    throw `Some of the input is empty`;
+  }
   email = helpers.checkUserEmail(email);
   helpers.checkPassword(password);
   isApplicant = helpers.checkUserType(isApplicant);
@@ -20,6 +23,16 @@ const createUser = async (email, password, isApplicant) => {
     email: email,
     hashedPassword: hash,
     type: isApplicant,
+    firstname:firstname,
+    lastname:lastname,
+    gander:gander,
+    city:city,
+    state:state,
+    country:country,
+    age:age,
+    phone:phone,
+    address:address,
+    website:website
   };
 
   const insertInfo = await userCollection.insertOne(newUser);

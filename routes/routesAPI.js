@@ -58,10 +58,30 @@ router
       let email = req.body.emailInput;
       let password = req.body.passwordInput;
       let isApplicant = req.body.userTypeInput;
+      let firstanme=req.body.firstnameInput;
+      let lastanme=req.body.lastnameInput;
+      let state=req.body.stateInput;
+      let gander=req.body.ganderInput;
+      let city=req.body.cityInput;
+      let country=req.body.countryInput;
+      let address=req.body.addressInput;
+      let website=req.body.websiteInput;
+      let age=req.body.ageInput;
+      let phone=req.body.phoneInput;
       const createInfo = await userData.createUser(
         email,
         password,
-        isApplicant
+        isApplicant,
+        firstanme,
+        lastanme,
+        gander,
+        city,
+        state,
+        country,
+        age,
+        phone,
+        address,
+        website
       );
       console.log(createInfo);
       if (createInfo) {
