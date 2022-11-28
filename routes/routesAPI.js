@@ -13,7 +13,9 @@ router.route("/").get(async (req, res) => {
       return res.redirect(`/hr/${req.session.userId}`);
     }
   } else {
-    res.sendFile(path.resolve("static/userLogin.html"));
+    res.render("userLogin", {
+      title: "Login",
+    });
   }
 });
 
@@ -27,7 +29,9 @@ router
         return res.redirect("/hr" + req.session.userId);
       }
     } else {
-      res.sendFile(path.resolve("static/userRegister.html"));
+      res.render("userRegister", {
+        title: "Register",
+      });
     }
   })
   .post(async (req, res) => {
@@ -39,7 +43,10 @@ router
       helpers.checkPassword(password);
       helpers.checkUserType(userType);
     } catch (error) {
-      res.status(400).sendFile(path.resolve("static/userLogin.html"));
+      return res.status(400).render("userRegister", {
+        title: "Register",
+        error: error,
+      });
     }
 
     try {
@@ -61,7 +68,10 @@ router
         return res.status(500).json({ error: "Internal Server Error" });
       }
     } catch (error) {
-      return res.status(500).sendFile(path.resolve("static/userRegister.html"));
+      return res.status(500).render("userRegister", {
+        title: "Register",
+        error: error,
+      });
     }
   });
 
@@ -72,7 +82,10 @@ router.route("/login").post(async (req, res) => {
     helpers.checkUserEmail(email);
     helpers.checkPassword(password);
   } catch (error) {
-    return res.status(400).sendFile(path.resolve("static/userLogin.html"));
+    return res.status(400).render("userLogin", {
+      title: "Login",
+      error: error,
+    });
   }
 
   try {
@@ -86,7 +99,10 @@ router.route("/login").post(async (req, res) => {
       return res.redirect("/");
     }
   } catch (error) {
-    return res.status(400).sendFile(path.resolve("static/userLogin.html"));
+    return res.status(400).render("userLogin", {
+      title: "Login",
+      error: error,
+    });
   }
 });
 

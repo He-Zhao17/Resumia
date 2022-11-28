@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Basic Info</title>
-  <link rel="stylesheet" href="/public/main.css">
-</head>
-<body>
-  <h1>This is basic info page for HR</h1>
-  <main>
-    <form action="/hr/addBasicInfo" method="POST">
+<section>
+    <h1>This is basic info page for applicant</h1>
+    <form action="/applicant/addBasicInfo" method="POST">
         <label>
-          Please enter more info so that we can help u receive applications easier:
+          Please enter more info so that we can help u search job easier:
         </label>
         <br>
+        <p style="color: red;">{{error}}</p>
         <label for="firstname">
             Firstname
             <input type="firstname" id = "firstnameInput" name="firstnameInput" placeholder="firstname">
@@ -20,6 +13,15 @@
         <label for="lastname">
             Lastname
             <input type="lastname" id = "lastnameInput" name="lastnameInput" placeholder="lastname">
+        </label>
+        <br>
+        <label for="genderInput">
+            Type
+            <select id = "genderInput" name="genderInput" >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+            </select>
         </label>
         <br>
         <label for="city">
@@ -42,6 +44,4 @@
         <br>
         <button id="submitButton" type="submit">Continue</button>
     </form>
-  </main>
-</body>
-</html>
+</section>

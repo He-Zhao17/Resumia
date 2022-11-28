@@ -6,6 +6,11 @@
 </head>
 <body>
     <header>
+        {{#if isHomepage}}
+            <h1>This is a navigation bar</h1>
+            <p>current time: {{time}}</p>
+        {{else}}     
+        {{/if}}
     </header>
     <main>
         {{{body}}}

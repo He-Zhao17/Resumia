@@ -1,22 +1,104 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
 const data = require("../data");
+const helpers = require("../helper/helpers");
+const userData = data.users;
 
 router.route("/:id").get(async (req, res) => {
   if (req.session.userType === false) {
     if (req.session.basicInfo === true) {
       return res.render("receivedApplications", {
         title: "Homepage",
-        username: req.session.user,
         time: new Date().toUTCString(),
+        isHomepage: true,
       });
     } else {
-      res.sendFile(path.resolve("static/HRBasicInfo.html"));
+      return res.status(403).render("HRBasicInfo", {
+        title: "HR Basic Info",
+      });
     }
   } else {
-    res.status(403).sendFile(path.resolve("static/forbiddenAccess.html"));
+    res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
   }
 });
 
+router
+  .route("/addBasicInfo")
+  .get(async (req, res) => {
+    if (req.session.userType === true || req.session.userType === null) {
+      res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
+      });
+    }
+    if (req.session.basicInfo === true) {
+      res.redirect("/");
+    }
+  })
+  .post(async (req, res) => {
+    if (req.session.userType === true || req.session.userType === null) {
+      res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
+      });
+    }
+    if (req.session.basicInfo === true) {
+      res.redirect("/");
+    }
+    try {
+      let firstname = req.body.firstnameInput;
+      let lastname = req.body.lastnameInput;
+      let city = req.body.cityInput;
+      let state = req.body.stateInput;
+      let country = req.body.countryInput;
+      let phone = req.body.phoneInput;
+      helpers.checkName(firstname);
+      helpers.checkName(lastname);
+      helpers.checkPlace(city);
+      helpers.checkPlace(state);
+      helpers.checkPlace(country);
+      helpers.checkPhone(phone);
+    } catch (error) {
+      return res.status(403).render("HRBasicInfo", {
+        title: "HR Basic Info",
+        error: error,
+      });
+    }
+    try {
+      let firstname = req.body.firstnameInput;
+      let lastname = req.body.lastnameInput;
+      let gender = req.body.genderInput;
+      let city = req.body.cityInput;
+      let state = req.body.stateInput;
+      let country = req.body.countryInput;
+      let phone = req.body.phoneInput;
+
+      const addInfo = await userData.addBasicInfo(
+        req.session.userId,
+        req.session.userType,
+        firstname,
+        lastname,
+        gender,
+        city,
+        state,
+        country,
+        phone
+      );
+
+      if (addInfo) {
+        req.session.basicInfo = addInfo.basicInfo;
+        res.redirect("/");
+      } else {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+    } catch (error) {
+      return res.status(403).render("HRBasicInfo", {
+        title: "HR Basic Info",
+        error: error,
+      });
+    }
+  });
 module.exports = router;

@@ -17,11 +17,11 @@ const checkPassword = function (password) {
     password == null ||
     password.trim().length === 0
   )
-    throw "Error: Invalid password";
+    throw "Error: Invalid Password";
 
   let reg = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
   if (!reg.test(password)) {
-    throw "Error: Invalid password";
+    throw "Error: Invalid Password";
   }
   return password;
 };
@@ -32,33 +32,51 @@ const checkUserType = function (userType) {
     userType == null ||
     userType.trim().length === 0
   )
-    throw "Error: Invalid user type";
+    throw "Error: Invalid User Type";
   if (userType === "true") {
     return true;
   } else if (userType === "false") {
     return false;
   } else {
-    throw "Error: Invalid user type";
+    throw "Error: Invalid User Type";
   }
 };
 
 const checkName = function (name) {
-  return true;
+  if (typeof name != "string" || name == null || name.trim().length === 0)
+    throw "Error: Invalid Name";
+  name = name.trim();
+  let reg = /^[a-z']+$/i;
+  let regWrong = /^.*(''+).*$/; // if there is a consecutive ''''', even more than 2, it's wrong
+  if (!reg.test(name)) {
+    throw "Error: Invalid Name";
+  } else {
+    if (regWrong.test(name)) {
+      throw "Error: Invalid Name";
+    }
+  }
+  return name;
 };
 
-const checkPlace = function (name) {
-  return true;
+const checkPlace = function (place) {
+  if (typeof place != "string" || place == null || place.trim().length === 0)
+    throw "Error: Invalid Place Name";
+  place = place.trim();
+  return place;
 };
 
-const checkPhone = function (name) {
-  return true;
+const checkPhone = function (phone) {
+  if (typeof phone != "string" || phone == null || phone.trim().length === 0)
+    throw "Error: Invalid Phone Number";
+  phone = phone.trim();
+  return phone;
 };
 
 const checkId = function (id) {
   if (typeof id != "string" || id == null || id.trim().length === 0)
-    throw "Error: id must be string instead of null or pure spaces";
+    throw "Error: Invalid Object ID";
   id = id.trim();
-  if (!ObjectId.isValid(id)) throw "Error: invalid object ID";
+  if (!ObjectId.isValid(id)) throw "Error: Invalid Object ID";
   return id;
 };
 
