@@ -3,11 +3,9 @@ const user = mongoCollections.user;
 const bcrypt = require("bcryptjs");
 const saltRounds = 16;
 const helpers = require("../helper/helpers");
+const { ObjectId } = require("mongodb");
 
-const createUser = async (email, password, isApplicant,firstname,lastname,gander,city,state,country,age,phone,address,website) => {
-  if(!email||!password||!isApplicant||!firstname||!lastname){
-    throw `Some of the input is empty`;
-  }
+const createUser = async (email, password, isApplicant) => {
   email = helpers.checkUserEmail(email);
   helpers.checkPassword(password);
   isApplicant = helpers.checkUserType(isApplicant);
@@ -23,18 +21,18 @@ const createUser = async (email, password, isApplicant,firstname,lastname,gander
     email: email,
     hashedPassword: hash,
     type: isApplicant,
-    firstname:firstname,
-    lastname:lastname,
-    gander:gander,
-    city:city,
-    state:state,
-    country:country,
-    age:age,
-    phone:phone,
-    address:address,
-    website:website
+    basicInfo: false, // this is for checking if user has filled basic info
+    firstname: "",
+    lastname: "",
+    gender: "",
+    city: "",
+    state: "",
+    country: "",
+    age: "",
+    phone: "",
+    address: "",
+    website: "",
   };
-
   const insertInfo = await userCollection.insertOne(newUser);
   if (!insertInfo.acknowledged || !insertInfo.insertedId)
     throw "Error: Creating User failed";
@@ -42,6 +40,7 @@ const createUser = async (email, password, isApplicant,firstname,lastname,gander
   return {
     userId: newId,
     userType: isApplicant,
+    basicInfo: newUser.basicInfo,
   };
 };
 
@@ -60,10 +59,65 @@ const checkUser = async (email, password) => {
     return {
       userId: getUser._id.toString(),
       userType: getUser.type,
+      basicInfo: getUser.basicInfo,
     };
   } else {
     throw "Error: Either email or password is invalid";
   }
 };
 
-module.exports = { createUser, checkUser };
+const getUserById = async (userId) => {
+  userId = helpers.checkId(userId);
+  const userCollection = await user();
+  const getUser = await userCollection.findOne({ _id: ObjectId(userId) });
+  if (getUser === null) {
+    throw `Error: User ${userId} Not Found`;
+  }
+  getUser._id = getUser._id.toString();
+  return getUser;
+};
+
+const addBasicInfo = async (
+  userId,
+  userType,
+  firstname,
+  lastname,
+  gender,
+  city,
+  state,
+  country,
+  phone
+) => {
+  helpers.checkName(firstname);
+  helpers.checkName(lastname);
+  helpers.checkPlace(city);
+  helpers.checkPlace(state);
+  helpers.checkPlace(country);
+  helpers.checkPhone(phone);
+
+  let getUser = await getUserById(userId);
+  getUser._id = ObjectId(getUser._id);
+  getUser.basicInfo = true;
+  getUser.firstname = firstname;
+  getUser.lastname = lastname;
+  getUser.gender = gender;
+  getUser.city = city;
+  getUser.state = state;
+  getUser.country = country;
+  getUser.phone = phone;
+
+  const userCollection = await user();
+  const updatedInfo = await userCollection.updateOne(
+    { _id: ObjectId(userId) },
+    { $set: getUser }
+  );
+  if (updatedInfo.modifiedCount === 0) {
+    throw "Error: Updating movie failed";
+  }
+
+  return {
+    basicInfo: getUser.basicInfo,
+  };
+};
+
+module.exports = { createUser, checkUser, getUserById, addBasicInfo };

@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 const checkUserEmail = function (email) {
   if (typeof email != "string" || email == null || email.trim().length === 0)
     throw "Error: Invalid Email";
@@ -39,8 +41,33 @@ const checkUserType = function (userType) {
     throw "Error: Invalid user type";
   }
 };
+
+const checkName = function (name) {
+  return true;
+};
+
+const checkPlace = function (name) {
+  return true;
+};
+
+const checkPhone = function (name) {
+  return true;
+};
+
+const checkId = function (id) {
+  if (typeof id != "string" || id == null || id.trim().length === 0)
+    throw "Error: id must be string instead of null or pure spaces";
+  id = id.trim();
+  if (!ObjectId.isValid(id)) throw "Error: invalid object ID";
+  return id;
+};
+
 module.exports = {
   checkUserEmail,
   checkPassword,
   checkUserType,
+  checkName,
+  checkPlace,
+  checkPhone,
+  checkId,
 };

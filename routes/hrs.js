@@ -4,19 +4,18 @@ const path = require("path");
 const data = require("../data");
 
 router.route("/:id").get(async (req, res) => {
-  /**
-   * TODO: need to route the user to different page depending on stages!
-   */
   if (req.session.userType === false) {
-    return res.render("HRHomepage", {
-      title: "Homepage",
-      time: new Date().toUTCString(),
-    });
+    if (req.session.basicInfo === true) {
+      return res.render("receivedApplications", {
+        title: "Homepage",
+        username: req.session.user,
+        time: new Date().toUTCString(),
+      });
+    } else {
+      res.sendFile(path.resolve("static/HRBasicInfo.html"));
+    }
   } else {
-    res.status(403).render("forbiddenAccess", {
-      title: "forbiddenAccess",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
+    res.status(403).sendFile(path.resolve("static/forbiddenAccess.html"));
   }
 });
 
