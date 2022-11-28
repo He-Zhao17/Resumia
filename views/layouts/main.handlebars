@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+</head>
+<body>
+    <header>
+        {{#if isHomepage}}
+            <h1>This is a navigation bar</h1>
+            <p>current time: {{time}}</p>
+        {{else}}     
+        {{/if}}
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    <footer></footer>
+</body>
+</html>

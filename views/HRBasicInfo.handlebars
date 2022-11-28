@@ -1,0 +1,48 @@
+
+<section>
+    <h1>This is basic info page for HR</h1>
+    <form action="/hr/addBasicInfo" method="POST">
+        <label>
+            Please enter more info so that we can help u receive applications easier:
+        </label>
+        <br>
+        <p style="color: red;">{{error}}</p>
+        <label for="firstname">
+            Firstname
+            <input type="firstname" id = "firstnameInput" name="firstnameInput" placeholder="firstname">
+        </label>
+        <label for="lastname">
+            Lastname
+            <input type="lastname" id = "lastnameInput" name="lastnameInput" placeholder="lastname">
+        </label>
+        <br>
+        <label for="genderInput">
+            Type
+            <select id = "genderInput" name="genderInput" >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+            </select>
+        </label>
+        <br>
+        <label for="city">
+            City
+            <input type="city" id = "cityInput" name="cityInput" placeholder="city">
+        </label>
+        <label for="state">
+            State
+            <input type="state" id = "stateInput" name="stateInput" placeholder="state">
+        </label>
+        <label for="country">
+            Country
+            <input type="country" id = "countryInput" name="countryInput" placeholder="country">
+        </label>
+        <br>
+        <label for="phone">
+            Phone
+            <input type="phone" id = "phoneInput" name="phoneInput" placeholder="phone">
+        </label>
+        <br>
+        <button id="submitButton" type="submit">Continue</button>
+    </form>
+</section>
