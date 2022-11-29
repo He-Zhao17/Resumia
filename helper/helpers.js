@@ -41,6 +41,27 @@ const checkUserType = function (userType) {
     throw "Error: Invalid User Type";
   }
 };
+function ismatched(fullString, substring) {
+  if(typeof fullString !='string'){
+    fullString=fullString.toString();
+}
+  fullString=fullString.toLowerCase();
+  substring=substring.toLowerCase();
+  let array = Array.from(fullString);
+  let sub = Array.from(substring);
+  for(let i=0;i<=array.length-sub.length;i++){
+      let j=0;
+      if(array[i]==sub[j]){
+        while(j<sub.length&& array[i+j]==sub[j]){
+          j++;
+        }
+        if(j==sub.length){
+          return true;
+        }
+      }
+  }
+  return false;
+};
 
 const checkName = function (name) {
   if (typeof name != "string" || name == null || name.trim().length === 0)
@@ -88,4 +109,5 @@ module.exports = {
   checkPlace,
   checkPhone,
   checkId,
+  ismatched
 };

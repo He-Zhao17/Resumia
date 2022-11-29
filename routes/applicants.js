@@ -3,7 +3,8 @@ const router = express.Router();
 const data = require("../data");
 const helpers = require("../helper/helpers");
 const userData = data.users;
-
+const appData = data.applications;
+const jobData=data.jobposts;
 router.route("/:id").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
@@ -23,8 +24,17 @@ router.route("/:id").get(async (req, res) => {
       error: "Error: 403, You are NOT logged in yet!",
     });
   }
-});
-
+})
+.post(async (req, res) => {
+  if(req.body.formid=="jobmarket-form"){
+   let array = await jobData.findjobs(req.body.input,req.body.type);
+    res.render("jobMarket",{jobs:array}) 
+    console.log(array)
+  }
+  else if(req.body.formid=="jobpost-form"){
+    console.log(req.body);
+  }
+})
 router
   .route("/addBasicInfo")
   .get(async (req, res) => {
