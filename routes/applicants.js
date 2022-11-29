@@ -5,7 +5,7 @@ const helpers = require("../helper/helpers");
 const userData = data.users;
 const appData = data.applications;
 const jobData=data.jobposts;
-router.route("/:id").get(async (req, res) => {
+router.route("/jobmarket").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
       return res.render("jobMarket", {
@@ -32,30 +32,32 @@ router.route("/:id").get(async (req, res) => {
     console.log(array)
   }
   else if(req.body.formid=="jobpost-form"){
+    let array = await appData.createApplication("hr_id",req.session.userId,"no",req.body.jobid);
+    res.redirect("/applicant/jobmarket")
     console.log(req.body);
   }
 })
 router
   .route("/addBasicInfo")
   .get(async (req, res) => {
-    if (req.session.userType === true || req.session.userType === null) {
+    if (req.session.userType == true || req.session.userType == null) {
       res.status(403).render("forbiddenAccess", {
         title: "Forbidden Access",
         error: "Error: 403, You are NOT logged in yet!",
       });
     }
-    if (req.session.basicInfo === true) {
+    if (req.session.basicInfo ==true) {
       res.redirect("/");
     }
   })
   .post(async (req, res) => {
-    if (req.session.userType === false || req.session.userType === null) {
+    if (req.session.userType == false || req.session.userType == null) {
       res.status(403).render("forbiddenAccess", {
         title: "Forbidden Access",
         error: "Error: 403, You are NOT logged in yet!",
       });
     }
-    if (req.session.basicInfo === true) {
+    if (req.session.basicInfo == true) {
       res.redirect("/");
     }
     try {
