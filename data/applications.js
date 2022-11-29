@@ -21,3 +21,6 @@ const createApplication = async (hr_id, user_id,resume_id,job_id) => {
     const newId = insertInfo.insertedId.toString();
     return newId;
   };
+  module.exports = {
+    createApplication
+};

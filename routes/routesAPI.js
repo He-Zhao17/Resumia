@@ -8,7 +8,7 @@ const path = require("path");
 router.route("/").get(async (req, res) => {
   if (req.session.userId) {
     if (req.session.userType === true) {
-      return res.redirect(`/applicant/${req.session.userId}`);
+      return res.redirect(`/applicant/jobmarket`);
     } else {
       return res.redirect(`/hr/${req.session.userId}`);
     }
