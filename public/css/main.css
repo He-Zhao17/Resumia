@@ -1,8 +1,94 @@
+/* CSS for login and register */
+
 .LoginAndRegister{
-    width: 30%;
-    height: 90%;
-    padding: 50px;
-    border: 1px solid black;
-    margin-left: 30px;
+    width: 70%;
+    padding: 0px;
     line-height: 80px;
+    margin: 0px auto;
+}
+
+.HomeNav{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px auto;
+}
+
+.HomeNav a{
+    text-decoration: none;
+
+}
+.HomeNav a:first-of-type{
+    color: #0077b5;
+    font-size: 19px;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.HomeNav a:first-of-type:hover{
+    opacity: 0.6;
+}
+.LoginButton{
+    border-radius: 2em;
+    border: 1px solid #0077b5;
+    width: 116px;
+    height: 49px;
+    color: #0077b5;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.LoginButton:hover{
+    opacity: 0.8;
+    color: cornflowerblue;
+}
+
+.LoginAndRegister hr{
+    border-color: #4aafe4;
+    height: 2px;
+    background-color: #4aafe4;
+}
+
+
+.LoginAndRegister h1{
+    margin-left: 10px;
+    color:rgb(71, 73, 113);
+    font-size: 50px;
+}
+.LoginAndRegister h2{
+    margin-left: 10px;
+    margin-top: -50px;
+    margin-bottom: -20px;
+}
+#login-form{
+    padding: 0px 15px;
+}
+#emailInput, #passwordInput{
+    width: 240px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#submitButton{
+    height: 40px;
+    width: 250px;
+    border-radius: 1em;
+    color: white;
+    background-color: #4aafe4;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#login-form img{
+    width: 50%;
+    height: 50%;
+    margin-left: 50%;
+    margin-top: -279px;
+}
+
+footer{
+    text-align: center;
 }

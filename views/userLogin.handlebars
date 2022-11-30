@@ -1,17 +1,27 @@
 <section class="LoginAndRegister">
-    <h1>Login</h1>
-    <p style="color: red;">{{error}}</p>
+    <nav class="HomeNav">
+        <img src="/public/img/Logo.png" alt="Resumia">
+        <div>
+            <a href="../static/index.html">About Us</a>
+            <a href="/register"><button class="LoginButton" type="submit">Register</button></a>
+        </div>
+    </nav>
+    <hr>
+
+    <h1>Here is your job miracle!</h1>
+    <h2>Sign in to discover</h2>
     <form id="login-form" action="/login" method="POST">
-        <label for="emailInput">
-            Email
+        <label for="emailInput">     
             <input type="text" id="emailInput" name="emailInput" placeholder="email">
         </label>
         <br>
-        <label for="passwordInput">
-            Password
+        <label for="passwordInput">   
             <input type="password" id="passwordInput" name="passwordInput" placeholder="password">
         </label>
+        <br>
         <button id="submitButton" type="submit">Login</button>
+        <p style="color: red;">{{error}}</p>
+        <img src="/public/img/web-development-skills.jpg" alt="RecuitPic">
     </form>
-    <a href="/register">Click here to register!</a>
+
 </section>
