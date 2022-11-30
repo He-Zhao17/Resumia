@@ -1,15 +1,23 @@
-<section class="LoginAndRegister">
-    <h1>Register</h1>
-    <p style="color: red;">{{error}}</p>
+<section class="Register">
+    <nav class="HomeNav">
+        <img src="/public/img/Logo.png" alt="Resumia">
+        <div>
+            <a href="../static/index.html">About Us</a>
+        </div>
+    </nav>
+    <hr>
+    <h1>Defining your future? Start here</h1>
+    
     <form id="registration-form" action="/register" method="POST">
+        <h2>Register</h2>
         <label for="emailInput">
-            Username
             <input type="text" id = "emailInput" name="emailInput" placeholder="email">
         </label>
+        <br>
         <label for="passwordInput">
-            Password
             <input type="password" id = "passwordInput" name="passwordInput" placeholder="password">
         </label>
+        <br>
         <label for="userTypeInput">
             Type
             <select id = "userTypeInput" name="userTypeInput" >
@@ -18,6 +26,7 @@
             </select>
         </label>
         <br>
+        <p style="color: red;">{{error}}</p>
         <button id="submitButton" type="submit">Register</button>
     </form>
     <a href="/">Already have an account? Click here to log-in</a>
