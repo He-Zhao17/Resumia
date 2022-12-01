@@ -26,15 +26,28 @@ router.route("/jobmarket").get(async (req, res) => {
   }
 })
 .post(async (req, res) => {
-  if(req.body.formid=="jobmarket-form"){
-   let array = await jobData.findjobs(req.body.input,req.body.type);
-    res.render("jobMarket",{jobs:array}) 
-    console.log(array)
-  }
-  else if(req.body.formid=="jobpost-form"){
-    let array = await appData.createApplication("hr_id",req.session.userId,"no",req.body.jobid);
-    res.redirect("/applicant/jobmarket")
-    console.log(req.body);
+  if (req.session.userType === true) {
+    if (req.session.basicInfo === true) {
+      if(req.body.formid=="jobmarket-form"){
+        let array = await jobData.findjobs(req.body.input,req.body.type);
+         res.render("jobMarket",{jobs:array}) 
+         console.log(array)
+       }
+       else if(req.body.formid=="jobpost-form"){
+         let array = await appData.createApplication("hr_id",req.session.userId,"no",req.body.jobid);
+         res.redirect("/applicant/jobmarket")
+         console.log(req.body);
+       }
+    } else {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
   }
 })
 router
