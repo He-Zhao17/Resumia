@@ -113,5 +113,24 @@ router
       });
     }
   });
-
+  router.route("/profile").get(async (req, res) => {
+    if (req.session.userType === true) {
+      if (req.session.basicInfo === true) {
+        let array=[];
+        let user = await userData.getUserById(req.session.userId);
+        array.push(user);
+        console.log(user)
+        res.render("applicantProfile",{user:array}) 
+      } else {
+        res.render("applicantBasicInfo", {
+          title: "Applicant Basic Info",
+        });
+      }
+    } else {
+      return res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
+      });
+    }
+  })
 module.exports = router;
