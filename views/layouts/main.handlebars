@@ -7,9 +7,17 @@
     <link rel="icon" href="/public/img/favicon.ico">
 </head>
 <body>
-    <header>
+    <header class="MainPage">
         {{#if isHomepage}}
-            <h1>This is a navigation bar</h1>
+            <nav class="HomeNav">
+                <img src="/public/img/Logo.png" alt="Resumia">
+                <div>
+                    <a href="../static/index.html">About Us</a>
+                    <a href="/logout"><button class="LoginButton" type="submit">Log out</button></a>
+                </div>
+            
+            </nav>
+            <hr>
             <p>current time: {{time}}</p>
         {{else}}     
         {{/if}}

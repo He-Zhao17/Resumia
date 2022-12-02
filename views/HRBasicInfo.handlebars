@@ -1,7 +1,16 @@
 
-<section>
+<section class="MainPage">
+    <nav class="HomeNav">
+        <img src="/public/img/Logo.png" alt="Resumia">
+        <div>
+            <a href="../static/index.html">About Us</a>
+            <a href="/logout"><button class="LoginButton" type="submit">Log out</button></a>
+        </div>
+            
+    </nav>
+    <hr>
     <h1>This is basic info page for HR</h1>
-    <form action="/hr/addBasicInfo" method="POST">
+    <form action="/hr/addBasicInfo" method="POST" class="InfoForm">
         <label>
             Please enter more info so that we can help u receive applications easier:
         </label>

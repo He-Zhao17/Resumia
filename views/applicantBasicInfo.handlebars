@@ -1,6 +1,14 @@
-<section>
+<section class="MainPage">
+    <nav class="HomeNav">
+        <img src="/public/img/Logo.png" alt="Resumia">
+        <div>
+            <a href="../static/index.html">About Us</a>
+            <a href="/logout"><button class="LoginButton" type="submit">Log out</button></a>
+        </div>
+    </nav>
+    <hr>
     <h1>This is basic info page for applicant</h1>
-    <form action="/applicant/addBasicInfo" method="POST">
+    <form action="/applicant/addBasicInfo" method="POST" class="InfoForm">
         <label>
           Please enter more info so that we can help u search job easier:
         </label>
@@ -10,6 +18,7 @@
             Firstname
             <input type="firstname" id = "firstnameInput" name="firstnameInput" placeholder="firstname">
         </label>
+        <br>
         <label for="lastname">
             Lastname
             <input type="lastname" id = "lastnameInput" name="lastnameInput" placeholder="lastname">
@@ -38,7 +47,7 @@
         </label>
         <br>
         <label for="phone">
-            Phone
+            Phone Number
             <input type="phone" id = "phoneInput" name="phoneInput" placeholder="phone">
         </label>
         <br>

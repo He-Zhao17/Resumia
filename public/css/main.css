@@ -1,6 +1,6 @@
 /* CSS for login and register */
 
-.Login, .Register{
+.MainPage{
     width: 70%;
     padding: 0px;
     line-height: 80px;
@@ -45,19 +45,19 @@
     color: cornflowerblue;
 }
 
-.Login hr, .Register hr{
+.MainPage hr{
     border-color: #4aafe4;
     height: 2px;
     background-color: #4aafe4;
 }
 
 
-.Login h1, .Register h1{
+.MainPage h1{
     margin-left: 10px;
     color:rgb(71, 73, 113);
     font-size: 50px;
 }
-.Login h2, .Register h2{
+.MainPage h2{
     margin-left: 10px;
     margin-top: -50px;
     margin-bottom: -20px;
@@ -102,3 +102,25 @@ footer{
     text-align: center;
     margin: 0px auto;
 }
+
+
+/* CSS for resume */
+
+.InfoForm{
+    margin-left: 15px;
+    line-height: 70px;
+}
+
+.InfoForm input{
+    width: 240px;
+    height: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.InfoForm select{
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+}
+
