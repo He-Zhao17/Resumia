@@ -1,7 +1,22 @@
 <section class="MainPage">
   
   <h1>Job Market</h1>
-
+<form id="sort-form" name="sort-form" action="" method="POST">
+    <input type = "hidden" id="formid" name="formid" value="sort-form">
+        <label for="sortby">
+            Sort By
+            <select onclick="submit_form()" id = "sortby" name="sortby">
+                <option value="LowHigh">Low to High</option>
+                <option value="HighLow">High to Low</option>
+            </select>
+        </label>
+</form>
+    <script>
+    function submit_form(){
+        var form = document.getElementById("sort-form");
+        form.submit();
+    }
+    </script>
   <p>{{error}}</p>
   <form id="jobmarket-form" name="jobmarket-form" action="" method="POST">
   <input type = "hidden" id="formid" name="formid" value="jobmarket-form">

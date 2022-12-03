@@ -38,6 +38,10 @@ router.route("/jobmarket").get(async (req, res) => {
          res.redirect("/applicant/jobmarket")
          console.log(req.body);
        }
+       else if(req.body.formid=="sort-form"){
+        console.log(req.body.sortby)
+        res.redirect("/applicant/jobmarket")
+       }
     } else {
       res.render("applicantBasicInfo", {
         title: "Applicant Basic Info",
