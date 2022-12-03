@@ -1,0 +1,59 @@
+<section class="MainPage">
+    <nav class="HomeNav">
+        <img src="/public/img/Logo.png" alt="Resumia">
+        <div>
+            <a href="../static/index.html">About Us</a>
+            <a href="/logout"><button class="LoginButton" type="submit">Log out</button></a>
+        </div>
+    </nav>
+    <hr>
+    <p>{{error}}</p>
+    <h1>This is Update page for applicant</h1>
+    {{#each user}}
+    <form action="/applicant/updateInfo" method="POST" class="InfoForm">
+        <label>
+          Please enter change the info you want:
+        </label>
+        <br>
+        <p style="color: red;">{{error}}</p>
+        <label for="firstname">
+            Firstname
+            <input type="firstname" id = "firstnameInput" name="firstnameInput" value={{firstname}}>
+        </label>
+        <br>
+        <label for="lastname">
+            Lastname
+            <input type="lastname" id = "lastnameInput" name="lastnameInput"  value={{lastname}}>
+        </label>
+        <br>
+        <label for="genderInput">
+            Type
+            <select id = "genderInput" name="genderInput">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+            </select>
+        </label>
+        <br>
+        <label for="city">
+            City
+            <input type="city" id = "cityInput" name="cityInput" value={{city}}>
+        </label>
+        <label for="state">
+            State
+            <input type="state" id = "stateInput" name="stateInput" value={{state}}>
+        </label>
+        <label for="country">
+            Country
+            <input type="country" id = "countryInput" name="countryInput"  value={{country}}>
+        </label>
+        <br>
+        <label for="phone">
+            Phone Number
+            <input type="phone" id = "phoneInput" name="phoneInput" value={{phone}}>
+        </label>
+        <br>
+        <button id="submitButton" type="submit">Update</button>
+    </form>
+    {{/each}}
+</section>
