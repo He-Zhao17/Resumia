@@ -11,6 +11,7 @@ router.route("/:id").get(async (req, res) => {
         title: "Homepage",
         time: new Date().toUTCString(),
         isHomepage: true,
+        isApplicant: false,
       });
     } else {
       return res.status(403).render("HRBasicInfo", {
