@@ -2,74 +2,76 @@
     <h1>Create your splendid resume!</h1>
     <div id="createResumeDiv">
         <div id="ResumeNav">
-            <div>Personal Information</div>
-            <div>Skills</div>
-            <div>Education</div>
-            <div>Working Experience</div>
-            <div>Personal Statement</div>
+            <div id="IDTag">Personal Information</div>
+            <div id="SkillTag">Skills</div>
+            <div id="EduTag">Education</div>
+            <div id="WorkTag">Working Experience</div>
+            <div id="ProjTag">Project</div>
+            <div id="PSTag">Personal Statement</div>
         </div>
         <form action="/applicant/createResume" method="POST" id="resume-form">
             <p style="color: red;">{{error}}</p>
-            <label for="resumeName">
+            <div id="IDCont">
+                <label for="resumeName">
                 Resume Title
                 <input type="text" id = "resumeNameInput" name="resumeNameInput" placeholder="Resume Title">
-            </label>
-            <label for="firstname">
-                Firstname
-                <input type="text" id = "firstnameInput" name="firstnameInput" placeholder="Firstname">
-            </label>
-            <label for="lastname">
-                Lastname
-                <input type="text" id = "lastnameInput" name="lastnameInput" placeholder="Lastname">
-            </label>
-            <br>
-            {{!-- <label for="email">
-                Email
-                <input type="email" id = "emailInput" name="emailInput" placeholder="Email">
-            </label> --}}
-            <label for="genderInput">
-                Gender
-                <select id = "genderInput" name="genderInput" >
-                    <option value="0">Male</option>
-                    <option value="1">Female</option>
-                    <option value="2">Not to tell</option>
-                </select>
-            </label>
-            <br>
-            <label for="city">
-                City
-                <input type="text" id = "cityInput" name="cityInput" placeholder="city">
-            </label>
-            <label for="state">
-                State
-                <input type="text" id = "stateInput" name="stateInput" placeholder="state">
-            </label>
-            <label for="country">
-                Country
-                <input type="text" id = "countryInput" name="countryInput" placeholder="country">
-            </label>
-            <br>
-            <label for="age">
-                Age
-                <input type="number" id = "ageInput" name="ageInput" placeholder="Age">
-            </label>
-            <br>
-            <label for="phone">
-                Phone
-                <input type="text" id = "phoneInput" name="phoneInput" placeholder="phone">
-            </label>
-            <br>
-            <label for="address">
-                Address
-                <input type="text" id = "addrInput" name="addrInput" placeholder="Address">
-            </label>
-            <br>
-            <label for="website">
-                Website
-                <input type="text" id = "websiteInput" name="websiteInput" placeholder="Website">
-            </label>
-            <br>
-            <div>
+                </label>
+                <label for="firstname">
+                    Firstname
+                    <input type="text" id = "firstnameInput" name="firstnameInput" placeholder="Firstname">
+                </label>
+                <label for="lastname">
+                    Lastname
+                    <input type="text" id = "lastnameInput" name="lastnameInput" placeholder="Lastname">
+                </label>
+                <br>
+                {{!-- <label for="email">
+                    Email
+                    <input type="email" id = "emailInput" name="emailInput" placeholder="Email">
+                </label> --}}
+                <label for="genderInput">
+                    Gender
+                    <select id = "genderInput" name="genderInput" >
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                        <option value="2">Not to tell</option>
+                    </select>
+                </label>
+                <br>
+                <label for="city">
+                    City
+                    <input type="text" id = "cityInput" name="cityInput" placeholder="city">
+                </label>
+                <label for="state">
+                    State
+                    <input type="text" id = "stateInput" name="stateInput" placeholder="state">
+                </label>
+                <label for="country">
+                    Country
+                    <input type="text" id = "countryInput" name="countryInput" placeholder="country">
+                </label>
+                <br>
+                <label for="age">
+                    Age
+                    <input type="number" id = "ageInput" name="ageInput" placeholder="Age">
+                </label>
+                <br>
+                <label for="phone">
+                    Phone
+                    <input type="text" id = "phoneInput" name="phoneInput" placeholder="phone">
+                </label>
+                <br>
+                <label for="address">
+                    Address
+                    <input type="text" id = "addrInput" name="addrInput" placeholder="Address">
+                </label>
+                <br>
+                <label for="website">
+                    Website
+                    <input type="text" id = "websiteInput" name="websiteInput" placeholder="Website">
+                </label>
+            </div>
+            <div id="SkillCont">
                 <label for="skills">
                     Add Skill
                     <input type="text" id = "skillInput" name="skillInput" placeholder="Add skill here">
@@ -77,8 +79,7 @@
                     <div>Added skill displays here</div>
                 </label>
             </div>
-            <br>
-            <div>  {{!-- Education --}}
+            <div id="EduCont">  {{!-- Education --}}
                 <div>
                     <label for="school">
                         School
@@ -130,11 +131,10 @@
                         Country
                         <input type="textarea" id = "descriptionInput" name="Edu[0][descriptionInput]" placeholder="Description">
                     </label>
-                    <br>
                 </div>
                 <button>Add Education</button>
             </div>
-            <div>  {{!-- Employed Histories --}}
+            <div id="WorkCont">  {{!-- Employed Histories --}}
                 <div>
                     <label for="employer">
                         Employer
@@ -176,11 +176,10 @@
                         Country
                         <input type="textarea" id = "descriptionInput" name="Emp[0][descriptionInput]" placeholder="Description">
                     </label>
-                    <br>
                 </div>
                 <button>Add Employed History</button>
             </div>
-            <div>  {{!-- Projects --}}
+            <div id="ProjCont">  {{!-- Projects --}}
                 <div>
                     <label for="title">
                         Title
@@ -196,10 +195,10 @@
                         Description
                         <input type="textarea" id = "descriptionInput" name="Pro[0][descriptionInput]" placeholder="Description">
                     </label>
-                    <br>
                 </div>
                 <button>Add Project</button>
             </div>
+
             <button class="submitButton" type="submit">Submit</button>
         </form>
     </div>
