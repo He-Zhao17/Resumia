@@ -100,61 +100,34 @@ const checkId = function (id) {
   if (!ObjectId.isValid(id)) throw "Error: Invalid Object ID";
   return id;
 };
-
-const checkEmployer = function (employer ){
-  if (!employer) {
-    throw "Error: Invalid Employer";
+const sortedbysalrayformlowtohigh = function (array) {
+for(let i=0;i<array.length;i++){
+  let index=i;
+  for(let j=i+1;j<array.length;j++){
+    if(array[index].salary>array[j].salary){
+      index=j;
+    }
   }
-  if (typeof employer !== "string") {
-    throw "Error: Invalid Employer";
-  }
-  if (employer.trim().length === 0) {
-    throw "Error: Employer should not be empty";
-  }
-  return employer.trim();
+  let temp = array[index];
+  array[index]=array[i];
+  array[i]=temp;
 }
-
-const checkSalary = function (salary) {
-  if (!salary) {
-    throw "Error: Invalid Salary";
+return array;
+};
+const sortedbysalrayformhightolow = function (array) {
+  for(let i=0;i<array.length;i++){
+    let index=i;
+    for(let j=i+1;j<array.length;j++){
+      if(array[index].salary<array[j].salary){
+        index=j;
+      }
+    }
+    let temp = array[index];
+    array[index]=array[i];
+    array[i]=temp;
   }
-  if (typeof salary != "number") {
-    throw "Error: Salary should be a number";
-  }
-  if (salary < 0) {
-    throw "Error: Invalid Salary";
-  }
-  return salary;
-}
-
-const checkJobTitle = function (jobTitle ){
-  if (!jobTitle) {
-    throw "Error: Invalid jobTitle";
-  }
-  if (typeof jobTitle !== "string") {
-    throw "Error: Invalid jobTitle";
-  }
-  if (jobTitle.trim().length === 0) {
-    throw "Error: jobTitle should not be empty";
-  }
-  return jobTitle.trim();
-}
-
-const checkJobDescription = function (JobDescription ){
-  if (!JobDescription) {
-    throw "Error: Invalid JobDescription";
-  }
-  if (typeof JobDescription !== "string") {
-    throw "Error: Invalid JobDescription";
-  }
-
-  if (JobDescription.trim().length === 0) {
-    throw "Error: JobDescription should not be empty";
-  }
-  return JobDescription.trim();
-}
-
-
+  return array;
+  };
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -164,8 +137,6 @@ module.exports = {
   checkPhone,
   checkId,
   ismatched,
-  checkEmployer,
-  checkSalary,
-  checkJobDescription,
-  checkJobTitle
-}
+  sortedbysalrayformlowtohigh,
+  sortedbysalrayformhightolow
+};
