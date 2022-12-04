@@ -1,197 +1,207 @@
 <section class="MainPage">
     <h1>Create your splendid resume!</h1>
-    <form action="/applicant/createResume" method="POST">
-        <p style="color: red;">{{error}}</p>
-        <label for="resumeName">
-            resumeTitle
-            <input type="text" id = "resumeNameInput" name="resumeNameInput" placeholder="Resume Title">
-        </label>
-        <label for="firstname">
-            Firstname
-            <input type="text" id = "firstnameInput" name="firstnameInput" placeholder="Firstname">
-        </label>
-        <label for="lastname">
-            Lastname
-            <input type="text" id = "lastnameInput" name="lastnameInput" placeholder="Lastname">
-        </label>
-        <br>
-        <label for="email">
-            Email
-            <input type="email" id = "emailInput" name="emailInput" placeholder="Email">
-        </label>
-        <label for="genderInput">
-            Gender
-            <select id = "genderInput" name="genderInput" >
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-                <option value="2">Not to tell</option>
-            </select>
-        </label>
-        <br>
-        <label for="city">
-            City
-            <input type="text" id = "cityInput" name="cityInput" placeholder="city">
-        </label>
-        <label for="state">
-            State
-            <input type="text" id = "stateInput" name="stateInput" placeholder="state">
-        </label>
-        <label for="country">
-            Country
-            <input type="text" id = "countryInput" name="countryInput" placeholder="country">
-        </label>
-        <br>
-        <label for="age">
-            Age
-            <input type="number" id = "ageInput" name="ageInput" placeholder="Age">
-        </label>
-        <br>
-        <label for="phone">
-            Phone
-            <input type="text" id = "phoneInput" name="phoneInput" placeholder="phone">
-        </label>
-        <br>
-        <label for="address">
-            Address
-            <input type="text" id = "addrInput" name="addrInput" placeholder="Address">
-        </label>
-        <br>
-        <label for="website">
-            Website
-            <input type="text" id = "websiteInput" name="websiteInput" placeholder="Website">
-        </label>
-        <br>
-        <div>
-            <label for="skills">
-                Add Skill
-                <input type="text" id = "skillInput" name="skillInput" placeholder="Add skill here">
-                <button id="addButton">Add</button>
-                <div>Added skill displays here</div>
+    <div id="createResumeDiv">
+        <div id="ResumeNav">
+            <div>Personal Information</div>
+            <div>Skills</div>
+            <div>Education</div>
+            <div>Working Experience</div>
+            <div>Personal Statement</div>
+        </div>
+        <form action="/applicant/createResume" method="POST" id="resume-form">
+            <p style="color: red;">{{error}}</p>
+            <label for="resumeName">
+                Resume Title
+                <input type="text" id = "resumeNameInput" name="resumeNameInput" placeholder="Resume Title">
             </label>
-        </div>
-        <br>
-        <div>  {{!-- Education --}}
+            <label for="firstname">
+                Firstname
+                <input type="text" id = "firstnameInput" name="firstnameInput" placeholder="Firstname">
+            </label>
+            <label for="lastname">
+                Lastname
+                <input type="text" id = "lastnameInput" name="lastnameInput" placeholder="Lastname">
+            </label>
+            <br>
+            {{!-- <label for="email">
+                Email
+                <input type="email" id = "emailInput" name="emailInput" placeholder="Email">
+            </label> --}}
+            <label for="genderInput">
+                Gender
+                <select id = "genderInput" name="genderInput" >
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                    <option value="2">Not to tell</option>
+                </select>
+            </label>
+            <br>
+            <label for="city">
+                City
+                <input type="text" id = "cityInput" name="cityInput" placeholder="city">
+            </label>
+            <label for="state">
+                State
+                <input type="text" id = "stateInput" name="stateInput" placeholder="state">
+            </label>
+            <label for="country">
+                Country
+                <input type="text" id = "countryInput" name="countryInput" placeholder="country">
+            </label>
+            <br>
+            <label for="age">
+                Age
+                <input type="number" id = "ageInput" name="ageInput" placeholder="Age">
+            </label>
+            <br>
+            <label for="phone">
+                Phone
+                <input type="text" id = "phoneInput" name="phoneInput" placeholder="phone">
+            </label>
+            <br>
+            <label for="address">
+                Address
+                <input type="text" id = "addrInput" name="addrInput" placeholder="Address">
+            </label>
+            <br>
+            <label for="website">
+                Website
+                <input type="text" id = "websiteInput" name="websiteInput" placeholder="Website">
+            </label>
+            <br>
             <div>
-                <label for="school">
-                    School
-                    <input type="text" id = "schoolInput" name="Edu[0][schoolInput]" placeholder="School">
+                <label for="skills">
+                    Add Skill
+                    <input type="text" id = "skillInput" name="skillInput" placeholder="Add skill here">
+                    <button id="addButton">Add</button>
+                    <div>Added skill displays here</div>
                 </label>
-                <br>
-                <label for="startDate">
-                    Start Date
-                    <input type="date" id = "startDateInput" name="Edu[0][startDateInput]" placeholder="Start Date">
-                </label>
-                <label for="currentStudy">
-                    Current Status
-                    <input type="radio" id = "currentStudyInput" name="Edu[0][currentStudyInput]">
-                </label>
-                <label for="endDate">
-                    End Date
-                    <input type="date" id = "endDateInput" name="Edu[0][endDateInput]" placeholder="End Date">
-                </label>
-                <br>
-                <label for="gpa">
-                    GPA
-                    <input type="text" id = "gpaInput" name="Edu[0][gpaInput]" placeholder="GPA">
-                </label>
-                <br>
-                <label for="degree">
-                    Degree
-                    <input type="text" id = "degreeInput" name="Edu[0][degreeInput]" placeholder="Degree">
-                </label>
-                <br>
-                <label for="major">
-                    Major
-                    <input type="text" id = "majorInput" name="Edu[0][majorInput]" placeholder="Major">
-                </label>
-                <br>
-                <label for="country">
-                    Country
-                    <input type="text" id = "countryInput" name="Edu[0][countryInput]" placeholder="Country">
-                </label>
-                <label for="state">
-                    State
-                    <input type="text" id = "stateInput" name="Edu[0][stateInput]" placeholder="State">
-                </label>
-                <label for="city">
-                    City
-                    <input type="text" id = "cityInput" name="Edu[0][cityInput]" placeholder="City">
-                </label>
-                <br>
-                <label for="description">
-                    Country
-                    <input type="textarea" id = "descriptionInput" name="Edu[0][descriptionInput]" placeholder="Description">
-                </label>
-                <br>
             </div>
-            <button>Add Education</button>
-        </div>
-        <div>  {{!-- Employed Histories --}}
-            <div>
-                <label for="employer">
-                    Employer
-                    <input type="text" id = "employerInput" name="Emp[0][employerInput]" placeholder="Employer">
-                </label>
-                <br>
-                <label for="jobTitle">
-                    Job Title
-                    <input type="text" id = "jobTitleInput" name="Emp[0][jobTitleInput]" placeholder="Job Title">
-                </label>
-                <br>
-                <label for="startDate">
-                    Start Date
-                    <input type="date" id = "startDateInput" name="Emp[0][startDateInput]" placeholder="Start Date">
-                </label>
-                <label for="currentEmployed">
-                    Current Status
-                    <input type="radio" id = "currentEmployed" name="Emp[0][currentStudyInput]">
-                </label>
-                <label for="endDate">
-                    End Date
-                    <input type="date" id = "endDateInput" name="Emp[0][endDateInput]" placeholder="End Date">
-                </label>
-                <br>
-                <label for="country">
-                    Country
-                    <input type="text" id = "countryInput" name="Emp[0][countryInput]" placeholder="Country">
-                </label>
-                <label for="state">
-                    State
-                    <input type="text" id = "stateInput" name="Emp[0][stateInput]" placeholder="State">
-                </label>
-                <label for="city">
-                    City
-                    <input type="text" id = "cityInput" name="Emp[0][cityInput]" placeholder="City">
-                </label>
-                <br>
-                <label for="description">
-                    Country
-                    <input type="textarea" id = "descriptionInput" name="Emp[0][descriptionInput]" placeholder="Description">
-                </label>
-                <br>
+            <br>
+            <div>  {{!-- Education --}}
+                <div>
+                    <label for="school">
+                        School
+                        <input type="text" id = "schoolInput" name="Edu[0][schoolInput]" placeholder="School">
+                    </label>
+                    <br>
+                    <label for="startDate">
+                        Start Date
+                        <input type="date" id = "startDateInput" name="Edu[0][startDateInput]" placeholder="Start Date">
+                    </label>
+                    <label for="currentStudy">
+                        Current Status
+                        <input type="radio" id = "currentStudyInput" name="Edu[0][currentStudyInput]">
+                    </label>
+                    <label for="endDate">
+                        End Date
+                        <input type="date" id = "endDateInput" name="Edu[0][endDateInput]" placeholder="End Date">
+                    </label>
+                    <br>
+                    <label for="gpa">
+                        GPA
+                        <input type="text" id = "gpaInput" name="Edu[0][gpaInput]" placeholder="GPA">
+                    </label>
+                    <br>
+                    <label for="degree">
+                        Degree
+                        <input type="text" id = "degreeInput" name="Edu[0][degreeInput]" placeholder="Degree">
+                    </label>
+                    <br>
+                    <label for="major">
+                        Major
+                        <input type="text" id = "majorInput" name="Edu[0][majorInput]" placeholder="Major">
+                    </label>
+                    <br>
+                    <label for="country">
+                        Country
+                        <input type="text" id = "countryInput" name="Edu[0][countryInput]" placeholder="Country">
+                    </label>
+                    <label for="state">
+                        State
+                        <input type="text" id = "stateInput" name="Edu[0][stateInput]" placeholder="State">
+                    </label>
+                    <label for="city">
+                        City
+                        <input type="text" id = "cityInput" name="Edu[0][cityInput]" placeholder="City">
+                    </label>
+                    <br>
+                    <label for="description">
+                        Country
+                        <input type="textarea" id = "descriptionInput" name="Edu[0][descriptionInput]" placeholder="Description">
+                    </label>
+                    <br>
+                </div>
+                <button>Add Education</button>
             </div>
-            <button>Add Employed History</button>
-        </div>
-        <div>  {{!-- Projects --}}
-            <div>
-                <label for="title">
-                    Title
-                    <input type="text" id = "titleInput" name="Pro[0][titleInput]" placeholder="Title">
-                </label>
-                <br>
-                <label for="role">
-                    Role
-                    <input type="text" id = "roleInput" name="Pro[0][roleInput]" placeholder="Role">
-                </label>
-                <br>
-                <label for="description">
-                    Description
-                    <input type="textarea" id = "descriptionInput" name="Pro[0][descriptionInput]" placeholder="Description">
-                </label>
-                <br>
+            <div>  {{!-- Employed Histories --}}
+                <div>
+                    <label for="employer">
+                        Employer
+                        <input type="text" id = "employerInput" name="Emp[0][employerInput]" placeholder="Employer">
+                    </label>
+                    <br>
+                    <label for="jobTitle">
+                        Job Title
+                        <input type="text" id = "jobTitleInput" name="Emp[0][jobTitleInput]" placeholder="Job Title">
+                    </label>
+                    <br>
+                    <label for="startDate">
+                        Start Date
+                        <input type="date" id = "startDateInput" name="Emp[0][startDateInput]" placeholder="Start Date">
+                    </label>
+                    <label for="currentEmployed">
+                        Current Status
+                        <input type="radio" id = "currentEmployed" name="Emp[0][currentStudyInput]">
+                    </label>
+                    <label for="endDate">
+                        End Date
+                        <input type="date" id = "endDateInput" name="Emp[0][endDateInput]" placeholder="End Date">
+                    </label>
+                    <br>
+                    <label for="country">
+                        Country
+                        <input type="text" id = "countryInput" name="Emp[0][countryInput]" placeholder="Country">
+                    </label>
+                    <label for="state">
+                        State
+                        <input type="text" id = "stateInput" name="Emp[0][stateInput]" placeholder="State">
+                    </label>
+                    <label for="city">
+                        City
+                        <input type="text" id = "cityInput" name="Emp[0][cityInput]" placeholder="City">
+                    </label>
+                    <br>
+                    <label for="description">
+                        Country
+                        <input type="textarea" id = "descriptionInput" name="Emp[0][descriptionInput]" placeholder="Description">
+                    </label>
+                    <br>
+                </div>
+                <button>Add Employed History</button>
             </div>
-            <button>Add Project</button>
-        </div>
-        <button id="submitButton" type="submit">Submit</button>
-    </form>
+            <div>  {{!-- Projects --}}
+                <div>
+                    <label for="title">
+                        Title
+                        <input type="text" id = "titleInput" name="Pro[0][titleInput]" placeholder="Title">
+                    </label>
+                    <br>
+                    <label for="role">
+                        Role
+                        <input type="text" id = "roleInput" name="Pro[0][roleInput]" placeholder="Role">
+                    </label>
+                    <br>
+                    <label for="description">
+                        Description
+                        <input type="textarea" id = "descriptionInput" name="Pro[0][descriptionInput]" placeholder="Description">
+                    </label>
+                    <br>
+                </div>
+                <button>Add Project</button>
+            </div>
+            <button id="submitButton" type="submit">Submit</button>
+        </form>
+    </div>
+    
 </section>

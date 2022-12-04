@@ -143,9 +143,14 @@ router
         let user = await userData.getUserById(req.session.userId);
         array.push(user);
         console.log(user)
-        res.render("applicantProfile",{user:array}) 
+        res.render("applicantProfile",{
+          isHomepage: true,
+          isApplicant: true,
+          user:array
+        }) 
       } else {
         res.render("applicantBasicInfo", {
+          
           title: "Applicant Basic Info",
         });
       }
@@ -163,7 +168,11 @@ router
         let user = await userData.getUserById(req.session.userId);
         array.push(user);
         console.log(user)
-        res.render("updateInfo",{user:array}) 
+        res.render("updateInfo",{
+          isHomepage: true,
+          isApplicant: true,
+          user:array,
+        }) 
       } else {
         res.render("applicantBasicInfo", {
           title: "Applicant Basic Info",
@@ -247,56 +256,67 @@ router.route("/createResume").get(async (req, res) => {
   }
 })
 .post(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
-      try {
-        let resumeName = req.body.resumeNameInput;
-        let firstname = req.body.firstnameInput;
-        let lastname = req.body.lastnameInput;
-        let email = req.body.emailInput;
-        let gender = req.body.genderInput;
-        let city = req.body.cityInput;
-        let state = req.body.stateInput;
-        let country = req.body.countryInput;
-        let age = req.body.ageInput;
-        let phone = req.body.phoneInput;
-        let address = req.body.addrInput;
-        let website = req.body.websiteInput;
-        let skills = req.body.skills;
-        // TODO: Haven't finished this part yet.
-
-        const createInfo = await resumeData.createResume(
-          req.session.userId,
-          req.session.userType,
-          firstname,
-          lastname,
-          gender,
-          city,
-          state,
-          country,
-          phone
-        );
-
-        if (createInfo) {
-          res.redirect("/applicant/reviewResumes");
-        } else {
-          return res.status(500).json({ error: "Internal Server Error" });
-        }
-      } catch (e) {
-        res.render("createResume", { error: e });
-      }
-    } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
-      });
-    }
-  } else {
+  if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {
       title: "Forbidden Access",
       error: "Error: 403, You are NOT logged in yet!",
     });
   }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  try {
+    let resumeName = req.body.resumeNameInput;
+    let firstname = req.body.firstnameInput;
+    let lastname = req.body.lastnameInput;
+    let email = req.body.emailInput;
+    let gender = req.body.genderInput;
+    let city = req.body.cityInput;
+    let state = req.body.stateInput;
+    let country = req.body.countryInput;
+    let age = req.body.ageInput;
+    let phone = req.body.phoneInput;
+    let address = req.body.addrInput;
+    let website = req.body.websiteInput;
+    let skills = req.body.skills;
+
+    // These 3 are arrays of objects
+    let edu = req.body.edu;
+    let emp = req.body.emp;
+    let pro = req.body.pro;
+
+    const createInfo = await resumeData.createResume(
+      req.session.userId,
+      resumeName,
+      firstname,
+      lastname,
+      email,
+      gender,
+      city,
+      state,
+      country,
+      age,
+      phone,
+      address,
+      website,
+      skills,
+      edu,
+      emp,
+      pro
+    );
+
+    if (createInfo) {
+      res.redirect("/applicant/reviewResumes");
+    } else {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  } catch (e) {
+    res.render("createResume", { error: e });
+  }
 });
+
 router.route("/applied").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
