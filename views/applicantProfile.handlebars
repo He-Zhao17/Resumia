@@ -3,21 +3,21 @@
 <br>
 {{#each user}}
 <p>Type:Applicants</p>
-<br>
+
 <p>Name:{{firstname}} {{lastname}}</p>
-<br>
+
 <p>Email:{{email}}</p>
-<br>
+
 <p>Gender:{{gender}}</p>
-<br>
+
 <p>Age:{{age}}</p>
-<br>
+
 <p>phone:{{phone}}</p>
-<br>
+
 <p>Address:{{city}} {{state}}{{country}}</p>
-<br>
+
 <p>website:{{website}}</p>
-<br>
+
 
 {{/each}}
 <form  id="update" action="/applicant/updateInfo" method="GET">

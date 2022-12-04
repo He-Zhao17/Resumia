@@ -138,9 +138,13 @@ router
         let user = await userData.getUserById(req.session.userId);
         array.push(user);
         console.log(user)
-        res.render("applicantProfile",{user:array}) 
+        res.render("applicantProfile",{
+          isHomepage: true,
+          user:array
+        }) 
       } else {
         res.render("applicantBasicInfo", {
+          
           title: "Applicant Basic Info",
         });
       }
@@ -158,7 +162,9 @@ router
         let user = await userData.getUserById(req.session.userId);
         array.push(user);
         console.log(user)
-        res.render("updateInfo",{user:array}) 
+        res.render("updateInfo",{
+          user:array
+        }) 
       } else {
         res.render("applicantBasicInfo", {
           title: "Applicant Basic Info",
