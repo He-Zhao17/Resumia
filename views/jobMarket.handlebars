@@ -33,7 +33,7 @@
     <input type="input" id = "input" name="input" placeholder="input">
     <label>input</label>
     <br>  
-    <button id="submitButton" type="submit">search</button>
+    <button class="submitButton" type="submit">search</button>
   </form>
   <br>
   {{#each jobs}}
@@ -44,12 +44,12 @@
     <label>jobtitle:{{jobTitle}}</label>
     <input type = "hidden" id="jobtitle" name="jobtitle" value={{jobTitle}}>
     <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
-    <button id="submitButton" type="submit">submit resume</button>
+    <button class="submitButton" type="submit">submit resume</button>
   </form>
   {{/each}}
 <section>
 
 <form id="userprofile-form" name="userprofile-form" action="/applicant/profile" method="GET">
-<button id="submitButton" type="submit">user profile</button>
+<button class="submitButton" type="submit">user profile</button>
 </form>
 </section>

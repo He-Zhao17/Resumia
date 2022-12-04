@@ -50,8 +50,11 @@
             <input type="phone" id = "phoneInput" name="phoneInput" value={{phone}}>
         </label>
         <br>
-        <a href="/"><button id="cancelButton">Cancel</button></a>
-        <button id="submitButton" type="submit">Update</button>
+        
+        <button class="submitButton updateButton" type="submit">Update</button>
+        <a href="/" id="cancelLink">
+            Cancel
+        </a>
     </form>
     {{/each}}
 </section>

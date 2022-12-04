@@ -74,7 +74,7 @@
     padding: 10px;
 }
 
-#submitButton{
+.submitButton{
     height: 40px;
     width: 250px;
     border-radius: 1em;
@@ -84,6 +84,20 @@
     font-weight: bold;
 }
 
+#cancelLink{
+    text-align: center;
+    margin: 20px 50px;
+    font-weight: bold;
+    color: #0077b5;
+    font-size: 16px;
+    margin-bottom: -57px;
+}
+
+
+.updateButton{
+    margin-left: 0%;
+    margin-top:30px;
+}
 #login-form img{
     width: 50%;
     height: 50%;
@@ -133,7 +147,10 @@ footer{
     background-color: white;
     font-size: 15px;
     font-weight: bold;
+    margin-left: 80%;
 }
+
+
 /* CSS for create Resume */
 
 .ResumeTable{
@@ -203,7 +220,6 @@ footer{
     margin: 0px;
     padding: 5px;
     flex-grow: 1;
-
 }
 
 #ResumeNav div{
@@ -216,4 +232,9 @@ footer{
     border-radius: 10px;
     margin: 20px auto;
     font-size: 20px;
+}
+
+#ResumeNav div:hover{
+    opacity: 0.6;
+    border: 3px solid#4aafe4;
 }
