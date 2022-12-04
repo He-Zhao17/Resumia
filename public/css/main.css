@@ -124,7 +124,16 @@ footer{
     border-radius: 5px;
 }
 
-
+#cancelButton{
+    height: 40px;
+    width: 250px;
+    border: 2px solid #4aafe4;
+    border-radius: 1em;
+    color: #0077b5;
+    background-color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
 /* CSS for create Resume */
 
 .ResumeTable{
