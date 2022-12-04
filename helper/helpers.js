@@ -100,7 +100,20 @@ const checkId = function (id) {
   if (!ObjectId.isValid(id)) throw "Error: Invalid Object ID";
   return id;
 };
-
+const sortedbysalrayformlowtohigh = function (array) {
+for(let i=0;i<array.length;i++){
+  let index=i;
+  for(let j=i+1;j<array.length;j++){
+    if(array[index].salary>array[j].salary){
+      index=j;
+    }
+  }
+  let temp = array[index];
+  array[index]=array[i];
+  array[i]=temp;
+}
+return array;
+};
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -109,5 +122,6 @@ module.exports = {
   checkPlace,
   checkPhone,
   checkId,
-  ismatched
+  ismatched,
+  sortedbysalrayformlowtohigh
 };
