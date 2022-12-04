@@ -114,6 +114,20 @@ for(let i=0;i<array.length;i++){
 }
 return array;
 };
+const sortedbysalrayformhightolow = function (array) {
+  for(let i=0;i<array.length;i++){
+    let index=i;
+    for(let j=i+1;j<array.length;j++){
+      if(array[index].salary<array[j].salary){
+        index=j;
+      }
+    }
+    let temp = array[index];
+    array[index]=array[i];
+    array[i]=temp;
+  }
+  return array;
+  };
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -123,5 +137,6 @@ module.exports = {
   checkPhone,
   checkId,
   ismatched,
-  sortedbysalrayformlowtohigh
+  sortedbysalrayformlowtohigh,
+  sortedbysalrayformhightolow
 };
