@@ -34,7 +34,10 @@ router.route("/jobmarket").get(async (req, res) => {
         req.session.searchtype=req.body.type;
         let array = await jobData.findjobs(req.session.searchinput,req.session.searchtype);
         req.session.searchArray=array;
-         res.render("jobMarket",{jobs:req.session.searchArray}) 
+         res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+         time: new Date().toUTCString(),
+         isHomepage: true,
+         isApplicant: true}) 
          console.log(req.session.searchArray)
        }
        else if(req.body.formid=="jobpost-form"){
@@ -44,9 +47,22 @@ router.route("/jobmarket").get(async (req, res) => {
        }
        else if(req.body.formid=="sort-form"){
         console.log(req.body.sortby)
+        if(req.body.sortby=="LowHigh"){
         req.session.searchArray=helpers.sortedbysalrayformlowtohigh(req.session.searchArray);
         console.log(req.session.searchArray)
-        res.render("jobMarket",{jobs:req.session.searchArray});
+        res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+        time: new Date().toUTCString(),
+        isHomepage: true,
+        isApplicant: true});
+        }
+        else if(req.body.sortby=="HighLow"){
+        req.session.searchArray=helpers.sortedbysalrayformhightolow(req.session.searchArray);
+        console.log(req.session.searchArray)
+        res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+        time: new Date().toUTCString(),
+        isHomepage: true,
+        isApplicant: true});
+        }
        }
     } else {
       res.render("applicantBasicInfo", {
