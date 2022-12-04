@@ -101,6 +101,60 @@ const checkId = function (id) {
   return id;
 };
 
+const checkEmployer = function (employer ){
+  if (!employer) {
+    throw "Error: Invalid Employer";
+  }
+  if (typeof employer !== "string") {
+    throw "Error: Invalid Employer";
+  }
+  if (employer.trim().length === 0) {
+    throw "Error: Employer should not be empty";
+  }
+  return employer.trim();
+}
+
+const checkSalary = function (salary) {
+  if (!salary) {
+    throw "Error: Invalid Salary";
+  }
+  if (typeof salary != "number") {
+    throw "Error: Salary should be a number";
+  }
+  if (salary < 0) {
+    throw "Error: Invalid Salary";
+  }
+  return salary;
+}
+
+const checkJobTitle = function (jobTitle ){
+  if (!jobTitle) {
+    throw "Error: Invalid jobTitle";
+  }
+  if (typeof jobTitle !== "string") {
+    throw "Error: Invalid jobTitle";
+  }
+  if (jobTitle.trim().length === 0) {
+    throw "Error: jobTitle should not be empty";
+  }
+  return jobTitle.trim();
+}
+
+const checkJobDescription = function (JobDescription ){
+  if (!JobDescription) {
+    throw "Error: Invalid JobDescription";
+  }
+  if (typeof JobDescription !== "string") {
+    throw "Error: Invalid JobDescription";
+  }
+
+  if (JobDescription.trim().length === 0) {
+    throw "Error: JobDescription should not be empty";
+  }
+  return JobDescription.trim();
+}
+
+
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -109,5 +163,9 @@ module.exports = {
   checkPlace,
   checkPhone,
   checkId,
-  ismatched
-};
+  ismatched,
+  checkEmployer,
+  checkSalary,
+  checkJobDescription,
+  checkJobTitle
+}
