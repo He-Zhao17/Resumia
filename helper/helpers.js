@@ -193,7 +193,7 @@ module.exports = {
   sortedbysalrayformlowtohigh,
   sortedbysalrayformhightolow,
   checkJobPostString,
-  checkSalary
+  checkSalary,
   sortedbysalrayformhightolow,
   checkGender,
   checkAge,
