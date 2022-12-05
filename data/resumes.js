@@ -79,7 +79,7 @@ const getAllresumes = async () => {
 // this does not get all the resume by user, only one !!
 const getResumeByUserId = async (UserId) => {
     const resumeCollection = await resume();
-    const resumes = await getAllresumes();
+    const resumes = await resumeCollection.find({}).toArray();
     for(let i=0;i<resumes.length;i++){
         if(UserId==resumes[i].creatorId){
             return resumes[i];

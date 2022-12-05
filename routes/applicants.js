@@ -45,12 +45,12 @@ router.route("/jobmarket").get(async (req, res) => {
        else if(req.body.formid=="jobpost-form"){
         try{
          let resume = await resumeData.getResumeByUserId(req.session.userId);
-         let array = await appData.createApplication(req.body.posterid,req.session.userId,resume.id,req.body.jobid);
+         console.log(resume)
+         let array = await appData.createApplication(req.body.posterid,req.session.userId,resume._id.toString(),req.body.jobid);
          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
           time: new Date().toUTCString(),
           isHomepage: true,
-          isApplicant: true,
-          error:error}) 
+          isApplicant: true}) 
          console.log(req.body);
         }catch (error) {
           res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
