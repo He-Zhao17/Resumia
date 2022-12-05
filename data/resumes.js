@@ -60,7 +60,8 @@ const createResume = async (
   return true;
 };
 
-const getAllresumes = async () => {
+const getAllresumes = async (applicantId) => {
+    helpers.checkId(applicantId);
     const resumeCollection = await resume();
     const resumeList = await resumeCollection.find({}).toArray();
     if (!resumeList) throw "Error: Getting all resumes failed";
@@ -68,11 +69,14 @@ const getAllresumes = async () => {
     let output = [];
     for (const resume of resumeList) {
         resume._id = resume._id.toString();
-        resumeObj = {
-            _id: resume._id,
-            resumeName: resume.resumeName,
-        };
-        output.push(resumeObj);
+        resume.creatorId = resume.creatorId.toString();
+        if (resume.creatorId === applicantId) {
+            let resumeObj = {
+                _id: resume._id,
+                resumeName: resume.resumeName,
+            };
+            output.push(resumeObj);
+        }
     }
     return output;
 }

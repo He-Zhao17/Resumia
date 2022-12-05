@@ -374,23 +374,104 @@ router.route("/applied").get(async (req, res) => {
 });
 
 router.route("/reviewResumes").get(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
-      res.render("reviewResumes", {
-        title: "Review Resumes",
-        isHomepage: true,
-        isApplicant: true,
-      });
-    } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
-      });
-    }
-  } else {
+  if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {
       title: "Forbidden Access",
       error: "Error: 403, You are NOT logged in yet!",
     });
+  }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  try {
+    let resumes = resumeData.getAllresumes(req.session.userId);
+    if (!resumes) { return res.status(500).json({ error: "Internal Server Error" }); }
+    res.render("reviewResumes", {
+      title: "Review Resumes",
+      isHomepage: true,
+      isApplicant: true,
+      resumes: resumes,
+    });
+  } catch (error) {
+    res.render("reviewResumes", { error: e });
+  }
+});
+
+router.route("/readResume/:id").get(async (req, res) => {
+  if (req.session.userType != true) {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  try {
+    let resume = resumeData.getResumeById(req.params.id);
+    if (!resume) { return res.status(500).json({ error: "Internal Server Error" }); }
+    res.render("reviewResumes", {
+      title: "Review Resumes",
+      isHomepage: true,
+      isApplicant: true,
+      resume: resume,
+    });
+  } catch (error) {
+    res.render("reviewResumes", { error: e });
+  }
+});
+
+router.route("/updateResume/:id").get(async (req, res) => {
+  if (req.session.userType != true) {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  try {
+    let result = resumeData.updateResume(req.params.id);
+    if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
+    res.render("reviewResumes", {
+      title: "Review Resumes",
+      isHomepage: true,
+      isApplicant: true,
+    });
+  } catch (error) {
+    res.render("reviewResumes", { error: e });
+  }
+});
+
+router.route("/deleteResume/:id").get(async (req, res) => {
+  if (req.session.userType != true) {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  try {
+    let result = resumeData.deleteResume(req.params.id);
+    if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
+    res.render("reviewResumes", {
+      title: "Review Resumes",
+      isHomepage: true,
+      isApplicant: true,
+    });
+  } catch (error) {
+    res.render("reviewResumes", { error: e });
   }
 });
 module.exports = router;
