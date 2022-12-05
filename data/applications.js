@@ -76,10 +76,10 @@ const getAllApplied = async (applicantId) => {
     app._id = app._id.toString();
     app.applicant = app.applicant.toString();
     if (app.applicant === applicantId) {
-        let getJob = jobposts.getJobPostById(app.job);
-        appObj = {
-          _id: app._id,
-          jobName: getJob.employer,
+      let getJob = jobposts.getJobPostById(app.job);
+      let appObj = {
+        _id: app._id,
+        jobName: getJob.employer,
       };
       output.push(appObj);
     }
@@ -91,6 +91,6 @@ const getAllApplied = async (applicantId) => {
   module.exports = {
     createApplication,
     getAllApplied,
-      getAppById,
-      getAllAppByHRId
+    getAppById,
+    getAllAppByHRId
 };
