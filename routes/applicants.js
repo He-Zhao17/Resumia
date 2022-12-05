@@ -43,9 +43,22 @@ router.route("/jobmarket").get(async (req, res) => {
          console.log(req.session.searchArray)
        }
        else if(req.body.formid=="jobpost-form"){
-         let array = await appData.createApplication(req.body.posterid,req.session.userId,"no",req.body.jobid);
-         res.redirect("/applicant/jobmarket")
+        try{
+         let resume = await resumeData.getResumeByUserId(req.session.userId);
+         let array = await appData.createApplication(req.body.posterid,req.session.userId,resume.id,req.body.jobid);
+         res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          time: new Date().toUTCString(),
+          isHomepage: true,
+          isApplicant: true,
+          error:error}) 
          console.log(req.body);
+        }catch (error) {
+          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          time: new Date().toUTCString(),
+          isHomepage: true,
+          isApplicant: true,
+          error:error}) 
+        }
        }
        else if(req.body.formid=="sort-form"){
         console.log(req.body.sortby)

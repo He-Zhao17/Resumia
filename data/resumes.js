@@ -76,7 +76,16 @@ const getAllresumes = async () => {
     }
     return output;
 }
-
+const getResumeByUserId = async (UserId) => {
+    const resumeCollection = await resume();
+    const resumes = await getAllresumes();
+    for(let i=0;i<resumes.length;i++){
+        if(UserId==resumes[i].creatorId){
+            return resumes[i];
+        }
+    }
+    throw"this applicant has no resume";
+}
 const getResumeById = async (resumeId) => {
     resumeId = helpers.checkId(resumeId);
     const resumeCollection = await resume();
@@ -169,4 +178,5 @@ module.exports = {
     getResumeById,
     deleteResume,
     updateResume,
+    getResumeByUserId
 }
