@@ -100,6 +100,7 @@ const checkId = function (id) {
   if (!ObjectId.isValid(id)) throw "Error: Invalid Object ID";
   return id;
 };
+
 const sortedbysalrayformlowtohigh = function (array) {
 for(let i=0;i<array.length;i++){
   let index=i;
@@ -114,6 +115,7 @@ for(let i=0;i<array.length;i++){
 }
 return array;
 };
+
 const sortedbysalrayformhightolow = function (array) {
   for(let i=0;i<array.length;i++){
     let index=i;
@@ -159,6 +161,26 @@ function checkSalary(s) {
   }
   return s;
 }
+
+const checkGender = function (gender) {
+  if (typeof gender != "string") throw "Error: Invalid Gender";
+  // if the input is null, it means user doesnt want to tell
+  if (gender == null || gender.trim().length === 0) return null;
+  if (gender != '0' || gender != '1' || gender != '2') throw "Error: Invalid Gender";
+  return Number(gender);
+};
+
+const checkAge = function (age) {
+  if (typeof age != "string") throw "Error: Invalid Age";
+  // if the input is null, it means user doesnt want to tell
+  if (age == null || age.trim().length === 0) return null;
+  let reg = /^[1-8][0-9]$/;
+if (!reg.test(age)) {
+  throw "Error: Invalid Age";
+}
+  return Number(age);
+};
+
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -172,4 +194,7 @@ module.exports = {
   sortedbysalrayformhightolow,
   checkJobPostString,
   checkSalary
+  sortedbysalrayformhightolow,
+  checkGender,
+  checkAge,
 };

@@ -5,6 +5,8 @@ const helpers = require("../helper/helpers");
 const userData = data.users;
 const appData = data.applications;
 const jobData=data.jobposts;
+const resumeData = data.resumes;
+
 router.route("/jobmarket").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
@@ -152,6 +154,7 @@ router
       });
     }
   });
+
   router.route("/profile").get(async (req, res) => {
     if (req.session.userType === true) {
       if (req.session.basicInfo === true) {
@@ -252,24 +255,22 @@ router
   })
 
 router.route("/createResume").get(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
-      res.render("createResume", {
-        title: "Create Resume",
-        isHomepage: true,
-        isApplicant: true,
-      });
-    } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
-      });
-    }
-  } else {
+  if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {
       title: "Forbidden Access",
       error: "Error: 403, You are NOT logged in yet!",
     });
   }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  res.render("createResume", {
+    title: "Create Resume",
+    isHomepage: true,
+    isApplicant: true,
+  });
 })
 .post(async (req, res) => {
   if (req.session.userType != true) {
@@ -334,23 +335,28 @@ router.route("/createResume").get(async (req, res) => {
 });
 
 router.route("/applied").get(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
-      res.render("applied", {
-        title: "Applied Jobs",
-        isHomepage: true,
-        isApplicant: true,
-      });
-    } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
-      });
-    }
-  } else {
+  if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {
       title: "Forbidden Access",
       error: "Error: 403, You are NOT logged in yet!",
     });
+  }
+  if (req.session.basicInfo != true) {
+    res.render("applicantBasicInfo", {
+      title: "Applicant Basic Info",
+    });
+  }
+  try {
+    let applied = appData.getAllApplied(req.session.userId);
+    if (!applied) { return res.status(500).json({ error: "Internal Server Error" }); }
+    res.render("applied", {
+      title: "Applied Jobs",
+      isHomepage: true,
+      isApplicant: true,
+      applied: applied,
+    });
+  } catch (error) {
+    res.render("applied", { error: e });
   }
 });
 
