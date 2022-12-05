@@ -128,6 +128,37 @@ const sortedbysalrayformhightolow = function (array) {
   }
   return array;
   };
+
+function checkJobPostString (name, param){
+  if (!param) {
+    throw `Error: Invalid ${name}`;
+  }
+  if (typeof param !== "string") {
+    throw `Error: Invalid ${name}`;
+  }
+  if (param.trim().length === 0) {
+    throw `Error: ${name} should not be empty.`;
+  }
+  return param.trim();
+}
+
+function checkSalary(s) {
+  if (!s) {
+    throw "Error: Invalid salary";
+  }
+  let salary = Number(s);
+  if (isNaN(salary)) {
+    throw "Error: Invalid salary";
+  }
+  s = salary;
+  if (typeof s !== "number") {
+    throw "Error: Invalid salary";
+  }
+  if (s < 0) {
+    throw "Error: Invalid salary";
+  }
+  return s;
+}
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -138,5 +169,7 @@ module.exports = {
   checkId,
   ismatched,
   sortedbysalrayformlowtohigh,
-  sortedbysalrayformhightolow
+  sortedbysalrayformhightolow,
+  checkJobPostString,
+  checkSalary
 };

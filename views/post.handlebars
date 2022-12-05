@@ -1,0 +1,48 @@
+<section>
+    <form id="createJobPost-form" action="/hr/post" method="POST">
+        <h2>Please input the Information of the Job Position.</h2>
+        <label for="employer">
+            Employer:
+            <input type="text" id = "employer" name="employer" placeholder="Employer">
+        </label>
+        <br>
+        <label for="country">
+            Country:
+            <input type="text" id = "country" name="country" placeholder="Country">
+        </label>
+        <label for="state">
+            State:
+            <input type="text" id = "state" name="state" placeholder="State">
+        </label>
+        <label for="city">
+            City:
+            <input type="text" id = "city" name="city" placeholder="City">
+        </label>
+        <br>
+        <label for="salary">
+            Salary:
+            <input type="number" id = "salary" name="salary" placeholder="Salary">
+        </label>
+        <br>
+        <label for="jobTitle">
+            Job Title:
+            <input type="text" id = "jobTitle" name="jobTitle" placeholder="Job Title">
+        </label>
+        <br>
+        <label for="jobDescription">
+            Job Description:<br>
+            <input type="text" id = "jobDescription" name="jobDescription" placeholder="Job Description">
+        </label>
+        <br>
+        <label for="isAvailable">
+            Is It Available Now?
+            <select id = "isAvailable" name="isAvailable" >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </label>
+        <br>
+        <p style="color: red;">{{error}}</p>
+        <button class="submitButton" type="submit">Post</button>
+    </form>
+</section>

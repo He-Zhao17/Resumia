@@ -190,6 +190,7 @@ footer{
     opacity: 0.5;
 }
 
+
 .ResumeDiv a{
     line-height: 50px;
 }
@@ -220,6 +221,7 @@ footer{
     width: 360px;
     margin: 0px;
     padding: 5px;
+    flex-grow: 1;
 }
 
 #ResumeNav div{
@@ -236,5 +238,17 @@ footer{
 
 #ResumeNav div:hover{
     opacity: 0.6;
+    border: 3px solid#4aafe4;
 }
 
+/*CSS for Jobpost-Form*/
+#registration-form{
+    width: 40%;
+    text-align: center;
+    margin: 0px auto;
+}
+
+#jobDescription {
+    height: 200px;
+    Width: 1000px;
+}
