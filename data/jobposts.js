@@ -33,6 +33,9 @@ const findjobs= async (string,type) => {
         else if(type=="jobTitle"&&helpers.ismatched(jobs[i].jobTitle,string)){
             result.push(jobs[i]);
         }
+        else if(type=="employer"&&helpers.ismatched(jobs[i].employer,string)){
+            result.push(jobs[i]);
+        }
     }
   return result;
 };
