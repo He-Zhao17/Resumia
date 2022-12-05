@@ -1,0 +1,14 @@
+<section>
+    Applicant: {{application.applicant.firstname}} {{application.applicant.lastname}}<br>
+    Job Position: <a href="/jobPost/{{application.job_id}}">{{application.jobPost.employer}} {{application.jobPost.jobTitle}} {{application.jobPost.city}}</a><br>
+    Resume: <a href="/resume/{{application.resume_id}}">Click to the resume</a><br>
+    {{#if (eq application.status  0)}}
+        Status: pending
+    {{else if (eq application.status 1)}}
+        Status: admitted
+    {{else}}
+        Status: rejected
+    {{/if}}
+    Notes: {{application.notes}}
+    <p style="color: red;">{{error}}</p>
+</section>

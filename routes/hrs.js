@@ -80,7 +80,10 @@ router
         const newPostId = await jobPostData.createJobPost(posterId,employer, country, state, city, salary, jobTitle, jobDescription, isAvailable);
         if (newPostId) {
           const postCreated = await jobPostData.getJobPostById(newPostId);
-          res.status(200).render("jobPost", postCreated);
+          res.status(200).render("jobPost.js", {
+            title: "Job Post",
+            jobPost: postCreated
+          });
         } else {
           return res.status(500).json({ error: "Internal Server Error" });
         }
@@ -134,10 +137,10 @@ router
       }
       try {
         const hrData = data.hrs;
-        const postsFound = await hrData.getAllPosts(this.session.userId);
-        req.status(200).render("posted", {
+        const postsFound = await hrData.getAllPosts(req.session.userId);
+        res.status(200).render("posted", {
           title: "Posted Positions",
-          JobPosts: postsFound
+          jobPosts: postsFound
         });
       } catch (error) {
         return res.status(403).render("posted", {
@@ -236,10 +239,10 @@ router
       }
       try {
         const hrData = data.hrs;
-        const appsFound = await hrData.getAllApplications(this.session.userId);
-        req.status(200).render("posted", {
+        const appsFound = await data.applications.getAllAppByHRId(req.session.userId);
+        res.status(200).render("posted", {
           title: "Received Applications",
-          JobPosts: appsFound
+          applications: appsFound
         });
       } catch (error) {
         return res.status(403).render("receivedApplications", {
@@ -260,8 +263,8 @@ router
       }
       try {
         const userData = data.users
-        const HRFound = await userData.getUserById(this.session.userId);
-        req.status(200).render("HRProfile", {
+        const HRFound = await userData.getUserById(req.session.userId);
+        res.status(200).render("HRProfile", {
           title: "HR Profile",
           HRProfile: HRFound
         });

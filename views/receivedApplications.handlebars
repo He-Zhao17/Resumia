@@ -1,4 +1,13 @@
 <section>
     <h1 style="color: rgb(13, 255, 0);">received applications</h1>
+
+    {{#each applications}}
+        <li>
+            <a href="/applications/{{this._id}}">{{this.jobPost.employer}} {{this.jobPost.jobTitle}} {{this.jobPost.city}}
+            from {{this.applicant.firstname}} {{this.applicant.lastname}}</a>
+        </li>
+    {{/each}}
+
+    <p style="color: red;">{{error}}</p>
     <a href="/logout">Click here to log out!</a>
 </section>

@@ -1,0 +1,11 @@
+<section>
+    <ul>
+        {{#each jobPosts}}
+            <li>
+                <a href="/jobPost/{{this._id}}">{{this.employer}} {{this.jobTitle}} {{this.city}}</a>
+            </li>
+        {{/each}}
+    </ul>
+    <p style="color: red;">{{error}}</p>
+
+</section>
