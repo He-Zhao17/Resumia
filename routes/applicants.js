@@ -43,7 +43,7 @@ router.route("/jobmarket").get(async (req, res) => {
          console.log(req.session.searchArray)
        }
        else if(req.body.formid=="jobpost-form"){
-         let array = await appData.createApplication("hr_id",req.session.userId,"no",req.body.jobid);
+         let array = await appData.createApplication(req.body.posterid,req.session.userId,"no",req.body.jobid);
          res.redirect("/applicant/jobmarket")
          console.log(req.body);
        }

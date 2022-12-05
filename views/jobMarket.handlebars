@@ -40,11 +40,13 @@
   {{#each jobs}}
   <form id="jobpost-form" name="jobpost-form" action="" method="POST">
   <input type = "hidden" id="formid" name="formid" value="jobpost-form">
+    <label>Employer:{{employer}}</label>
     <label>salary:{{salary}}</label>
-    <input type = "hidden" id="salary" name="salary" value={{salary}}>
     <label>jobtitle:{{jobTitle}}</label>
-    <input type = "hidden" id="jobtitle" name="jobtitle" value={{jobTitle}}>
+    <label>Location:{{country}} {{state}} {{city}}</label>
+    <label>Description:{{jobDescription}}</label>
     <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
+    <input type = "hidden" id="posterid" name="posterid" value={{posterId}}>
     <button id="submitButton" type="submit">submit resume</button>
   </form>
   {{/each}}
