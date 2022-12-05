@@ -76,6 +76,7 @@ const getAllresumes = async () => {
     }
     return output;
 }
+// this does not get all the resume by user, only one !!
 const getResumeByUserId = async (UserId) => {
     const resumeCollection = await resume();
     const resumes = await getAllresumes();
@@ -86,6 +87,7 @@ const getResumeByUserId = async (UserId) => {
     }
     throw"this applicant has no resume";
 }
+
 const getResumeById = async (resumeId) => {
     resumeId = helpers.checkId(resumeId);
     const resumeCollection = await resume();
