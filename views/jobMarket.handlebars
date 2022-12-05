@@ -1,6 +1,7 @@
 <section class="MainPage">
   
   <h1>Job Market</h1>
+
 <form id="sort-form" name="sort-form" action="" method="POST">
     <input type = "hidden" id="formid" name="formid" value="sort-form">
         <label for="sortby">
@@ -33,7 +34,7 @@
     <input type="input" id = "input" name="input" placeholder="input">
     <label>input</label>
     <br>  
-    <button class="submitButton" type="submit">search</button>
+    <button id="submitButton" type="submit">search</button>
   </form>
   <br>
   {{#each jobs}}
@@ -44,12 +45,9 @@
     <label>jobtitle:{{jobTitle}}</label>
     <input type = "hidden" id="jobtitle" name="jobtitle" value={{jobTitle}}>
     <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
-    <button class="submitButton" type="submit">submit resume</button>
+    <button id="submitButton" type="submit">submit resume</button>
   </form>
   {{/each}}
 <section>
 
-<form id="userprofile-form" name="userprofile-form" action="/applicant/profile" method="GET">
-<button class="submitButton" type="submit">user profile</button>
-</form>
 </section>

@@ -119,53 +119,5 @@ const addBasicInfo = async (
     basicInfo: getUser.basicInfo,
   };
 };
-/*const updateUser = async (
-  userId,
-  firstname,
-  lastname,
-  gender,
-  city,
-  state,
-  country,
-  phone
-) => {
-  if (!ObjectId.isValid(userId)){
-    throw 'invalid object ID';
-  }
-  if(!firstname||!lastname ||!gender ||!city||!state||!country||!phone){
-    throw"some of the inputs are empty";
-  }
-  if(typeof firstname !== "string"||typeof lastname !== "string"||typeof gender !== "string"||typeof city !== "string"||typeof country !== "string"||typeof state !== "string"){
-    throw"some of the inputs are not string";
-  }
-  if(firstname.trim().length === 0||lastname.trim().length ==0||gender.trim().length ==0||city.trim().length ==0||country.trim().length ==0||phone.trim().length ==0||state.trim().length ==0){
-    throw"some of the inputs are empty string";
-  }
-  firstname=firstname.trim();
-  lastname=lastname.trim();
-  gender=gender.trim();
-  city=city.trim();
-  state=state.trim();
-  country=country.trim();
-  phone=phone.trim();
-  const MovieCollection = await movies();
-  let updateUser = {
-    firstname:firstname,
-    lastname:lastname,
-    gender:gender,
-    city:city,
-    state:state,
-    country:country,
-    phone:phone
-  };
-  const updatedInfo = await updateUser.updateOne(
-    {_id: ObjectId(movieId)},
-    {$set: updateMovie}
-  );
-  if (updatedInfo.modifiedCount === 0) {
-    throw 'could not update movie successfully';
-  }
-  return await getMovieById(movieId);
-};
-*/
+
 module.exports = { createUser, checkUser, getUserById, addBasicInfo };
