@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const helpers = require("../helper/helpers");
-const {checkEmployer, checkPlace, checkSalary, checkJobTitle, checkJobDescription, checkId, checkJobPostString} = require("../helper/helpers");
+const {checkPlace, checkSalary,  checkId, checkJobPostString} = require("../helper/helpers");
 const {ObjectId} = require("mongodb");
 const userData = data.users;
 
