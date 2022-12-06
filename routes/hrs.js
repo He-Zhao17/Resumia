@@ -82,7 +82,7 @@ router
         const newPostId = await jobPostData.createJobPost(posterId,employer, country, state, city, salary, jobTitle, jobDescription, isAvailable);
         if (newPostId) {
           const postCreated = await jobPostData.getJobPostById(newPostId);
-          res.status(200).render("jobPost.js", {
+          res.status(200).render("jobPost", {
             title: "Job Post",
             isHomepage: true,
             jobPost: postCreated
