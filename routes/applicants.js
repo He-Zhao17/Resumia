@@ -1,4 +1,5 @@
 const express = require("express");
+const { user } = require("../config/mongoCollections");
 const router = express.Router();
 const data = require("../data");
 const helpers = require("../helper/helpers");
@@ -346,7 +347,42 @@ router.route("/createResume").get(async (req, res) => {
     res.render("createResume", { error: e });
   }
 });
-
+router.route("/updatePassword").get(async (req, res) => {
+  if (req.session.userType === true) {
+    if (req.session.basicInfo === true) {
+      return res.render("updatePassword", {
+        title: "Homepage",
+        time: new Date().toUTCString(),
+        isHomepage: true,
+        isApplicant: true,
+      });
+    } else {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+})
+.post(async (req, res) => {
+  try {
+  const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
+  console.log(updatepassword)
+  res.redirect("/applicant/profile");
+  }catch(error){
+    return res.render("updatePassword", {
+      title: "Homepage",
+      time: new Date().toUTCString(),
+      isHomepage: true,
+      isApplicant: true,
+      error:error
+    });
+  }
+})
 router.route("/applied").get(async (req, res) => {
   if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {

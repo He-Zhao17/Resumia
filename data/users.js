@@ -119,5 +119,27 @@ const addBasicInfo = async (
     basicInfo: getUser.basicInfo,
   };
 };
+const UpdatePassword = async (passwordone,passwordtwo,newpassword,userid)=>{
+if(passwordone!=passwordtwo){
+throw"your old passwrod are not matched";
+}
+const userCollection = await user();
+helpers.checkPassword(newpassword)
+const getuser = await userCollection.findOne({ _id: ObjectId(userid) });
+comparePassword = await bcrypt.compare(passwordone, getuser.hashedPassword);
+if(!comparePassword){
+  throw"your old password is incorrect"
+}
+const hash = await bcrypt.hash(newpassword, saltRounds);
+getuser.hashedPassword=hash;
+const updatedInfo = await userCollection.updateOne(
+  { _id: ObjectId(userid) },
+  { $set: getuser }
+);
+if (updatedInfo.modifiedCount === 0) {
+  throw "Error: Updating movie failed";
+}
+return "your password has changed successfully";
 
-module.exports = { createUser, checkUser, getUserById, addBasicInfo };
+};
+module.exports = { createUser, checkUser, getUserById, addBasicInfo,UpdatePassword };
