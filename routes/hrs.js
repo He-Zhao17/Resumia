@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const helpers = require("../helper/helpers");
-const {checkEmployer, checkPlace, checkSalary, checkJobTitle, checkJobDescription, checkId, checkJobPostString} = require("../helper/helpers");
+const {checkPlace, checkSalary,  checkId, checkJobPostString} = require("../helper/helpers");
 const {ObjectId} = require("mongodb");
 const userData = data.users;
 
@@ -19,11 +19,13 @@ router
       }
       try {
         res.status(200).render("post", {
-          title: "Create a Job Post"
+          title: "Create a Job Post",
+          isHomepage: true
         });
       } catch (e) {
         return res.status(403).render("post", {
           title: "Create a Job Post",
+          isHomepage: true,
           error: error,
         });
       }
@@ -80,8 +82,9 @@ router
         const newPostId = await jobPostData.createJobPost(posterId,employer, country, state, city, salary, jobTitle, jobDescription, isAvailable);
         if (newPostId) {
           const postCreated = await jobPostData.getJobPostById(newPostId);
-          res.status(200).render("jobPost.js", {
+          res.status(200).render("jobPost", {
             title: "Job Post",
+            isHomepage: true,
             jobPost: postCreated
           });
         } else {
@@ -90,6 +93,7 @@ router
       } catch (error) {
         return res.status(403).render("post", {
           title: "Create a Job Post",
+          isHomepage: true,
           error: error,
         });
       }
@@ -102,7 +106,7 @@ router
           error: "Error: 403, You are NOT logged in yet!",
         });
       }
-      const params = req.body.params;
+      const params = req.body;
       let postId;
       try {
         if (!params.postId) {
@@ -121,6 +125,7 @@ router
       } catch (error) {
         return res.status(403).render("posted", {
           title: "Posted Positions",
+          isHomepage: true,
           error: error,
         });
       }
@@ -140,11 +145,13 @@ router
         const postsFound = await hrData.getAllPosts(req.session.userId);
         res.status(200).render("posted", {
           title: "Posted Positions",
+          isHomepage: true,
           jobPosts: postsFound
         });
       } catch (error) {
         return res.status(403).render("posted", {
           title: "Posted Positions",
+          isHomepage: true,
           error: error,
         });
       }
@@ -189,6 +196,7 @@ router
     } catch (error) {
       return res.status(403).render("HRBasicInfo", {
         title: "HR Basic Info",
+        isHomepage: true,
         error: error,
       });
     }
@@ -222,6 +230,7 @@ router
     } catch (error) {
       return res.status(403).render("HRBasicInfo", {
         title: "HR Basic Info",
+        isHomepage: true,
         error: error,
       });
     }
@@ -242,11 +251,13 @@ router
         const appsFound = await data.applications.getAllAppByHRId(req.session.userId);
         res.status(200).render("posted", {
           title: "Received Applications",
+          isHomepage: true,
           applications: appsFound
         });
       } catch (error) {
         return res.status(403).render("receivedApplications", {
           title: "Received Applications",
+          isHomepage: true,
           error: error,
         });
       }
@@ -266,11 +277,13 @@ router
         const HRFound = await userData.getUserById(req.session.userId);
         res.status(200).render("HRProfile", {
           title: "HR Profile",
+          isHomepage: true,
           HRProfile: HRFound
         });
       } catch (error) {
         return res.status(403).render("HRProfile", {
           title: "HR Profile",
+          isHomepage: true,
           error: error,
         });
       }

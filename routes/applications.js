@@ -26,11 +26,13 @@ router
             let appFound = await appData.getAppById(id);
             res.status(200).render("application", {
                 title: "Application",
+                isHomepage: true,
                 application: appFound
             })
         } catch (error) {
             return res.status(403).render("application", {
                 title: "Application",
+                isHomepage: true,
                 error: error,
             });
         }

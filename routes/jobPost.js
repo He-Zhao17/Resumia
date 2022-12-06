@@ -26,11 +26,13 @@ router
             let postFound = await jobPostsData.getJobPostById(id);
             res.status(200).render("jobPost", {
                 title: "Job Post",
+                isHomepage: true,
                 jobPost: postFound
             })
         } catch (error) {
             return res.status(403).render("jobPost", {
                 title: "Job Post",
+                isHomepage: true,
                 error: error,
             });
         }
