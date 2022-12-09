@@ -12,42 +12,45 @@ let EduCont = document.getElementById('EduCont');
 let WorkCont = document.getElementById("WorkCont");
 let ProjCont = document.getElementById("ProjCont");
 let PSCont = document.getElementById("PSCont");
-
+hideForm(SkillCont);
+hideForm(EduCont);
+hideForm(WorkCont);
+hideForm(ProjCont);
 IDTag.onclick = function(){  
     IDCont.style.display ='block';
-    hideForm(document.getElementById('SkillCont'));
-    hideForm(document.getElementById('EduCont'));
-    hideForm(document.getElementById('WorkCont'));
-    hideForm(document.getElementById('ProjCont'));
+    hideForm(SkillCont);
+    hideForm(EduCont);
+    hideForm(WorkCont);
+    hideForm(ProjCont);
     
 }
 SkillTag.onclick = function(){
     SkillCont.style.display ='block';
-    hideForm(document.getElementById('IDCont'));
-    hideForm(document.getElementById('EduCont'));
-    hideForm(document.getElementById('WorkCont'));
-    hideForm(document.getElementById('ProjCont'));
+    hideForm(IDCont);
+    hideForm(EduCont);
+    hideForm(WorkCont);
+    hideForm(ProjCont);
     
 }
 EduTag.onclick = function(){
-    hideForm(document.getElementById('IDCont'));
-    hideForm(document.getElementById('SkillCont'));
-    hideForm(document.getElementById('WorkCont'));
-    hideForm(document.getElementById('ProjCont'));
+    hideForm(IDCont);
+    hideForm(SkillCont);
+    hideForm(WorkCont);
+    hideForm(ProjCont);
     EduCont.style.display ='block';
 }
 WorkTag.onclick = function(){
-    hideForm(document.getElementById('IDCont'));
-    hideForm(document.getElementById('SkillCont'));
-    hideForm(document.getElementById('EduCont'));
-    hideForm(document.getElementById('ProjCont'));
+    hideForm(IDCont);
+    hideForm(SkillCont);
+    hideForm(EduCont);
+    hideForm(ProjCont);
     WorkCont.style.display ='block';
 }
 ProjTag.onclick = function(){
-    hideForm(document.getElementById('IDCont'));
-    hideForm(document.getElementById('SkillCont'));
-    hideForm(document.getElementById('EduCont'));
-    hideForm(document.getElementById('WorkCont'));
+    hideForm(IDCont);
+    hideForm(SkillCont);
+    hideForm(EduCont);
+    hideForm(WorkCont);
     ProjCont.style.display ='block';
 }
 

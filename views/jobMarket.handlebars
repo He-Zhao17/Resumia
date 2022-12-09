@@ -1,57 +1,69 @@
 <section class="MainPage">
   
   <h1>Job Market</h1>
-
-<form id="sort-form" name="sort-form" action="" method="POST">
-    <input type = "hidden" id="formid" name="formid" value="sort-form">
-        <label for="sortby">
-            Sort By
-            <select onclick="submit_form()" id = "sortby" name="sortby">
-                <option  value="LowHigh">Low to High</option>
-                <option  value="HighLow">High to Low</option>
-            </select>
-        </label>
-</form>
-    <script>
-    function submit_form(){
-        var form = document.getElementById("sort-form");
-        form.submit();
-    }
-    </script>
-  <p>{{error}}</p>
-  <form id="jobmarket-form" name="jobmarket-form" action="" method="POST">
-  <input type = "hidden" id="formid" name="formid" value="jobmarket-form">
-    <input type="radio" id="type" name="type" value="employer">
-    <label>employer</label><br>
-    <input type="radio" id="type" name="type" value="country">
-    <label>country</label><br>
-    <input type="radio" id="type" name="type" value="state">
-    <label>CSS</label><br>
-    <input type="radio" id="type" name="type" value="city">
-    <label>city</label>
-    <input type="radio" id="type" name="type" value="salary">
-    <label>salary</label>
-    <input type="radio" id="type" name="type" value="jobTitle">
-    <label>jobTitle</label>
-    <input type="input" id = "input" name="input" placeholder="input">
-    <label>input</label>
-    <br>  
-    <button id="submitButton" type="submit">search</button>
+<div id="jobPlatform">
+<div id="jobSearch">
+  <form id="sort-form" name="sort-form" action="" method="POST">
+      <input type = "hidden" id="formid" name="formid" value="sort-form">
+          <label for="sortby">
+              Sort By
+              <select onclick="submit_form()" id = "sortby" name="sortby">
+                  <option  value="LowHigh">Low to High</option>
+                  <option  value="HighLow">High to Low</option>
+              </select>
+          </label>
   </form>
+      <script>
+      function submit_form(){
+          var form = document.getElementById("sort-form");
+          form.submit();
+      }
+      </script>
+    <p>{{error}}</p>
+    <form id="jobmarket-form" name="jobmarket-form" action="" method="POST">
+    <input type = "hidden" id="formid" name="formid" value="jobmarket-form">
+      <input type="radio" id="type" name="type" value="employer">
+      <label>employer</label><br>
+      <input type="radio" id="type" name="type" value="country">
+      <label>country</label><br>
+      <input type="radio" id="type" name="type" value="state">
+      <label>CSS</label><br>
+      <input type="radio" id="type" name="type" value="city">
+      <label>city</label><br>
+      <input type="radio" id="type" name="type" value="salary">
+      <label>salary</label><br>
+      <input type="radio" id="type" name="type" value="jobTitle">
+      <label>jobTitle</label><br>
+      <input type="input" id = "input" name="input" placeholder="input">
+      <label>input</label>
+      <br>  
+      <button class="submitButton" type="submit">search</button>
+    </form>
   <br>
+</div>
+  <div id="jobResult">
   {{#each jobs}}
-  <form id="jobpost-form" name="jobpost-form" action="" method="POST">
+  
+    <div class="jobList">
+      <form id="jobpost-form" name="jobpost-form" action="" method="POST">
   <input type = "hidden" id="formid" name="formid" value="jobpost-form">
+    <label><h3>{{jobTitle}}</h3></label>
     <label>Employer:{{employer}}</label>
+    <br>
     <label>salary:{{salary}}</label>
-    <label>jobtitle:{{jobTitle}}</label>
-    <label>Location:{{country}} {{state}} {{city}}</label>
+    <br>
+  
+    <label>Location:{{country}}, {{state}}, {{city}}</label>
+    <br>
     <label>Description:{{jobDescription}}</label>
+    <br>
     <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
     <input type = "hidden" id="posterid" name="posterid" value={{posterId}}>
-    <button id="submitButton" type="submit">submit resume</button>
+    <button class="submitButton" type="submit">submit resume</button>
+    </div>
   </form>
   {{/each}}
-<section>
+   </div>
+</div>
 
 </section>

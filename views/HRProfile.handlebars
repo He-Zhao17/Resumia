@@ -1,4 +1,5 @@
-<section>
+<section class="MainPage">
+    <h1>HR profile</h1>
     email: {{HRProfile.email}}<br>
     firstname: {{HRProfile.firstname}}<br>
     lastname: {{HRProfile.lastname}}<br>
@@ -10,5 +11,12 @@
     phone: {{HRProfile.phone}}<br>
     address: {{HRProfile.address}}<br>
     website: {{HRProfile.website}}
+    <form  id="update" action="/hr/updateInfo" method="GET">
+<button class="submitButton" type="submit">updateinfo</button>
+</form>
+<form  id="update" action="/hr/updatePassword" method="GET">
+<button class="submitButton" type="submit">change password</button>
+</form>
     <p style="color: red;">{{error}}</p>
+
 </section>

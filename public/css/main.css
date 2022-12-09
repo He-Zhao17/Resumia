@@ -192,7 +192,7 @@ footer{
 
 
 .ResumeDiv a{
-    line-height: 50px;
+    line-height: 80px;
 }
 
 #resume-form{
@@ -233,7 +233,9 @@ footer{
     border-radius: 10px;
     margin: 20px auto;
     font-size: 20px;
+
 }
+
 
 #ResumeNav div:hover{
     opacity: 0.6;
@@ -250,4 +252,42 @@ footer{
 #jobDescription {
     height: 200px;
     Width: 1000px;
+}
+
+
+/* CSS for Job Searching (Applicants)*/
+
+#jobPlatform{
+    display: flex;
+    justify-content: flex-start;
+}
+#jobSearch{
+    width: 30%;
+    padding-left: 30px;
+}
+
+#jobResult{
+    width: 68%;
+}
+
+.jobList{
+    border: 2px solid #4aafe4;
+    border-radius: 10px;
+    padding-left: 40px;
+    margin-bottom: 20px;
+}
+
+
+/* CSS for posted Jobs (HR)*/
+#postedJobs{
+    list-style-type: none;
+    font-size: 20px;
+}
+
+#postedJobs a{
+    margin-left: 80px;
+}
+
+#postedJobs a:hover{
+    opacity: 0.8;
 }

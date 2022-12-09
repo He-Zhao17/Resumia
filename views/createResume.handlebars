@@ -8,6 +8,8 @@
             <div id="WorkTag">Working Experience</div>
             <div id="ProjTag">Project</div>
             <div id="PSTag">Personal Statement</div>
+            
+
         </div>
         <form action="/applicant/createResume" method="POST" id="resume-form">
             <p style="color: red;">{{error}}</p>
@@ -16,6 +18,7 @@
                 Resume Title
                 <input type="text" id = "resumeNameInput" name="resumeNameInput" placeholder="Resume Title">
                 </label>
+                <br>
                 <label for="firstname">
                     Firstname
                     <input type="text" id = "firstnameInput" name="firstnameInput" placeholder="Firstname">
@@ -197,9 +200,10 @@
                     </label>
                 </div>
                 <button>Add Project</button>
+                <br><br>
+                <button class="submitButton" type="submit">Submit</button>
             </div>
 
-            <button class="submitButton" type="submit">Submit</button>
         </form>
     </div>
     

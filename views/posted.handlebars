@@ -1,8 +1,13 @@
 <section class="MainPage">
-    <ul>
+    <h1>Posted Jobs</h1>
+    <ul id="postedJobs">
         {{#each jobPosts}}
             <li>
-                <a href="/jobPost/{{this._id}}">{{this.employer}} {{this.jobTitle}} {{this.city}}</a>
+                {{this.jobTitle}} 
+                <br>
+                {{this.employer}} {{this.city}} 
+                <a href="/jobPost/{{this._id}}">View</a>
+                <a href="/hr/post">Edit</a>
             </li>
         {{/each}}
     </ul>
