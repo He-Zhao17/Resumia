@@ -174,6 +174,7 @@ router
       if (req.session.basicInfo === true) {
         let array=[];
         let user = await userData.getUserById(req.session.userId);
+        user.Type="applicant"
         array.push(user);
         console.log(user)
         res.render("applicantProfile",{
