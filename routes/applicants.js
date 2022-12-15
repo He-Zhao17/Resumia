@@ -423,7 +423,8 @@ router.route("/reviewResumes").get(async (req, res) => {
     });
   }
   try {
-    let resumes = resumeData.getAllresumes(req.session.userId);
+    let resumes = await resumeData.getAllresumes(req.session.userId);
+    console.log(resumes);
     if (!resumes) { return res.status(500).json({ error: "Internal Server Error" }); }
     res.render("reviewResumes", {
       title: "Review Resumes",

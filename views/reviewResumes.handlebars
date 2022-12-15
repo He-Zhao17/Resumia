@@ -7,47 +7,16 @@
             </a>
         </div>
         
+
+        {{#each resumes}}
+            <div class="ResumeDiv">
+                <p>{{resumeName}}</p>
+                <a href="/applicant/readResume/{{_id}}">Review</a>
+                <a href="/applicant/updateResume/1">Update</a>
+                <a href="/applicant/deleteResume/1">Delete</a>
+            </div>
+
+        {{/each}}
         
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/1">Review</a>
-            <a href="/applicant/updateResume/1">Update</a>
-            <a href="/applicant/deleteResume/1">Delete</a>
-        </div>
-
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/2">Review</a>
-            <a href="/applicant/updateResume/2">Update</a>
-            <a href="/applicant/deleteResume/2">Delete</a>
-        </div>
-
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/3">Review</a>
-            <a href="/applicant/updateResume/3">Update</a>
-            <a href="/applicant/deleteResume/3">Delete</a>
-        </div>
-
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/3">Review</a>
-            <a href="/applicant/updateResume/3">Update</a>
-            <a href="/applicant/deleteResume/3">Delete</a>
-        </div>
-
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/3">Review</a>
-            <a href="/applicant/updateResume/3">Update</a>
-            <a href="/applicant/deleteResume/3">Delete</a>
-        </div>
-
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/3">Review</a>
-            <a href="/applicant/updateResume/3">Update</a>
-            <a href="/applicant/deleteResume/3">Delete</a>
-        </div>
-
-        <div class="ResumeDiv">
-            <a href="/applicant/readResume/3">Review</a>
-            <a href="/applicant/updateResume/3">Update</a>
-            <a href="/applicant/deleteResume/3">Delete</a>
-        </div>
     </div>
 </section>

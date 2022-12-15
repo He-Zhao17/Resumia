@@ -166,7 +166,7 @@ const checkGender = function (gender) {
   if (typeof gender != "string") throw "Error: Invalid Gender";
   // if the input is null, it means user doesnt want to tell
   if (gender == null || gender.trim().length === 0) return null;
-  if (gender != '0' || gender != '1' || gender != '2') throw "Error: Invalid Gender";
+  if (gender != '0' && gender != '1' && gender != '2') throw "Error: Invalid Gender";
   return Number(gender);
 };
 

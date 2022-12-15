@@ -26,6 +26,7 @@ const createResume = async (
   helpers.checkName(lastname);
   helpers.checkUserEmail(email);
   gender = helpers.checkGender(gender);
+
   helpers.checkPlace(city);
   helpers.checkPlace(state);
   helpers.checkPlace(country);
