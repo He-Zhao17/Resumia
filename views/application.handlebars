@@ -3,7 +3,8 @@
     <table id="appDetail" border="1">
         {{#if isApplicant}}
         {{else}}
-            <form action="/applications/updateStatus/{{application._id}}" method="post">
+            {{#ifEquals applicantion.status "pending"}}
+                <form action="/applications/updateStatus/{{application._id}}" method="post">
                 <div id="isAccept">
                     <p>Operation for accepting this application or declining ?</p>
                     <div id="acceptBtn">
@@ -11,7 +12,10 @@
                         <button type="submit" name="adOrNot" value="false">Decline</button>
                     </div>
                 </div>
-            </form>
+                </form>
+            {{else}}
+                
+            {{/ifEquals}}
         {{/if}}
         <tr>
             <td>Applicant: </td>
