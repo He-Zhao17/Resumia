@@ -61,9 +61,9 @@
                     <p>{{this.notes}}</p>
                 {{/each}}
             </div>
-            <form action="" method="post">
+            <form action="/applications/sendNotes/{{application._id}}" method="post">
                 <div id="sendContent">
-                    <textarea name="" id="" cols="30" rows="8">Type your text here</textarea>
+                    <textarea name="notes" id="" cols="30" rows="8">Type your text here</textarea>
                     <button>Send👆</button>
                 </div>
                 

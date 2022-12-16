@@ -249,7 +249,7 @@ router
         let state = req.body.stateInput;
         let country = req.body.countryInput;
         let phone = req.body.phoneInput;
-  
+          
         const addInfo = await userData.addBasicInfo(
           req.session.userId,
           firstname,
@@ -332,10 +332,9 @@ router.route("/createResume").get(async (req, res) => {
     let address = req.body.addrInput;
     let website = req.body.websiteInput;
     let skills = req.body.skills;
-    // These 3 are arrays of objects
-    let edu = req.body.edu;
-    let emp = req.body.emp;
-    let pro = req.body.pro;
+    let edu = req.body.Edu;
+    let emp = req.body.Emp;
+    let pro = req.body.Pro;
 
     const createInfo = await resumeData.createResume(
       req.session.userId,
@@ -489,31 +488,6 @@ router.route("/readResume/:id").get(async (req, res) => {
   }
 });
 
-router.route("/updateResume/:id").get(async (req, res) => {
-  if (req.session.userType != true) {
-    return res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-  if (req.session.basicInfo != true) {
-    res.render("applicantBasicInfo", {
-      title: "Applicant Basic Info",
-    });
-  }
-  try {
-    let result = resumeData.updateResume(req.params.id);
-    if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
-    res.render("reviewResumes", {
-      title: "Review Resumes",
-      isHomepage: true,
-      isApplicant: true,
-    });
-  } catch (error) {
-    res.render("reviewResumes", { error: e });
-  }
-});
-
 router.route("/deleteResume/:id").get(async (req, res) => {
   if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {
@@ -528,9 +502,11 @@ router.route("/deleteResume/:id").get(async (req, res) => {
   }
   try {
     let result = await resumeData.deleteResume(req.params.id);
+    console.log(result);
     if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
-    res.render("reviewResumes", {
-      title: "Review Resumes",
+    console.log(result);
+    res.render("jobMarket", {
+      title: "job market",
       isHomepage: true,
       isApplicant: true,
     });
