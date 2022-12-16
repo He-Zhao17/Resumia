@@ -1,21 +1,17 @@
 <section class="MainPage">
 <h1>User profile</h1>
 {{#each user}}
-<p>Type:{{Type}}</p>
 
-<p>Name:{{firstname}} {{lastname}}</p>
 
-<p>Email:{{email}}</p>
-
-<p>Gender:{{gender}}</p>
-
-<p>Age:{{age}}</p>
-
-<p>phone:{{phone}}</p>
-
-<p>Address:{{city}} {{state}}{{country}}</p>
-
-<p>website:{{website}}</p>
+<div class="userProfile">
+    <p id="userTitle">{{firstname}} {{lastname}} <sub>({{Type}})</sub></p>
+    <p>Email:&nbsp;{{email}}</p>
+    <p>Gender:&nbsp;{{gender}}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        Age:&nbsp;{{age}}</p>
+<p>phone:&nbsp;{{phone}}</p>
+<p>Address:&nbsp;{{city}}, {{state}}, {{country}}</p>
+<p>website:&nbsp;{{website}}</p>
+</div>
 
 
 {{/each}}
@@ -25,4 +21,5 @@
 <form  id="update" action="/applicant/updatePassword" method="GET">
 <button class="submitButton" type="submit">change password</button>
 </form>
+
 </section>

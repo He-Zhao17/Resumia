@@ -142,7 +142,7 @@ router
       let state = req.body.stateInput;
       let country = req.body.countryInput;
       let phone = req.body.phoneInput;
-
+    
       const addInfo = await userData.addBasicInfo(
         req.session.userId,
         req.session.userType,
@@ -450,16 +450,17 @@ router.route("/readResume/:id").get(async (req, res) => {
     });
   }
   try {
-    let resume = resumeData.getResumeById(req.params.id);
+    let resume = await resumeData.getResumeById(req.params.id);
     if (!resume) { return res.status(500).json({ error: "Internal Server Error" }); }
-    res.render("reviewResumes", {
+    console.log(resume);
+    res.render("reviewOneResume", {
       title: "Review Resumes",
       isHomepage: true,
       isApplicant: true,
-      resume: resume,
+      resumes: resume,
     });
   } catch (error) {
-    res.render("reviewResumes", { error: e });
+    res.render("reviewResumes", { error: error });
   }
 });
 

@@ -14,16 +14,15 @@
                     <div>
                         <a href="../static/index.html">About Us</a>
                         {{#if isApplicant}}  {{!-- nav bar for Applicant --}}
-                            <a href="/applicant/jobMarket">Job Market</a>
-                            <a href="/applicant/applied">Applied</a>
-                            <a href="/applicant/createResume">Create New Resume</a>
-                            <a href="/applicant/reviewResumes">My Resume</a>
-                            <a href="/applicant/profile">Profile</a>
-                        {{else}}  {{!-- nav bar for Applicant --}}
-                            <a href="/hr/post">Post New Position</a>
-                            <a href="/hr/posted">Posted Positions</a>
-                            <a href="/hr/received">Received Applications</a>
-                            <a href="/hr/profile">Profile</a>
+                            <a href="/applicant/jobMarket" class="navLink">Job Market</a>
+                            <a href="/applicant/applied" class="navLink">Applied</a>
+                            <a href="/applicant/reviewResumes" class="navLink">My Resume</a>
+                            <a href="/applicant/profile" class="navLink">Profile</a>
+                        {{else}}  {{!-- nav bar for HR --}}
+                            <a href="/hr/post" class="navLink">Post New Position</a>
+                            <a href="/hr/posted" class="navLink">Posted Positions</a>
+                            <a href="/hr/received" class="navLink">Received Applications</a>
+                            <a href="/hr/profile" class="navLink">Profile</a>
                         {{/if}}
                         <a href="/logout"><button class="LoginButton" type="submit">Log out</button></a>
                     </div>
