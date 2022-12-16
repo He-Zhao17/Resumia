@@ -48,6 +48,7 @@ const createJobPost = async (posterId,employer, country, state, city, salary, jo
     salary = checkSalary(salary);
     jobTitle = checkJobPostString("jobTitle", jobTitle);
     jobDescription = checkJobPostString("jobDescription", jobDescription);
+    let date = new Date().toLocaleDateString();
     if (!isAvailable) {
         throw "Error: Invalid isAvailable";
     }
@@ -63,7 +64,8 @@ const createJobPost = async (posterId,employer, country, state, city, salary, jo
         "salary": salary,
         "jobTitle": jobTitle,
         "jobDescription": jobDescription,
-        "isAvailable": isAvailable
+        "isAvailable": isAvailable,
+        "postTime":date
     }
     const jobPostCollection = await jobpost();
     const insertInfo = await jobPostCollection.insertOne(postInfo);
