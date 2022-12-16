@@ -79,7 +79,6 @@ const getUserById = async (userId) => {
 
 const addBasicInfo = async (
   userId,
-  userType,
   firstname,
   lastname,
   gender,
@@ -89,8 +88,18 @@ const addBasicInfo = async (
   country,
   phone
 ) => {
+  console.log("")
+  console.log(firstname);
+  console.log(lastname);
+  console.log(gender);
+  console.log(age);
+  console.log(city);
+  console.log(state);
+  console.log(country);
+  console.log(phone);
   helpers.checkName(firstname);
   helpers.checkName(lastname);
+  gender = helpers.checkGender(gender);
   helpers.checkPlace(city);
   helpers.checkPlace(state);
   helpers.checkPlace(country);
@@ -114,7 +123,7 @@ const addBasicInfo = async (
     { $set: getUser }
   );
   if (updatedInfo.modifiedCount === 0) {
-    throw "Error: Updating movie failed";
+    throw "Error: Updating user failed";
   }
 
   return {

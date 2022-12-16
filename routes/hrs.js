@@ -187,6 +187,7 @@ router
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
+      let age = req.body.ageInput;
       let phone = req.body.phoneInput;
       helpers.checkName(firstname);
       helpers.checkName(lastname);
@@ -208,6 +209,7 @@ router
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
+      let age = req.body.ageInput;
       let phone = req.body.phoneInput;
 
       const addInfo = await userData.addBasicInfo(
@@ -216,6 +218,7 @@ router
         firstname,
         lastname,
         gender,
+        age,
         city,
         state,
         country,
@@ -298,9 +301,7 @@ router
 router.route("/updateInfo").get(async (req, res) => {
   if (req.session.userType === false) {
     if (req.session.basicInfo === true) {
-      let array=[];
       let user = await userData.getUserById(req.session.userId);
-      array.push(user);
       return res.render("HRUpdateInfo", {
         title: "Update Info",
         isHomepage: true,
@@ -339,5 +340,62 @@ router.route("/:id").get(async (req, res) => {
       error: "Error: 403, You are NOT logged in yet!",
     });
   }
-});
+})
+.post(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      try {
+      let firstname = req.body.firstnameInput;
+      let lastname = req.body.lastnameInput;
+      let gender = req.body.genderInput;
+      let age = req.body.genderInput;
+      let city = req.body.cityInput;
+      let state = req.body.stateInput;
+      let country = req.body.countryInput;
+      let phone = req.body.phoneInput;
+
+      let addInfo = await userData.addBasicInfo(
+        req.session.userId,
+        firstname,
+        lastname,
+        gender,
+        age,
+        city,
+        state,
+        country,
+        phone
+      );
+      
+      if (addInfo) {
+        if (addInfo.gender === 0) {
+          addInfo.gender = 'Male'
+        }
+        else if (addInfo.gender === 1){
+          addInfo.gender = 'Female'
+        }
+        else {
+          addInfo.gender = 'Not to tell'
+        }
+
+        req.session.basicInfo = addInfo.basicInfo;
+        res.redirect("/hr/profile");
+      } else {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+    }catch(e){
+      let user = await userData.getUserById(req.session.userId);
+      res.render("updateInfo",{error:e,HRProfile:user});
+    }
+    } else {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+})
 module.exports = router;

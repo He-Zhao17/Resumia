@@ -128,6 +128,8 @@ router
     try {
       let firstname = req.body.firstnameInput;
       let lastname = req.body.lastnameInput;
+      let gender = req.body.genderInput;
+      let age = req.body.ageInput;
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
@@ -148,6 +150,7 @@ router
       let firstname = req.body.firstnameInput;
       let lastname = req.body.lastnameInput;
       let gender = req.body.genderInput;
+      let age = req.body.ageInput;
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
@@ -155,10 +158,10 @@ router
     
       const addInfo = await userData.addBasicInfo(
         req.session.userId,
-        req.session.userType,
         firstname,
         lastname,
         gender,
+        age,
         city,
         state,
         country,
@@ -185,6 +188,15 @@ router
         let array=[];
         let user = await userData.getUserById(req.session.userId);
         user.Type="applicant"
+        if (user.gender === 0) {
+          user.gender = 'Male'
+        }
+        else if (user.gender === 1){
+          user.gender = 'Female'
+        }
+        else {
+          user.gender = 'Not to tell'
+        }
         array.push(user);
         console.log(user)
         res.render("applicantProfile",{
@@ -194,7 +206,6 @@ router
         }) 
       } else {
         res.render("applicantBasicInfo", {
-          
           title: "Applicant Basic Info",
         });
       }
@@ -208,14 +219,11 @@ router
   router.route("/updateInfo").get(async (req, res) => {
     if (req.session.userType === true) {
       if (req.session.basicInfo === true) {
-        let array=[];
         let user = await userData.getUserById(req.session.userId);
-        array.push(user);
-        console.log(user)
         res.render("updateInfo",{
           isHomepage: true,
           isApplicant: true,
-          user:array,
+          user:user,
         }) 
       } else {
         res.render("applicantBasicInfo", {
@@ -236,6 +244,7 @@ router
         let firstname = req.body.firstnameInput;
         let lastname = req.body.lastnameInput;
         let gender = req.body.genderInput;
+        let age = req.body.ageInput;
         let city = req.body.cityInput;
         let state = req.body.stateInput;
         let country = req.body.countryInput;
@@ -243,10 +252,10 @@ router
   
         const addInfo = await userData.addBasicInfo(
           req.session.userId,
-          req.session.userType,
           firstname,
           lastname,
           gender,
+          age,
           city,
           state,
           country,

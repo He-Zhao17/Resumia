@@ -15,14 +15,13 @@
     <p>address: {{HRProfile.address}}</p>
     <p>website: {{HRProfile.website}}</p>
     </div>
-    {{!-- <form  id="update" action="/hr/updateInfo" method="GET">
+    <form  id="update" action="/hr/updateInfo" method="GET">
 <button class="submitButton" type="submit">update information</button>
-</form> --}}
-<a href="/hr/updateInfo">update information</a>
-
-<form  id="update" action="/hr/updateInfo" method="GET">
-<button class="submitButton" type="submit">change password</button>
 </form>
+
+{{!-- <form  id="update" action="/hr/updateInfo" method="GET">
+<button class="submitButton" type="submit">change password</button>
+</form> --}}
     <p style="color: red;">{{error}}</p>
 
 </section>
