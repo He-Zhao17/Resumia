@@ -355,6 +355,7 @@ footer{
     height: 50px;
 }
 
+/* CSS for submitting applications panel */
 #hidebg {
     position:fixed;
     left:0px;top:0px;
@@ -396,4 +397,15 @@ footer{
     color: #0077b5;
     font-weight: bolder;
     font-size: 22px;
+}
+
+/* CSS for reviewing ONE Resume */
+.reviewOneResume{
+    width: 60%;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.reviewOneResume td{
+    padding-left: 20px;
 }

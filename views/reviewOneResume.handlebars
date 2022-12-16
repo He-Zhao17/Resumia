@@ -1,9 +1,77 @@
 <section class="MainPage">
+    <h1>This is your Information of resume '{{resume.resumeName}}'</h1>
     <div>
-        <p>{{resume.firstName}}</p>
-        <p>{{resume.email}}</p>
-        
-    </div>
+        <table border="1" class="reviewOneResume">
+            <tr>
+                <td>Resume Name</td>
+                <td>{{resume.resumeName}}</td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>{{resume.firstName}} {{resume.lastName}}</td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td>{{resume.email}}</td>
+            </tr>
+            <tr>
+                <td>Gender: </td>
+                <td>{{resume.gender}}</td>
+            </tr>
+            <tr>
+                <td>City: </td>
+                <td>{{resume.city}}</td>
+            </tr>
+            <tr>
+                <td>State: </td>
+                <td>{{resume.state}}</td>
+            </tr>
+            <tr>
+                <td>Country: </td>
+                <td>{{resume.country}}</td>
+            </tr>
+            <tr>
+                <td>Age: </td>
+                <td>{{resume.age}}</td>
+            </tr>
+            <tr>
+                <td>Telephone Number: </td>
+                <td>{{resume.phone}}</td>
+            </tr>
+            <tr>
+                <td>Address: </td>
+                <td>{{resume.address}}</td>
+            </tr>
+            <tr>
+                <td>Website url: </td>
+                <td>{{resume.website}}</td>
+            </tr>
+            <tr>
+                <td>Skills: </td>
+                {{#each resume.skill}}
+                    <td></td>
+                {{/each}}
+            </tr>
+            <tr>
+                <td>Education: </td>
+                {{#each resume.edu}}
+                    <td></td>
+                {{/each}}
+            </tr>
+            <tr>
+                <td>Employment: </td>
+                {{#each resume.emp}}
+                    <td></td>
+                {{/each}}
+            </tr>
 
+            <tr>
+                <td>Project: </td>
+                {{#each resume.pro}}
+                    <td></td>
+                {{/each}}
+            </tr>
+        </table>
     </div>
+    <a href="/applicant/reviewResumes" id="return"> ← Back to List</a>
 </section>
