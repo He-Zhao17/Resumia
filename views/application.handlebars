@@ -27,18 +27,22 @@
         </tr>
         <tr>
             <td>Application Status</td>
-            <td>{{application.status}}</td>
+            <td>
+                {{!-- {{#if_eq applications.status 0}}
+                    Status: pending
+                {{else}} {{#if_eq application.status 1}}
+                        Status: admitted
+                {{else}}
+                        Status: rejected
+                    {{/if_eq}}
+                {{/if_eq}}
+                Notes: {{application.notes}} --}}
+            </td>
         </tr>
-        {{!-- {{#if (eq application.status  0)}}
-        Status: pending
-    {{else if (eq application.status 1)}}
-        Status: admitted
-    {{else}}
-        Status: rejected
-    {{/if}}
-    Notes: {{application.notes}} --}}
+        
     </table>
     <p style="color: red;">{{error}}</p>
     <a href="/applicant/applied" id="return"> ← Back to List</a>
 
 </section>
+
