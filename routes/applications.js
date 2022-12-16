@@ -76,7 +76,7 @@ router
         });
 
 router
-    .route("/sendNotes") // id is application id
+    .route("/sendNotes/:id") // id is application id
     .post(async (req, res) => {
         if (!req.session.userId) {
             return res.status(403).render("forbiddenAccess", {
@@ -86,10 +86,10 @@ router
         }
         let type = true;
         try {
-            if (!req.body.applicationId) {
+            if (!req.params.id) {
                 throw "no appId";
             }
-            helpers.checkId(req.body.applicationId);
+            helpers.checkId(req.params.id);
             if (!req.body.notes) {
                 throw "no content of the note.";
             }
@@ -107,16 +107,15 @@ router
                 notes: note,
                 postDate: new Date().toUTCString(),
             }
-            const userInfo = await userData.getUserById(req.session.userId);
-            if (userInfo.type) {
+            if (req.session.userType) {
                 newNote.from = 'Applicant';
             } else {
                 newNote.from = "HR";
                 type = false;
             }
 
-            const updateInfo = await appData.sendNote(req.body.applicationId, newNote);
-            res.status(200).refresh();
+            const updateInfo = await appData.sendNote(req.params.id, newNote);
+            res.status(200).redirect(`/applications/${req.params.id}`);
 
         } catch (error) {
             return res.status(403).render("application",{
