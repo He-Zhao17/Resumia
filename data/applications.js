@@ -13,6 +13,7 @@ const createApplication = async (hr_id, user_id,resume_id,job_id) => {
       throw `Some of the input is empty`;
     }
     const appCollection = await app();
+    let date = new Date().toLocaleDateString();
     let newApp = {
       user_id: user_id,
       hr_id: hr_id,
@@ -20,8 +21,9 @@ const createApplication = async (hr_id, user_id,resume_id,job_id) => {
       job_id:job_id,
       status:0,
       notes:[
-
-      ]
+   
+      ],
+      createTime:date
     };
   
     const insertInfo = await appCollection.insertOne(newApp);
