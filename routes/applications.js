@@ -126,7 +126,7 @@ router
         }
     })
 
-router.route("/updateStatus")
+router.route("/updateStatus/:id")
     .post(async (req, res) => {
         if (!req.session.userId) {
             return res.status(403).render("forbiddenAccess", {
@@ -135,25 +135,27 @@ router.route("/updateStatus")
             });
         }
         try {
+            if (!req.params.id) {
+                throw "Application Id not provided";
+            }
             const userInfo = await userData.getUserById(req.session.userId);
             if (userInfo.type) {
                 throw "Applicant cannot update the status.";
             }
 
-            if (!req.body.applicationId) {
-                throw "no appId";
-            }
-            helpers.checkId(req.body.applicationId);
+
+            helpers.checkId(req.params.id);
             if (!req.body.adOrNot) {
                 throw "no decision";
             }
             let decision = req.body.adOrNot;
-            if (typeof decision !== "boolean") {
-                throw "note is not a boolean";
+            if (!(decision === "true" || decision === "false")) {
+                throw "invalid ad/rej"
             }
+            decision = decision === "true" ? true : false;
 
-            const updateInfo = await appData.updateStatus(req.body.applicationId, req.body.adOrNot);
-            res.status(200).refresh();
+            const updateInfo = await appData.updateStatus(req.params.id, decision);
+            res.status(200).redirect(`/applications/${req.params.id}`);
 
         } catch (error) {
             return res.status(403).render("application",{

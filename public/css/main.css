@@ -458,3 +458,88 @@ footer{
     border-color: #4aafe4;
 
 }
+
+/* CSS for accepting message */
+#isAccept{
+    border: 1px solid black;
+    background-color: #4aafe4;
+    color: white;
+    width: 70%;
+    height: 50px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 20px;
+    border-radius: 15px;
+}
+
+#acceptBtn{
+    margin: auto 10px;
+}
+
+#acceptBtn button{
+    border-radius: 10px;
+    border-color: grey;
+    font-weight: bold;
+}
+#acceptBtn button:hover{
+    background-color: #4aafe4;
+    color: white;
+}
+
+
+/* CSS for notes panel */
+#sendPanel{
+    width: 350px;
+    height: 500px;
+    position: fixed;
+    right: 200px;
+    bottom: 0px;
+    border: 3px solid #0077b5;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+#NotesTitle{
+    width: 27%;
+    background-color: #4aafe4;
+    color: white;
+    height: 40px;
+    line-height: 40px;
+    font-size: 30px;
+    border: 1px solid #0077b5;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#NotesContent{
+    width: 100%;
+    border: 1px solid #4aafe4;
+    height: 300px;
+    border-radius: 10px;
+}
+
+#sendContent{
+    width:100%;
+    height: 112px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sendContent textarea{
+    border:1px solid #4aafe4;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#sendContent button{
+    width: 88px;
+    height: 30px;
+    border: 2px solid #0077b5;
+    color: #0077b5;
+    font-weight: bold;
+}
