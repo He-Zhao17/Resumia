@@ -3,7 +3,7 @@
 
     {{#each applications}}
         <li>
-            <a href="/applications/{{this._id}}">{{this.jobPost.employer}} {{this.jobPost.jobTitle}} {{this.jobPost.city}}
+            <a href="/applications/{{this._id}}">{{this.job.employer}} {{this.job.jobTitle}} {{this.job.city}}
             from {{this.applicant.firstname}} {{this.applicant.lastname}}</a>
         </li>
     {{/each}}
