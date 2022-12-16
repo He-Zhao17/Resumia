@@ -1,10 +1,9 @@
 <section class="MainPage">
     <h1>{{application.jobPost.employer}}, {{application.jobPost.jobTitle}}, {{application.jobPost.city}}</h1>
     <table id="appDetail" border="1">
-        {{#if isApplicant}}
-        {{else}}
-            {{#ifEquals applicantion.status "pending"}}
-                <form action="/applications/updateStatus/{{application._id}}" method="post">
+
+        {{#if hideOrNot}}
+            <form action="/applications/updateStatus/{{application._id}}" method="post">
                 <div id="isAccept">
                     <p>Operation for accepting this application or declining ?</p>
                     <div id="acceptBtn">
@@ -12,10 +11,7 @@
                         <button type="submit" name="adOrNot" value="false">Decline</button>
                     </div>
                 </div>
-                </form>
-            {{else}}
-                
-            {{/ifEquals}}
+            </form>
         {{/if}}
         <tr>
             <td>Applicant: </td>

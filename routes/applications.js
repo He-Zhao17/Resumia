@@ -44,7 +44,8 @@ router
                 title: "Application",
                 isHomepage: true,
                 error: error,
-                isApplicant: req.session.userType
+                isApplicant: req.session.userType,
+                hideOrNot: false
             });
         }
 
