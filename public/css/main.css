@@ -354,3 +354,46 @@ footer{
     width: 220px;
     height: 50px;
 }
+
+#hidebg {
+    position:fixed;
+    left:0px;top:0px;
+    background-color:#000;
+    width:100%;
+    filter:alpha(opacity=60);
+    opacity:0.6;
+    display:none;
+    z-Index:2;
+}
+ #hidebox{
+    position:fixed;
+    width:350px;
+    height:150px;
+    top:400px;
+    left:38%;
+    background-color:#fff;
+    display:none;
+    cursor:pointer;
+    z-Index:3;
+    padding: 30px;
+}
+
+
+ #content { 
+    text-align:center;
+    cursor:pointer;
+    z-Index:1;
+}
+
+
+#closeButton{
+    border: 1px solid black;
+    padding: 5px;
+    position: fixed;
+    left: 58%;
+    top: 400px;
+    width: 30px;
+    color: #0077b5;
+    font-weight: bolder;
+    font-size: 22px;
+}

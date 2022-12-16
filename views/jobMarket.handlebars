@@ -45,7 +45,6 @@
   {{#each jobs}}
   
     <div class="jobList">
-      <form id="jobpost-form" name="jobpost-form" action="" method="POST">
   <input type = "hidden" id="formid" name="formid" value="jobpost-form">
     <label><h3>{{jobTitle}}</h3></label>
     <label>Employer:{{employer}}</label>
@@ -59,11 +58,29 @@
     <br>
     <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
     <input type = "hidden" id="posterid" name="posterid" value={{posterId}}>
-    <button class="submitButton" type="submit">submit resume</button>
+        
+    <button class="submitButton" type="submit" onClick="show();">submit resume</button>
+
+    <div id="hidebox">
+      <button onClick="hide();" id="closeButton">x</button>
+      <form action="/applicant/jobmarket" method="post">
+        <label for="submitResume">
+          Select one resume:
+          <select name="submitResume" id="submitResume">
+            <option value="resume1">option1</option>
+            <option value="resume2">option1</option>
+          </select>
+        </label>
+        <br>
+        <button class="submitButton" type="submit" onClick="hide();">SUBMIT</button>
+      </form>
     </div>
-  </form>
+  </div>
   {{/each}}
    </div>
+
+   <div id="hidebg"></div>
+
 </div>
 
 </section>
