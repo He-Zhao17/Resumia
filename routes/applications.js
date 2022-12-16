@@ -28,11 +28,16 @@ router
             let id = checkId(req.params.id);
             let appFound = await appData.getAppById(id);
             const userInfo = await userData.getUserById(req.session.userId);
+            let hideOrNot = false;
+            if (!req.session.userType && appFound.status === "Pending") {
+                hideOrNot = true;
+            }
             res.status(200).render("application", {
                 title: "Application",
                 isHomepage: true,
                 application: appFound,
-                isApplicant: userInfo.type
+                isApplicant: userInfo.type,
+                hideOrNot: hideOrNot
             })
         } catch (error) {
             return res.status(403).render("application", {
