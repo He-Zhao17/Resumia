@@ -41,10 +41,10 @@ const getAppById = async (appId) => {
         throw `Error: Application ${appId} Not Found`;
     }
     appFound._id = appFound._id.toString();
-    appFound.jobPost = jobposts.getJobPostById(appFound.job_id);
-    appFound.applicant = users.getUserById(appFound.user_id);
-    appFound.hr = users.getUserById(appFound.hr_id);
-    appFound.resume = resumes.getResumeById(appFound.resume_id);
+    appFound.jobPost = await jobposts.getJobPostById(appFound.job_id);
+    appFound.applicant = await users.getUserById(appFound.user_id);
+    appFound.hr = await users.getUserById(appFound.hr_id);
+    appFound.resume = await resumes.getResumeById(appFound.resume_id);
     return appFound;
 }
 

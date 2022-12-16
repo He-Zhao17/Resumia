@@ -1,5 +1,5 @@
 <section class="MainPage">
-    <h1>(改成职位名称)</h1>
+    <h1>{{application.jobPost.employer}}, {{application.jobPost.jobTitle}}, {{application.jobPost.city}}</h1>
     <table id="appDetail" border="1">
         <tr>
             <td>Applicant: </td>
@@ -7,12 +7,12 @@
         </tr>
         <tr>
             <td>Company Name</td>
-            <td></td>
+            <td>{{application.jobPost.employer}}</td>
         </tr>
         <tr>
             <td>Job Position: </td>           
             <td>
-                <a href="/jobPost/{{application.job_id}}">{{application.jobPost.employer}} {{application.jobPost.jobTitle}} {{application.jobPost.city}}</a>
+                <a href="/jobPost/{{application.job_id}}">{{application.jobPost.jobTitle}}, {{application.jobPost.city}}</a>
             </td>
         </tr>
         <tr>
@@ -23,11 +23,11 @@
         </tr>
         <tr>
             <td>Submission Date</td>
-            <td></td>
+            <td>{{application.createTime}}</td>
         </tr>
         <tr>
             <td>Application Status</td>
-            <td></td>
+            <td>{{application.status}}</td>
         </tr>
         {{!-- {{#if (eq application.status  0)}}
         Status: pending
