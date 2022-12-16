@@ -9,7 +9,7 @@ const users = require("./users");
 const resumes = require("./resumes");
 
 const createApplication = async (hr_id, user_id,resume_id,job_id) => {
-    if(!hr_id||!user_id||!job_id){
+    if(!hr_id||!user_id||!job_id||!resume_id){
       throw `Some of the input is empty`;
     }
     const appCollection = await app();
@@ -19,7 +19,9 @@ const createApplication = async (hr_id, user_id,resume_id,job_id) => {
       resume_id: resume_id,
       job_id:job_id,
       status:0,
-      notes:[]
+      notes:[
+
+      ]
     };
   
     const insertInfo = await appCollection.insertOne(newApp);
@@ -87,10 +89,30 @@ const getAllApplied = async (applicantId) => {
   return output;
 }
 
+const sendNote = async (appId, noteObj) => {
+    helpers.checkId(appId);
+    const appCollection = await app();
+    const updateInfo = await appCollection.updateOne(
+        {_id: ObjectId(appId)},
+        {$addToSet: {notes: noteObj}
+    });
+    if (!updateInfo.acknowledged || !updateInfo.modifiedCount) throw `Could not send the note.`;
+    return true;
+}
 
+const updateStatus = async (appId, adOrNot) => {
+    helpers.checkId(appId);
+    const appCollection = await app();
+    const updateInfo = await appCollection.updateOne(
+        {_id: ObjectId(appId)},
+        {status: adOrNot? true : false}
+    );
+    if (!updateInfo.acknowledged || !updateInfo.modifiedCount) throw `Could not update the status`;
+    return true;
+}
   module.exports = {
     createApplication,
     getAllApplied,
     getAppById,
-    getAllAppByHRId
+    getAllAppByHRId, sendNote, updateStatus
 };

@@ -293,26 +293,7 @@ router
       }
     })
 
-router.route("/:id").get(async (req, res) => {
-  if (req.session.userType === false) {
-    if (req.session.basicInfo === true) {
-      return res.render("receivedApplications", {
-        title: "Homepage",
-        isHomepage: true,
-        isApplicant: false,
-      });
-    } else {
-      return res.status(403).render("HRBasicInfo", {
-        title: "HR Basic Info",
-      });
-    }
-  } else {
-    res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-});
+
 
 router.route("/updateInfo").get(async (req, res) => {
   if (req.session.userType === false) {
@@ -339,4 +320,24 @@ router.route("/updateInfo").get(async (req, res) => {
   }
 });
 
+router.route("/:id").get(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      return res.render("receivedApplications", {
+        title: "Homepage",
+        isHomepage: true,
+        isApplicant: false,
+      });
+    } else {
+      return res.status(403).render("HRBasicInfo", {
+        title: "HR Basic Info",
+      });
+    }
+  } else {
+    res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+});
 module.exports = router;

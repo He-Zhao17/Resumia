@@ -8,6 +8,7 @@ const appData = data.applications;
 const jobData=data.jobposts;
 const resumeData = data.resumes;
 
+
 router.route("/jobmarket").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
@@ -36,10 +37,16 @@ router.route("/jobmarket").get(async (req, res) => {
         req.session.searchtype=req.body.type;
         let array = await jobData.findjobs(req.session.searchinput,req.session.searchtype);
         req.session.searchArray=array;
-         res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+
+        const resumes = await resumeData.getResumesByApplicantId(req.session.userId);
+
+         res.render("jobMarket",{
+           jobs:req.session.searchArray,
+           title: "Homepage",
          time: new Date().toUTCString(),
          isHomepage: true,
-         isApplicant: true}) 
+         isApplicant: true, resumes: resumes
+         });
          console.log(req.session.searchArray)
        }
        else if(req.body.formid=="jobpost-form"){
@@ -347,6 +354,7 @@ router.route("/createResume").get(async (req, res) => {
     res.render("createResume", { error: e });
   }
 });
+
 router.route("/updatePassword").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
@@ -383,6 +391,7 @@ router.route("/updatePassword").get(async (req, res) => {
     });
   }
 })
+
 router.route("/applied").get(async (req, res) => {
   if (req.session.userType != true) {
     return res.status(403).render("forbiddenAccess", {
@@ -512,4 +521,7 @@ router.route("/deleteResume/:id").get(async (req, res) => {
     res.render("reviewResumes", { error: e });
   }
 });
+
+
+
 module.exports = router;

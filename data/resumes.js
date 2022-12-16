@@ -93,6 +93,20 @@ const getResumeByUserId = async (UserId) => {
     throw"this applicant has no resume";
 }
 
+const getResumesByApplicantId = async (applicantId) => {
+    const resumeCollection = await resume();
+    const resumes = await resumeCollection.find({creatorId : applicantId}).toArray();
+    if (!resumes) {
+        throw "Cannot get the resumes by applicant Id";
+    }
+    for (var i = 0; i < resumes.length; i++) {
+        resumes[i]._id = resumes[i]._id.toString();
+    }
+    return resumes;
+}
+
+
+
 const getResumeById = async (resumeId) => {
     resumeId = helpers.checkId(resumeId);
     const resumeCollection = await resume();
@@ -185,5 +199,6 @@ module.exports = {
     getResumeById,
     deleteResume,
     updateResume,
-    getResumeByUserId
+    getResumeByUserId,
+    getResumesByApplicantId
 }

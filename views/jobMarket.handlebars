@@ -63,12 +63,13 @@
 
     <div id="hidebox">
       <button onClick="hide();" id="closeButton">x</button>
-      <form action="/applicant/jobmarket" method="post">
+      <form action="/applications/createApplication" method="post">
         <label for="submitResume">
           Select one resume:
           <select name="submitResume" id="submitResume">
-            <option value="resume1">option1</option>
-            <option value="resume2">option1</option>
+              {{#each resumes}}
+                  <option value={{_id}}>{{resumeName}}</option>
+              {{/each}}
           </select>
         </label>
         <br>
