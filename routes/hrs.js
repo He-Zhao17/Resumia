@@ -327,11 +327,7 @@ router.route("/updateInfo").get(async (req, res) => {
 router.route("/:id").get(async (req, res) => {
   if (req.session.userType === false) {
     if (req.session.basicInfo === true) {
-      return res.render("receivedApplications", {
-        title: "Homepage",
-        isHomepage: true,
-        isApplicant: false,
-      });
+      return res.status(200).redirect("/hr/received");
     } else {
       return res.status(403).render("HRBasicInfo", {
         title: "HR Basic Info",
