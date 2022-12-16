@@ -39,6 +39,11 @@
     Notes: {{application.notes}} --}}
     </table>
     <p style="color: red;">{{error}}</p>
-    <a href="/applicant/applied" id="return"> ← Back to List</a>
+    {{#if isApplicant}}
+        <a href="/applicant/applied" id="return"> ← Back to List</a>
+    {{else}}
+        <a href="/hr/received" id="return"> ← Back to List</a>
+    {{/if}}
+
 
 </section>
