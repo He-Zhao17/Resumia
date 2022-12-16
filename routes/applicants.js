@@ -418,7 +418,12 @@ router.route("/applied").get(async (req, res) => {
       applications: applied
     });
   } catch (e) {
-    res.render("applied", { error: e });
+    res.render("applied", {
+      error: e,
+      title: "Applied Jobs",
+      isHomepage: true,
+      isApplicant: true,
+    });
   }
 });
 

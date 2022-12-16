@@ -1,5 +1,9 @@
 <section class="MainPage">
     <h1>This is your applications</h1>
+    {{#each applications}}
+        <p>{{this.job.employer}}<br/> {{this.job.jobTitle}}</p>
+    {{/each}}
+
 
 
 
