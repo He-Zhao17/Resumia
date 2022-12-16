@@ -13,7 +13,6 @@ router.route("/jobmarket").get(async (req, res) => {
     if (req.session.basicInfo === true) {
       return res.render("jobMarket", {
         title: "Homepage",
-        time: new Date().toUTCString(),
         isHomepage: true,
         isApplicant: true,
       });

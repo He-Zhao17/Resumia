@@ -4,6 +4,7 @@ const data = require("../data");
 const helpers = require("../helper/helpers");
 const {checkPlace, checkSalary,  checkId, checkJobPostString} = require("../helper/helpers");
 const {ObjectId} = require("mongodb");
+const { route } = require("./applicants");
 const userData = data.users;
 
 
@@ -274,7 +275,10 @@ router
       }
       try {
         const userData = data.users
-        const HRFound = await userData.getUserById(req.session.userId);
+        let HRFound = await userData.getUserById(req.session.userId);
+        if (HRFound.type === false) {
+          HRFound.Type = 'HR';
+        }
         res.status(200).render("HRProfile", {
           title: "HR Profile",
           isHomepage: true,
@@ -289,13 +293,11 @@ router
       }
     })
 
-
 router.route("/:id").get(async (req, res) => {
   if (req.session.userType === false) {
     if (req.session.basicInfo === true) {
       return res.render("receivedApplications", {
         title: "Homepage",
-        time: new Date().toUTCString(),
         isHomepage: true,
         isApplicant: false,
       });
@@ -311,4 +313,30 @@ router.route("/:id").get(async (req, res) => {
     });
   }
 });
+
+router.route("/updateInfo").get(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      let array=[];
+      let user = await userData.getUserById(req.session.userId);
+      array.push(user);
+      return res.render("HRUpdateInfo", {
+        title: "Update Info",
+        isHomepage: true,
+        isApplicant: false,
+        user: user
+      });
+    } else {
+      return res.status(403).render("HRBasicInfo", {
+        title: "HR Basic Info",
+      });
+    }
+  } else {
+    res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+});
+
 module.exports = router;

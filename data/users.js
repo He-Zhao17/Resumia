@@ -83,6 +83,7 @@ const addBasicInfo = async (
   firstname,
   lastname,
   gender,
+  age,
   city,
   state,
   country,
@@ -101,6 +102,7 @@ const addBasicInfo = async (
   getUser.firstname = firstname;
   getUser.lastname = lastname;
   getUser.gender = gender;
+  getUser.age = age;
   getUser.city = city;
   getUser.state = state;
   getUser.country = country;
