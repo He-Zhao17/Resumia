@@ -332,7 +332,6 @@ router.route("/createResume").get(async (req, res) => {
     let address = req.body.addrInput;
     let website = req.body.websiteInput;
     let skills = req.body.skills;
-
     // These 3 are arrays of objects
     let edu = req.body.edu;
     let emp = req.body.emp;

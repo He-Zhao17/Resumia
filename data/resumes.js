@@ -33,7 +33,15 @@ const createResume = async (
   age = helpers.checkAge(age);
   phone = helpers.checkPhone(phone);
   address = helpers.checkPlace(address);
-
+  if(gender==0){
+    gender="Male";
+  }
+  else if(gender==1){
+    gender="Female";
+  }
+  else{
+    gender="Not to tell";
+  }
   let newResume = {
     creatorId: creatorId,
     resumeName: resumeName,

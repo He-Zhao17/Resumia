@@ -6,6 +6,7 @@ const {checkPlace, checkSalary,  checkId, checkJobPostString} = require("../help
 const {ObjectId} = require("mongodb");
 const { route } = require("./applicants");
 const userData = data.users;
+const applicationsData = data.applications;
 
 
 
@@ -252,17 +253,19 @@ router
       }
       try {
         const hrData = data.hrs;
-        const appsFound = await data.applications.getAllAppByHRId(req.session.userId);
-        res.status(200).render("posted", {
+        const appsFound = await applicationsData.getAllAppByHRId(req.session.userId);
+        res.status(200).render("receivedApplications", {
           title: "Received Applications",
           isHomepage: true,
+          isApplicant: false,
           applications: appsFound
         });
       } catch (error) {
         return res.status(403).render("receivedApplications", {
           title: "Received Applications",
           isHomepage: true,
-          error: error,
+          isApplicant: false,
+          error: error
         });
       }
     })
