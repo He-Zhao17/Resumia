@@ -48,27 +48,53 @@
             </tr>
             <tr>
                 <td>Skills: </td>
-                {{#each resume.skill}}
+                {{#each resume.skills}}
                     <td></td>
                 {{/each}}
             </tr>
             <tr>
                 <td>Education: </td>
                 {{#each resume.edu}}
-                    <td></td>
+                <td>
+                    <div>school: {{this.schoolInput}}</div>
+                    <div>start date: {{this.startDateInput}}</div>
+                    <div>current study: {{this.currentStudyInput}}</div>
+                    <div>end date: {{this.endDateInput}}</div>
+                    <div>gpa: {{this.gpaInput}}</div>
+                    <div>degree: {{this.degreeInput}}</div>
+                    <div>major: {{this.majorInput}}</div>
+                    <div>country: {{this.countryInput}}</div>
+                    <div>state: {{this.stateInput}}</div>
+                    <div>city: {{this.cityInput}}</div>
+                    <div>description: {{this.descriptionInput}}</div>
+                </td>
                 {{/each}}
             </tr>
             <tr>
                 <td>Employment: </td>
                 {{#each resume.emp}}
-                    <td></td>
+                <td>
+                    <div>employer: {{this.employerInput}}</div>
+                    <div>job title: {{this.jobTitleInput}}</div>
+                    <div>start date: {{this.startDateInput}}</div>
+                    <div>current employed: {{this.currentStudyInput}}</div>
+                    <div>country: {{this.countryInput}}</div>
+                    <div>state: {{this.stateInput}}</div>
+                    <div>city: {{this.cityInput}}</div>
+                    <div>description: {{this.descriptionInput}}</div>
+                </td>
+
                 {{/each}}
             </tr>
 
             <tr>
                 <td>Project: </td>
                 {{#each resume.pro}}
-                    <td></td>
+                <td>
+                    <div>title: {{this.titleInput}}</div>
+                    <div>role: {{this.roleInput}}</div>
+                    <div>description: {{this.descriptionInput}}</div>
+                </td>
                 {{/each}}
             </tr>
         </table>

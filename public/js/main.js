@@ -11,7 +11,6 @@ let SkillCont = document.getElementById('SkillCont');
 let EduCont = document.getElementById('EduCont');
 let WorkCont = document.getElementById("WorkCont");
 let ProjCont = document.getElementById("ProjCont");
-let PSCont = document.getElementById("PSCont");
 hideForm(SkillCont);
 hideForm(EduCont);
 hideForm(WorkCont);
@@ -84,25 +83,88 @@ function submitHide()
 
 // Javascript for adding skills
 
-document.getElementById('addButton').onclick = function(){//给 btn1 增加点击事件
-    //1、创建一个标签对象  p
-    let pObj = document.createElement('p');
-        //1.1 增加的内容
-        pObj.innerHTML = "这是增加的 p";
-        //1.2 获取对象增加的位置
-        let box = document.getElementsByClassName('box')[0];
-        //1.3 把标签 p 添加到 box 中【追加】
-        box.appendChild(pObj)   //在 box 的最后面添加对象
-        let a = document.getElementsByClassName('a')[0];
- 
-        box.insertBefore(pObj,a) //在 a 的前面添加 pObj
+let skillCounter = 0;
+document.getElementById('addButton').onclick = function(){
+    let skillInput = document.getElementById('skillInput').value;
+    let skill = document.createElement('input');
+    skill.setAttribute('class', 'skillTag');
+    skill.setAttribute('type','text');
+    skill.setAttribute('disabled','disabled');
+    skill.setAttribute('name', "skills");
+    skill.setAttribute('value', skillInput);
+    let box = document.getElementById('box');
+    box.appendChild(skill);
+
+    skillCounter++;
+    skillInput = '';
+    
 }
 
+document.getElementById('deleteButton').onclick = function(){
+    let box = document.getElementById('box');
+    box.removeChild(box.lastChild);
+    skillCounter--;
+}
 
+let eduCounter = 1;
+document.getElementById('addEdu').onclick = function(){
+    
+    let newEdu = document.createElement('div');
+    newEdu.innerHTML = `
+    <label for="school">
+    School
+    <input type="text" id = "schoolInput" name="Edu[${eduCounter}][schoolInput]" placeholder="School">
+</label>
+<br>
+<label for="startDate">
+    Start Date
+    <input type="date" id = "startDateInput" name="Edu[${eduCounter}][startDateInput]" placeholder="Start Date">
+</label>
+<label for="currentStudy">
+    Currently studying
+    <input type="radio" id = "currentStudyInput" name="Edu[${eduCounter}][currentStudyInput]">
+</label>
+<label for="endDate">
+    End Date
+    <input type="date" id = "endDateInput" name="Edu[${eduCounter}][endDateInput]" placeholder="End Date">
+</label>
+<br>
+<label for="gpa">
+    GPA
+    <input type="text" id = "gpaInput" name="Edu[${eduCounter}][gpaInput]" placeholder="GPA">
+</label>
+<br>
+<label for="degree">
+    Degree
+    <input type="text" id = "degreeInput" name="Edu[${eduCounter}][degreeInput]" placeholder="Degree">
+</label>
+<br>
+<label for="major">
+    Major
+    <input type="text" id = "majorInput" name="Edu[${eduCounter}][majorInput]" placeholder="Major">
+</label>
+<br>
+<label for="country">
+    Country
+    <input type="text" id = "countryInput" name="Edu[${eduCounter}][countryInput]" placeholder="Country">
+</label>
+<label for="state">
+    State
+    <input type="text" id = "stateInput" name="Edu[${eduCounter}][stateInput]" placeholder="State">
+</label>
+<label for="city">
+    City
+    <input type="text" id = "cityInput" name="Edu[${eduCounter}][cityInput]" placeholder="City">
+</label>
+<br>
+<label for="description">
+    Country
+    <input type="textarea" id = "descriptionInput" name="Edu[${eduCounter}][descriptionInput]" placeholder="Description">
+</label>
+    `;
 
-document.getElementById('deleteButton').onclick = function(){//给 btn2 增加点击事件
-    //获取父元素
-    let box = document.getElementsByClassName('box')[0];
-    //删除 box 中的第一个子元素
-    box.removeChild(box.childNodes[0]);
+    let box = document.getElementById('EduCont');
+    box.appendChild(newEdu);
+
+    eduCounter++;
 }

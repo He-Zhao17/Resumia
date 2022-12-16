@@ -6,9 +6,7 @@
             <div id="SkillTag">Skills</div>
             <div id="EduTag">Education</div>
             <div id="WorkTag">Working Experience</div>
-            <div id="ProjTag">Project</div>
-            <div id="PSTag">Personal Statement</div>
-            
+            <div id="ProjTag">Project</div>            
 
         </div>
         <form action="/applicant/createResume" method="POST" id="resume-form">
@@ -80,12 +78,9 @@
                     <input type="text" id = "skillInput" name="skillInput" placeholder="Add skill here">
                     <button id="addButton" type="button">Add</button>
                     
-                    <button id="deleteButton" type="button">删除节点</button>
+                    <button id="deleteButton" type="button">Delete from bottom</button>
                     
-                    <div class="box">
-                        <div>Added skill displays here</div>
-                        <div class="a"></div>
-                    </div>
+                    <div id="box"></div>
                     
                 </label>
             </div>
@@ -101,7 +96,7 @@
                         <input type="date" id = "startDateInput" name="Edu[0][startDateInput]" placeholder="Start Date">
                     </label>
                     <label for="currentStudy">
-                        Current Status
+                        Currently studying
                         <input type="radio" id = "currentStudyInput" name="Edu[0][currentStudyInput]">
                     </label>
                     <label for="endDate">
@@ -142,8 +137,9 @@
                         <input type="textarea" id = "descriptionInput" name="Edu[0][descriptionInput]" placeholder="Description">
                     </label>
                 </div>
-                <button>Add Education</button>
+                {{!-- <button type="button" id="addEdu">Add Education</button> --}}
             </div>
+            
             <div id="WorkCont">  {{!-- Employed Histories --}}
                 <div>
                     <label for="employer">
@@ -161,7 +157,7 @@
                         <input type="date" id = "startDateInput" name="Emp[0][startDateInput]" placeholder="Start Date">
                     </label>
                     <label for="currentEmployed">
-                        Current Status
+                        Currently employed
                         <input type="radio" id = "currentEmployed" name="Emp[0][currentStudyInput]">
                     </label>
                     <label for="endDate">
@@ -187,7 +183,7 @@
                         <input type="textarea" id = "descriptionInput" name="Emp[0][descriptionInput]" placeholder="Description">
                     </label>
                 </div>
-                <button>Add Employed History</button>
+                {{!-- <button>Add Employed History</button> --}}
             </div>
             <div id="ProjCont">  {{!-- Projects --}}
                 <div>
@@ -206,7 +202,7 @@
                         <input type="textarea" id = "descriptionInput" name="Pro[0][descriptionInput]" placeholder="Description">
                     </label>
                 </div>
-                <button>Add Project</button>
+                {{!-- <button>Add Project</button> --}}
                 <br><br>
                 <button class="submitButton" type="submit">Submit</button>
             </div>

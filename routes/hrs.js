@@ -189,8 +189,8 @@ router
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
-      let age = req.body.ageInput;
       let phone = req.body.phoneInput;
+
       helpers.checkName(firstname);
       helpers.checkName(lastname);
       helpers.checkPlace(city);
@@ -216,7 +216,6 @@ router
 
       const addInfo = await userData.addBasicInfo(
         req.session.userId,
-        req.session.userType,
         firstname,
         lastname,
         gender,
@@ -286,6 +285,15 @@ router
         if (HRFound.type === false) {
           HRFound.Type = 'HR';
         }
+        if (HRFound.gender === 0) {
+          HRFound.gender = 'Male'
+        }
+        else if (HRFound.gender === 1){
+          HRFound.gender = 'Female'
+        }
+        else {
+          HRFound.gender = 'Not to tell'
+        }
         res.status(200).render("HRProfile", {
           title: "HR Profile",
           isHomepage: true,
@@ -299,8 +307,6 @@ router
         });
       }
     })
-
-
 
 router.route("/updateInfo").get(async (req, res) => {
   if (req.session.userType === false) {
@@ -370,7 +376,7 @@ router.route("/:id").get(async (req, res) => {
       let firstname = req.body.firstnameInput;
       let lastname = req.body.lastnameInput;
       let gender = req.body.genderInput;
-      let age = req.body.genderInput;
+      let age = req.body.ageInput;
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
@@ -421,5 +427,59 @@ router.route("/:id").get(async (req, res) => {
   }
 })
 
+router.route("/:id").get(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      return res.render("receivedApplications", {
+        title: "Homepage",
+        isHomepage: true,
+        isApplicant: false,
+      });
+    } else {
+      return res.status(403).render("HRBasicInfo", {
+        title: "HR Basic Info",
+      });
+    }
+  } else {
+    res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+})
 
+router.route("/updatePassword").get(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      return res.render("updatePassword", {
+        title: "Homepage",
+        isHomepage: true,
+        isApplicant: false,
+      });
+    } else {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+})
+.post(async (req, res) => {
+  try {
+  const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
+  console.log(updatepassword)
+  res.redirect("/hr/profile");
+  }catch(error){
+    return res.render("updatePassword", {
+      title: "Homepage",
+      isHomepage: true,
+      isApplicant: true,
+      error:error
+    });
+  }
+})
 module.exports = router;
