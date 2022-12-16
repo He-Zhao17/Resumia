@@ -504,14 +504,9 @@ router.route("/deleteResume/:id").get(async (req, res) => {
     let result = await resumeData.deleteResume(req.params.id);
     console.log(result);
     if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
-    console.log(result);
-    res.render("jobMarket", {
-      title: "job market",
-      isHomepage: true,
-      isApplicant: true,
-    });
+    res.redirect("/applicant/reviewResumes");
   } catch (e) {
-    res.render("reviewResumes", { error: e });
+    res.redirect("/applicant/reviewResumes");
   }
 });
 

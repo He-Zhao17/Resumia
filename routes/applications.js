@@ -39,7 +39,7 @@ router
                 title: "Application",
                 isHomepage: true,
                 error: error,
-                isApplicant: true
+                isApplicant: req.session.userType
             });
         }
 
@@ -70,7 +70,7 @@ router
                 return res.status(403).render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
                     time: new Date().toUTCString(),
                     isHomepage: true,
-                    isApplicant: true,
+                    isApplicant: req.session.userType,
                     error:error});
             }
         });
@@ -120,7 +120,7 @@ router
         } catch (error) {
             return res.status(403).render("application",{
                 isHomepage: true,
-                isApplicant: true,
+                isApplicant: req.session.userType,
                 error: error});
         }
     })
@@ -159,7 +159,7 @@ router.route("/updateStatus/:id")
         } catch (error) {
             return res.status(403).render("application",{
                 isHomepage: true,
-                isApplicant: true,
+                isApplicant: req.session.userType,
                 error: error});
         }
 
