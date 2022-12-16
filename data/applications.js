@@ -1,5 +1,5 @@
 const mongoCollections = require("../config/mongoCollections");
-const app = mongoCollections.appliction;
+const app = mongoCollections.application;
 const job = mongoCollections.jobpost;
 const helpers = require("../helper/helpers");
 const jobposts = require("./jobposts");
