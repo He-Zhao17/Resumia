@@ -12,8 +12,8 @@ const userData = data.users;
 router
     .route("/:id")
     .get(async (req, res) => {
-        if (req.session.userType === true || req.session.userType === null) {
-            res.status(403).render("forbiddenAccess", {
+        if (req.session.userType != true) {
+            return res.status(403).render("forbiddenAccess", {
                 title: "Forbidden Access",
                 error: "Error: 403, You are NOT logged in yet!",
             });
