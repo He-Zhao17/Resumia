@@ -249,7 +249,7 @@ router
         let state = req.body.stateInput;
         let country = req.body.countryInput;
         let phone = req.body.phoneInput;
-  
+          
         const addInfo = await userData.addBasicInfo(
           req.session.userId,
           firstname,
