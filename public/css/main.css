@@ -409,3 +409,36 @@ footer{
 .reviewOneResume td{
     padding-left: 20px;
 }
+
+/* CSS for reviewing all applications table */
+#applicationTable{
+    border: 1px solid gray;
+    width: 100%;
+}
+
+#applicationNav{
+    background-color: grey;
+    color: white;
+
+}
+
+#applicationNav td{
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.viewApp{
+    width: 100px;
+    height: 35px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    background-color: #4aafe4;
+    color: white;
+}
+
+.appColumn{
+    border: 1px solid rgb(199, 199, 199);
+    padding-left: 20px;
+    font-size: 18px;
+}
