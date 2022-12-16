@@ -45,6 +45,7 @@ const getAppById = async (appId) => {
     appFound.applicant = await users.getUserById(appFound.user_id);
     appFound.hr = await users.getUserById(appFound.hr_id);
     appFound.resume = await resumes.getResumeById(appFound.resume_id);
+    appFound.status = appFound.status == 0 ? "Pending" : appFound.status == 1 ? "Admitted" : "Rejected";
     return appFound;
 }
 
@@ -65,6 +66,7 @@ const getAllAppByHRId = async (HRId) => {
             app.hr = getHr;
             app.resume = getResume;
             app.job = getJob
+            app.status = app.status == 0 ? "Pending" : app.status == 1 ? "Admitted" : "Rejected";
         }
     }
     return appList;
@@ -88,7 +90,8 @@ const getAllApplied = async (applicantId) => {
       app.applicant = getApplicant;
       app.hr = getHr;
       app.resume = getResume;
-      app.job = getJob
+      app.job = getJob;
+      app.status = app.status == 0 ? "Pending" : app.status == 1 ? "Admitted" : "Rejected";
     }
   }
   return appList;

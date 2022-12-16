@@ -28,15 +28,7 @@
         <tr>
             <td>Application Status</td>
             <td>
-                {{!-- {{#if_eq applications.status 0}}
-                    Status: pending
-                {{else}} {{#if_eq application.status 1}}
-                        Status: admitted
-                {{else}}
-                        Status: rejected
-                    {{/if_eq}}
-                {{/if_eq}}
-                Notes: {{application.notes}} --}}
+                {{application.status}}
             </td>
         </tr>
         
