@@ -56,12 +56,12 @@ router
                 });
             }
             try {
-                if (!req.body.resumeId || !req.body.applicantId || !req.body.jobId) {
+                if (!req.body.submitResume || !req.body.jobIdToBack) {
                     throw "some argument not provided.";
                 }
-                let resumeId = req.body.resumeId;
-                let applicantId = req.body.applicantId;
-                let jobId = req.body.jobId;
+                let resumeId = req.body.submitResume;
+                let applicantId = req.session.userId;
+                let jobId = req.body.jobIdToBack;
                 let jobFound = await jobPostData.getJobPostById(jobId);
 
                 const createInfo = await appData.createApplication(jobFound.posterId, applicantId, resumeId, jobId);

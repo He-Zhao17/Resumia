@@ -415,7 +415,7 @@ router.route("/applied").get(async (req, res) => {
       title: "Applied Jobs",
       isHomepage: true,
       isApplicant: true,
-      applied: applied,
+      applications: applied
     });
   } catch (e) {
     res.render("applied", { error: e });

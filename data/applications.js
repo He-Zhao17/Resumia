@@ -70,23 +70,24 @@ const getAllAppByHRId = async (HRId) => {
 const getAllApplied = async (applicantId) => {
   helpers.checkId(applicantId);
   const appCollection = await app();
-  const appList = await appCollection.find({}).toArray();
+  let appList = await appCollection.find({user_id: applicantId}).toArray();
   if (!appList) throw "Error: Getting all appList failed";
 
-  let output = [];
-  for (const app of appList) {
+  for (let app of appList) {
     app._id = app._id.toString();
-    app.applicant = app.applicant.toString();
-    if (app.applicant === applicantId) {
-      let getJob = jobposts.getJobPostById(app.job);
-      let appObj = {
-        _id: app._id,
-        jobName: getJob.employer,
-      };
-      output.push(appObj);
+    app.applicant_id = app.user_id.toString();
+    if (app.applicant_id === applicantId) {
+      let getJob = await jobposts.getJobPostById(app.job_id);
+      let getApplicant = await users.getUserById(app.user_id);
+      let getHr = await users.getUserById(app.hr_id);
+      let getResume = await resumes.getResumeById(app.resume_id);
+      app.applicant = getApplicant;
+      app.hr = getHr;
+      app.resume = getResume;
+      app.job = getJob
     }
   }
-  return output;
+  return appList;
 }
 
 const sendNote = async (appId, noteObj) => {
