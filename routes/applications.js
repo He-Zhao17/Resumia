@@ -47,7 +47,7 @@ router
 
 
 router
-    .route(("/createApplication")
+    .route("/createApplication")
         .post( async (req, res) => {
             if (req.session.userType != true) {
                 return res.status(403).render("forbiddenAccess", {
@@ -73,7 +73,7 @@ router
                     isApplicant: true,
                     error:error});
             }
-        }));
+        });
 
 router
     .route("/sendNotes") // id is application id
