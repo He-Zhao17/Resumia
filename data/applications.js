@@ -111,9 +111,10 @@ const sendNote = async (appId, noteObj) => {
 const updateStatus = async (appId, adOrNot) => {
     helpers.checkId(appId);
     const appCollection = await app();
+    adOrNot = adOrNot ? 1 : 2;
     const updateInfo = await appCollection.updateOne(
         {_id: ObjectId(appId)},
-        {status: adOrNot? true : false}
+        {$set: {status: adOrNot}}
     );
     if (!updateInfo.acknowledged || !updateInfo.modifiedCount) throw `Could not update the status`;
     return true;

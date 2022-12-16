@@ -5,7 +5,6 @@
         {{else}}
             <div id="isAccept">
                 <p>Operation for accepting this application or declining ?</p>
-                
                 <form id="acceptBtn" action="/applications/updateStatus/{{application._id}}" method="post">
                     <button type="submit" name="adOrNot" value="true">Accept</button>
                     <button type="submit" name="adOrNot" value="false">Decline</button>
