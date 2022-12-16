@@ -57,7 +57,7 @@
             <div id="NotesTitle">Notes</div>
             <div id="NotesContent">
                 {{#each application.notes}}
-                    <p>{{this.from}} <sub>{{this.postDate}}</sub></p>
+                    <p class="author">{{this.from}} <sub>({{this.postDate}})</sub></p>
                     <p>{{this.notes}}</p>
                 {{/each}}
             </div>

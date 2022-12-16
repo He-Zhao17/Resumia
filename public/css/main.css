@@ -515,10 +515,13 @@ footer{
 }
 
 #NotesContent{
-    width: 100%;
+    width: 96%;
     border: 1px solid #4aafe4;
     height: 300px;
     border-radius: 10px;
+    line-height: 10px;
+    padding-left: 10px;
+    overflow:scroll;
 }
 
 #sendContent{
@@ -537,9 +540,15 @@ footer{
 }
 
 #sendContent button{
-    width: 88px;
+    width: 79px;
     height: 30px;
     border: 2px solid #0077b5;
     color: #0077b5;
     font-weight: bold;
+}
+
+.author{
+    color: #0077b5;
+    font-weight: bold;
+    font-size: 18px;
 }
