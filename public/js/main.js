@@ -106,3 +106,5 @@ document.getElementById('deleteButton').onclick = function(){//给 btn2 增加�
     //删除 box 中的第一个子元素
     box.removeChild(box.childNodes[0]);
 }
+
+
