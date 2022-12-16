@@ -73,5 +73,8 @@
             </tr>
         </table>
     </div>
-    <a href="/applicant/reviewResumes" id="return"> ← Back to List</a>
+    {{#if isApplicant}}
+        <a href="/applicant/reviewResumes" id="return"> ← Back to List</a>
+    {{/if}}
+
 </section>
