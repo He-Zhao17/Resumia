@@ -9,7 +9,7 @@ const jobPostsData = data.jobposts;
 router
     .route("/:id")
     .get(async (req, res) => {
-        if (req.session.userType === true || req.session.userType === null) {
+        if (!req.session.userId) {
             res.status(403).render("forbiddenAccess", {
                 title: "Forbidden Access",
                 error: "Error: 403, You are NOT logged in yet!",

@@ -1,12 +1,30 @@
+
+
 <section class="MainPage">
     <h1 style="color: rgb(13, 255, 0);">Received applications</h1>
 
-    {{#each applications}}
-        <li>
-            <a href="/applications/{{this._id}}">{{this.jobPost.employer}} {{this.jobPost.jobTitle}} {{this.jobPost.city}}
-            from {{this.applicant.firstname}} {{this.applicant.lastname}}</a>
-        </li>
-    {{/each}}
-
+    <table id="applicationTable" border="1">
+        <tr id="applicationNav">
+            <td>Applicant Name</td>
+            <td>Company Name</td>
+            <td>Job Position</td>
+            <td>Submission date</td>
+            <td>Operation</td>
+        </tr>
+        {{#each applications}}
+            <tr>
+                <td class="appColumn">{{this.applicant.firstname}} {{this.applicant.lastname}}</td>
+                <td class="appColumn">{{this.job.employer}}</td>
+                <td class="appColumn">{{this.job.jobTitle}}</td>
+                <td class="appColumn">N/A</td>
+                <td class="appColumn">
+                    <a href="/applications/{{this._id}}">
+                        <button class="viewApp">VIEW</button>
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
     <p style="color: red;">{{error}}</p>
+
 </section>

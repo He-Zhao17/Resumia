@@ -1,10 +1,26 @@
 <section class="MainPage">
-    <h1>This is your applications</h1>
-    {{#each applications}}
-        <p>{{this.job.employer}}<br/> {{this.job.jobTitle}}</p>
-    {{/each}}
-
-
-
-
+    <h1>Your applications</h1>
+    
+        <table id="applicationTable" border="1">
+            <tr id="applicationNav">
+                <td>Company Name</td>
+                <td>Job Position</td>
+                <td>Submission date</td>
+                <td>Operation</td>
+            </tr>
+            {{#each applications}}
+                <tr>
+                    <td class="appColumn">{{this.job.employer}}</td>
+                    <td class="appColumn">{{this.job.jobTitle}}</td>
+                    <td class="appColumn">{{this.createTime}}</td>
+                    <td class="appColumn">
+                        <a href="/applications/{{this._id}}">
+                            <button id="view" class="viewApp">VIEW</button>
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    <p style="color: red;">{{error}}</p>
+        
 </section>

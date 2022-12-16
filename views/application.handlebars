@@ -1,14 +1,50 @@
-<section>
-    Applicant: {{application.applicant.firstname}} {{application.applicant.lastname}}<br>
-    Job Position: <a href="/jobPost/{{application.job_id}}">{{application.jobPost.employer}} {{application.jobPost.jobTitle}} {{application.jobPost.city}}</a><br>
-    Resume: <a href="/resume/{{application.resume_id}}">Click to the resume</a><br>
-    {{#if (eq application.status  0)}}
-        Status: pending
-    {{else if (eq application.status 1)}}
-        Status: admitted
-    {{else}}
-        Status: rejected
-    {{/if}}
-    Notes: {{application.notes}}
+<section class="MainPage">
+    <h1>{{application.jobPost.employer}}, {{application.jobPost.jobTitle}}, {{application.jobPost.city}}</h1>
+    <table id="appDetail" border="1">
+        <tr>
+            <td>Applicant: </td>
+            <td>{{application.applicant.firstname}} {{application.applicant.lastname}}</td>
+        </tr>
+        <tr>
+            <td>Company Name</td>
+            <td>{{application.jobPost.employer}}</td>
+        </tr>
+        <tr>
+            <td>Job Position: </td>           
+            <td>
+                <a href="/jobPost/{{application.job_id}}">{{application.jobPost.jobTitle}}, {{application.jobPost.city}}</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Resume:</td>
+            <td>
+                {{#if isApplicant}}
+                    <a href="/applicant/readResume/{{application.resume_id}}">Click to the resume</a>
+                {{else}}
+                    <a href="/hr/readResume/{{application.resume_id}}">Click to the resume</a>
+                {{/if}}
+
+            </td>
+        </tr>
+        <tr>
+            <td>Submission Date</td>
+            <td>{{application.createTime}}</td>
+        </tr>
+        <tr>
+            <td>Application Status</td>
+            <td>
+                {{application.status}}
+            </td>
+        </tr>
+        
+    </table>
     <p style="color: red;">{{error}}</p>
+    {{#if isApplicant}}
+        <a href="/applicant/applied" id="return"> ← Back to List</a>
+    {{else}}
+        <a href="/hr/received" id="return"> ← Back to List</a>
+    {{/if}}
+
+
 </section>
+

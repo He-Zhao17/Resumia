@@ -6,6 +6,8 @@ const {checkPlace, checkSalary,  checkId, checkJobPostString} = require("../help
 const {ObjectId} = require("mongodb");
 const { route } = require("./applicants");
 const userData = data.users;
+const applicationsData = data.applications;
+const resumeData = data.resumes;
 
 
 
@@ -252,17 +254,19 @@ router
       }
       try {
         const hrData = data.hrs;
-        const appsFound = await data.applications.getAllAppByHRId(req.session.userId);
-        res.status(200).render("posted", {
+        const appsFound = await applicationsData.getAllAppByHRId(req.session.userId);
+        res.status(200).render("receivedApplications", {
           title: "Received Applications",
           isHomepage: true,
+          isApplicant: false,
           applications: appsFound
         });
       } catch (error) {
         return res.status(403).render("receivedApplications", {
           title: "Received Applications",
           isHomepage: true,
-          error: error,
+          isApplicant: false,
+          error: error
         });
       }
     })
@@ -321,14 +325,32 @@ router.route("/updateInfo").get(async (req, res) => {
   }
 });
 
+router.route("/readResume/:id").get(async (req, res) => {
+  if (req.session.userType === true) {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+  try {
+    let resume = await resumeData.getResumeById(req.params.id);
+    if (!resume) { return res.status(500).json({ error: "Internal Server Error" }); }
+    console.log(resume);
+    res.render("reviewOneResume", {
+      title: "Review Resumes",
+      isHomepage: true,
+      isApplicant: false,
+      resume: resume,
+    });
+  } catch (error) {
+    res.render("reviewResumes", { error: error });
+  }
+});
+
 router.route("/:id").get(async (req, res) => {
   if (req.session.userType === false) {
     if (req.session.basicInfo === true) {
-      return res.render("receivedApplications", {
-        title: "Homepage",
-        isHomepage: true,
-        isApplicant: false,
-      });
+      return res.status(200).redirect("/hr/received");
     } else {
       return res.status(403).render("HRBasicInfo", {
         title: "HR Basic Info",
@@ -398,4 +420,6 @@ router.route("/:id").get(async (req, res) => {
     });
   }
 })
+
+
 module.exports = router;

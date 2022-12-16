@@ -12,8 +12,8 @@ const userData = data.users;
 router
     .route("/:id")
     .get(async (req, res) => {
-        if (req.session.userType === true || req.session.userType === null) {
-            res.status(403).render("forbiddenAccess", {
+        if (!req.session.userId) {
+            return res.status(403).render("forbiddenAccess", {
                 title: "Forbidden Access",
                 error: "Error: 403, You are NOT logged in yet!",
             });
@@ -49,7 +49,7 @@ router
 router
     .route("/createApplication")
         .post( async (req, res) => {
-            if (req.session.userType != true) {
+            if (!req.session.userId) {
                 return res.status(403).render("forbiddenAccess", {
                     title: "Forbidden Access",
                     error: "Error: 403, You are NOT logged in yet!",
@@ -78,7 +78,7 @@ router
 router
     .route("/sendNotes") // id is application id
     .post(async (req, res) => {
-        if (req.session.userType != true) {
+        if (!req.session.userId) {
             return res.status(403).render("forbiddenAccess", {
                 title: "Forbidden Access",
                 error: "Error: 403, You are NOT logged in yet!",
@@ -128,7 +128,7 @@ router
 
 router.route("/updateStatus")
     .post(async (req, res) => {
-        if (req.session.userType != true) {
+        if (!req.session.userId) {
             return res.status(403).render("forbiddenAccess", {
                 title: "Forbidden Access",
                 error: "Error: 403, You are NOT logged in yet!",
