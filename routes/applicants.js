@@ -38,15 +38,19 @@ router.route("/jobmarket").get(async (req, res) => {
         let array = await jobData.findjobs(req.session.searchinput,req.session.searchtype);
         req.session.searchArray=array;
 
-        const resumes = await resumeData.getResumesByApplicantId(req.session.userId);
+        const resu = await resumeData.getResumesByApplicantId(req.session.userId);
 
          res.render("jobMarket",{
            jobs:req.session.searchArray,
            title: "Homepage",
          time: new Date().toUTCString(),
          isHomepage: true,
-         isApplicant: true, resumes: resumes
+         isApplicant: true, 
+         resumes: resu
          });
+         for(let i =0;i<resu.length;i++){
+          console.log(resu[i].resumeName);
+         }
          console.log(req.session.searchArray)
        }
        else if(req.body.formid=="jobpost-form"){

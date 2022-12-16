@@ -59,11 +59,24 @@
     <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
     <input type = "hidden" id="posterid" name="posterid" value={{posterId}}>
         
-    <button class="submitButton" type="submit" onClick="show();">submit resume</button>
+    <button id="{{_id}}" class="submitButton" type="submit" onClick="show(this.id);">
+      submit resume
+      </button>
 
-    <div id="hidebox">
+    
+  </div>
+  {{/each}}
+   </div>
+
+   <div id="hidebg"></div>
+    
+</div>
+
+
+<div id="hidebox">
       <button onClick="hide();" id="closeButton">x</button>
       <form action="/applications/createApplication" method="post" id="jobpost-form">
+        <input type="text" id="jobInput" name="jobIdToBack" value="" style="display: none;">
         <label for="submitResume">
           Select one resume:
           <select name="submitResume" id="submitResume">
@@ -76,12 +89,4 @@
         <button class="submitButton" type="submit" onClick="submitHide();">SUBMIT</button>
       </form>
     </div>
-  </div>
-  {{/each}}
-   </div>
-
-   <div id="hidebg"></div>
-
-</div>
-
 </section>

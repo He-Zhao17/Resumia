@@ -58,12 +58,16 @@ function hideForm(input){
     input.style.display = 'none';
 }
 
-function show()
+function show(input)
 {
-   var hideobj=document.getElementById("hidebg");
-   hideobj.style.display="block";
-   hideobj.style.height=document.body.clientHeight+"px";
-   document.getElementById("hidebox").style.display="block";  
+    var hideobj=document.getElementById("hidebg");
+    hideobj.style.display="block";
+    hideobj.style.height=document.body.clientHeight+"px";
+    document.getElementById("hidebox").style.display="block";
+    // Transfer the data of jobId to routes together with resume 
+    let jobInput = document.getElementById("jobInput");
+    jobInput.value = input;
+    console.log(jobInput.value);
 }
 function hide()
 {
@@ -76,6 +80,31 @@ function submitHide()
     alert('success!');
    document.getElementById("hidebg").style.display="none";
    document.getElementById("hidebox").style.display="none";
+}
+
+// Javascript for adding skills
+
+document.getElementById('addButton').onclick = function(){//给 btn1 增加点击事件
+    //1、创建一个标签对象  p
+    var pObj = document.createElement('p');
+        //1.1 增加的内容
+        pObj.innerHTML = "这是增加的 p";
+        //1.2 获取对象增加的位置
+        var box = document.getElementsByClassName('box')[0];
+        //1.3 把标签 p 添加到 box 中【追加】
+        box.appendChild(pObj)   //在 box 的最后面添加对象
+        var a = document.getElementsByClassName('a')[0];
+ 
+        box.insertBefore(pObj,a) //在 a 的前面添加 pObj
+}
+
+
+
+document.getElementById('deleteButton').onclick = function(){//给 btn2 增加点击事件
+    //获取父元素
+    var box = document.getElementsByClassName('box')[0];
+    //删除 box 中的第一个子元素
+    box.removeChild(box.childNodes[0]);
 }
 
 
