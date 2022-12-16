@@ -3,14 +3,15 @@
     <table id="appDetail" border="1">
         {{#if isApplicant}}
         {{else}}
-            <div id="isAccept">
-                <p>Operation for accepting this application or declining ?</p>
-                
-                <form id="acceptBtn" action="/applications/updateStatus/{{application._id}}" method="post">
-                    <button type="submit" name="adOrNot" value="true">Accept</button>
-                    <button type="submit" name="adOrNot" value="false">Decline</button>
-                </form>
-            </div>
+            <form action="/applications/updateStatus/{{application._id}}" method="post">
+                <div id="isAccept">
+                    <p>Operation for accepting this application or declining ?</p>
+                    <div id="acceptBtn">
+                        <button type="submit" name="adOrNot" value="true">Accept</button>
+                        <button type="submit" name="adOrNot" value="false">Decline</button>
+                    </div>
+                </div>
+            </form>
         {{/if}}
         <tr>
             <td>Applicant: </td>
@@ -48,10 +49,22 @@
             </td>
         </tr>
         
-        <tr>
-            <td>Notes: </td>
-            <td></td>
-        </tr>
+        <div id="sendPanel">
+            <div id="NotesTitle">Notes</div>
+            <div id="NotesContent">
+                {{#each application.notes}}
+                    <p>{{this.from}} <sub>{{this.postDate}}</sub></p>
+                    <p>{{this.notes}}</p>
+                {{/each}}
+            </div>
+            <form action="" method="post">
+                <div id="sendContent">
+                    <textarea name="" id="" cols="30" rows="8">Type your text here</textarea>
+                    <button>Send👆</button>
+                </div>
+                
+            </form>
+        </div>
     </table>
     <p style="color: red;">{{error}}</p>
     {{#if isApplicant}}
