@@ -63,7 +63,7 @@
 
     <div id="hidebox">
       <button onClick="hide();" id="closeButton">x</button>
-      <form action="/applications/createApplication" method="post">
+      <form action="/applications/createApplication" method="post" id="jobpost-form">
         <label for="submitResume">
           Select one resume:
           <select name="submitResume" id="submitResume">
@@ -73,7 +73,7 @@
           </select>
         </label>
         <br>
-        <button class="submitButton" type="submit" onClick="hide();">SUBMIT</button>
+        <button class="submitButton" type="submit" onClick="submitHide();">SUBMIT</button>
       </form>
     </div>
   </div>

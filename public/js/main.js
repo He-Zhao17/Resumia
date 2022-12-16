@@ -58,19 +58,24 @@ function hideForm(input){
     input.style.display = 'none';
 }
 
-function show()  //显示隐藏层和弹出层
+function show()
 {
    var hideobj=document.getElementById("hidebg");
-   hideobj.style.display="block";  //显示隐藏层
-   hideobj.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
-   document.getElementById("hidebox").style.display="block";  //显示弹出层
+   hideobj.style.display="block";
+   hideobj.style.height=document.body.clientHeight+"px";
+   document.getElementById("hidebox").style.display="block";  
 }
-function hide()  //去除隐藏层和弹出层
+function hide()
+{
+   document.getElementById("hidebg").style.display="none";
+   document.getElementById("hidebox").style.display="none";
+}
+
+function submitHide() 
 {
     alert('success!');
    document.getElementById("hidebg").style.display="none";
    document.getElementById("hidebox").style.display="none";
 }
-
 
 

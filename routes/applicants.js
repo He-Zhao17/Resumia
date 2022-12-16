@@ -405,7 +405,7 @@ router.route("/applied").get(async (req, res) => {
     });
   }
   try {
-    let applied = appData.getAllApplied(req.session.userId);
+    let applied = await appData.getAllApplied(req.session.userId);
     if (!applied) { return res.status(500).json({ error: "Internal Server Error" }); }
     res.render("applied", {
       title: "Applied Jobs",
@@ -413,7 +413,7 @@ router.route("/applied").get(async (req, res) => {
       isApplicant: true,
       applied: applied,
     });
-  } catch (error) {
+  } catch (e) {
     res.render("applied", { error: e });
   }
 });
@@ -465,7 +465,7 @@ router.route("/readResume/:id").get(async (req, res) => {
       title: "Review Resumes",
       isHomepage: true,
       isApplicant: true,
-      resumes: resume,
+      resume: resume,
     });
   } catch (error) {
     res.render("reviewResumes", { error: error });
@@ -510,14 +510,14 @@ router.route("/deleteResume/:id").get(async (req, res) => {
     });
   }
   try {
-    let result = resumeData.deleteResume(req.params.id);
+    let result = await resumeData.deleteResume(req.params.id);
     if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
     res.render("reviewResumes", {
       title: "Review Resumes",
       isHomepage: true,
       isApplicant: true,
     });
-  } catch (error) {
+  } catch (e) {
     res.render("reviewResumes", { error: e });
   }
 });
