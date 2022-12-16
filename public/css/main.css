@@ -321,3 +321,36 @@ footer{
     color: #4aafe4;
     font-weight: bold;
 }
+
+
+/* CSS for Job information view */
+.JobInfo{
+    border: 2px solid #4aafe4;
+    border-radius: 12px;
+    width: 46%;
+    padding-left: 40px;
+    margin-top: -10px;
+    line-height: 32px;
+    font-size: 22px;
+}
+
+.JobInfo h3{
+    color: #0077b5;
+}
+
+#return{
+    text-decoration: none;
+    font-size: 15px;
+    color: #0077b5;
+}
+
+#return:hover{
+    text-decoration:dashed;
+    opacity: 0.6;
+}
+
+#imgLink{
+    margin: 0px;
+    width: 220px;
+    height: 50px;
+}

@@ -1,18 +1,22 @@
 <section class="MainPage">
-    <h1>HR profile</h1>
-    email: {{HRProfile.email}}<br>
-    firstname: {{HRProfile.firstname}}<br>
-    lastname: {{HRProfile.lastname}}<br>
-    gender: {{HRProfile.gender}}<br>
-    country: {{HRProfile.country}}<br>
-    state: {{HRProfile.state}}<br>
-    city: {{HRProfile.city}}<br>
-    age: {{HRProfile.age}}<br>
-    phone: {{HRProfile.phone}}<br>
-    address: {{HRProfile.address}}<br>
-    website: {{HRProfile.website}}
+    <h1>HR profile</h1>  
+    <div class="userProfile">
+
+    
+    <p id="userTitle">{{HRProfile.firstname}} {{HRProfile.lastname}} <sub>({{HRProfile.Type}})</sub></p>
+    <p>{{HRProfile.email}}</p>
+    <p>gender: {{HRProfile.gender}}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        Age:&nbsp;{{HRProfile.age}}
+    </p>
+    <p>country: {{HRProfile.country}}</p>
+    <p>state: {{HRProfile.state}}</p>
+    <p>city: {{HRProfile.city}}</p>
+    <p>phone: {{HRProfile.phone}}</p>
+    <p>address: {{HRProfile.address}}</p>
+    <p>website: {{HRProfile.website}}</p>
+    </div>
     <form  id="update" action="/hr/updateInfo" method="GET">
-<button class="submitButton" type="submit">updateinfo</button>
+<button class="submitButton" type="submit">update information</button>
 </form>
 <form  id="update" action="/hr/updatePassword" method="GET">
 <button class="submitButton" type="submit">change password</button>

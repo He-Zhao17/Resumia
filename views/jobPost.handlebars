@@ -1,15 +1,19 @@
 <section class="MainPage">
+    
     <h1>Posted successfully!</h1>
-    <p>
+    <div class="JobInfo">
+        <p>
+        <h3>{{jobPost.jobTitle}}</h3>
         Employer: {{jobPost.employer}}<br>
         Country: {{jobPost.country}}<br>
         State: {{jobPost.state}}<br>
         City: {{jobPost.city}}<br>
         Salary: {{jobPost.salary}}<br>
-        Job Title: {{jobPost.jobTitle}}<br>
         Job Description: {{jobPost.jobDescription}}<br>
         Is Available: {{jobPost.isAvailable}}
     </p>
     <p style="color: red;">{{error}}</p>
+    </div>
+    <a href="/hr/posted" id="return"> ← Back to List</a>
     
 </section>
