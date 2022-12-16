@@ -18,7 +18,12 @@
         <tr>
             <td>Resume:</td>
             <td>
-                <a href="/hr/readResume/{{application.resume_id}}">Click to the resume</a>
+                {{#if isApplicant}}
+                    <a href="/applicant/readResume/{{application.resume_id}}">Click to the resume</a>
+                {{else}}
+                    <a href="/hr/readResume/{{application.resume_id}}">Click to the resume</a>
+                {{/if}}
+
             </td>
         </tr>
         <tr>
