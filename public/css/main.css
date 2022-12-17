@@ -480,10 +480,11 @@ footer{
     height: 500px;
     position: fixed;
     right: 200px;
-    bottom: 0px;
+    bottom: 5px;
     border: 3px solid #0077b5;
     padding: 5px;
     border-radius: 15px;
+    background-color: white;
 }
 
 #NotesTitle{
@@ -522,6 +523,7 @@ footer{
     border:1px solid #4aafe4;
     border-radius: 15px;
     padding: 10px;
+    resize:none;
 }
 
 #sendContent button{

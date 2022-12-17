@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-let hbs = exphbs.create({});
 app.use(
   session({
     name: "AuthCookie",
@@ -22,9 +21,7 @@ app.use(
   })
 );
 
-hbs.handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
-  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-});
+
 
 app.use(async (req, res, next) => {
   let time = new Date().toUTCString();
