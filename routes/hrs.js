@@ -134,6 +134,41 @@ router
       }
     })
 
+router.route("/updatePassword").get(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      return res.render("updatePassword", {
+        title: "Homepage",
+        isHomepage: true,
+        isApplicant: false,
+      });
+    } else {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+})
+    .post(async (req, res) => {
+      try {
+        const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
+        console.log(updatepassword)
+        res.redirect("/hr/profile");
+      }catch(error){
+        return res.render("updatePassword", {
+          title: "Homepage",
+          isHomepage: true,
+          isApplicant: true,
+          error:error
+        });
+      }
+    })
+
 router
     .route("/posted")
     .get(async  (req, res) => {
@@ -448,38 +483,5 @@ router.route("/:id").get(async (req, res) => {
   }
 })
 
-router.route("/updatePassword").get(async (req, res) => {
-  if (req.session.userType === false) {
-    if (req.session.basicInfo === true) {
-      return res.render("updatePassword", {
-        title: "Homepage",
-        isHomepage: true,
-        isApplicant: false,
-      });
-    } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
-      });
-    }
-  } else {
-    return res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-})
-.post(async (req, res) => {
-  try {
-  const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
-  console.log(updatepassword)
-  res.redirect("/hr/profile");
-  }catch(error){
-    return res.render("updatePassword", {
-      title: "Homepage",
-      isHomepage: true,
-      isApplicant: true,
-      error:error
-    });
-  }
-})
+
 module.exports = router;
