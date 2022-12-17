@@ -291,21 +291,6 @@ footer{
     margin-bottom: 20px;
 }
 
-
-/* CSS for posted Jobs (HR)*/
-#postedJobs{
-    list-style-type: none;
-    font-size: 20px;
-}
-
-#postedJobs a{
-    margin-left: 80px;
-}
-
-#postedJobs a:hover{
-    opacity: 0.8;
-}
-
 /* CSS for user Profile */
 .userProfile{
     border: 2px solid #4aafe4;
@@ -411,18 +396,18 @@ footer{
 }
 
 /* CSS for reviewing all applications table */
-#applicationTable{
+.applicationTable{
     border: 1px solid gray;
     width: 100%;
 }
 
-#applicationNav{
+.applicationNav{
     background-color: grey;
     color: white;
 
 }
 
-#applicationNav td{
+.applicationNav td{
     padding-left: 20px;
     font-size: 20px;
     font-weight: bold;

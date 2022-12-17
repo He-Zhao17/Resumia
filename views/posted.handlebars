@@ -1,16 +1,34 @@
 <section class="MainPage">
     <h1>Posted Jobs</h1>
-    <ul id="postedJobs">
+
+    
+    <table class="applicationTable" border="1">
+        <tr class="applicationNav">
+            <td>Job Position</td>
+            <td>Company Name</td>
+            <td>Is Available</td>
+            <td>City</td>
+            <td>Operation</td>
+        </tr>
+
         {{#each jobPosts}}
-            <li>
-                {{this.jobTitle}} 
-                <br>
-                {{this.employer}} {{this.city}} 
-                <a href="/jobPost/{{this._id}}">View</a>
-                <a href="/hr/post">Edit</a>
+            <tr>
+                <td class="appColumn">{{this.jobTitle}}</td> 
+                <td class="appColumn">{{this.employer}}</td>
+                <td class="appColumn">{{this.isAvailable}}</td>
+                <td class="appColumn">{{this.city}} </td>
+                <td class="appColumn">
+                    <a href="/jobPost/{{this._id}}">View</a>
+                    &emsp;
+                    <a href="/hr/post">Edit</a>
+                </td>
+            </tr>
+                 
+                
+                
             </li>
         {{/each}}
-    </ul>
+    </table>
     <p style="color: red;">{{error}}</p>
 
 </section>
