@@ -249,7 +249,13 @@ router
         let state = req.body.stateInput;
         let country = req.body.countryInput;
         let phone = req.body.phoneInput;
-          
+        helpers.checkName(firstname);
+        helpers.checkName(lastname);
+        helpers.checkPlace(city);
+        helpers.checkPlace(state);
+        helpers.checkPlace(country);
+        helpers.checkPhone(phone);
+        helpers.checkAge(age);  
         const addInfo = await userData.addBasicInfo(
           req.session.userId,
           firstname,
@@ -389,8 +395,10 @@ router.route("/updatePassword").get(async (req, res) => {
 })
 .post(async (req, res) => {
   try {
+  helpers.checkPassword(req.body.NewpasswordInput);
+  helpers.checkPassword(req.body.passwordInputFirst);
+  helpers.checkPassword(req.body.passwordInputSecond);
   const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
-  console.log(updatepassword)
   res.redirect("/applicant/profile");
   }catch(error){
     return res.render("updatePassword", {
