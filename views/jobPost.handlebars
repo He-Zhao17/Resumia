@@ -14,6 +14,28 @@
     </p>
     <p style="color: red;">{{error}}</p>
     </div>
+    <table class="applicationTable" border="1">
+        <tr class="applicationNav">
+            <td>Applicant Name</td>
+            <td>Company Name</td>
+            <td>Job Position</td>
+            <td>Submission date</td>
+            <td>Operation</td>
+        </tr>
+        {{#each applications}}
+            <tr>
+                <td class="appColumn">{{this.applicant.firstname}} {{this.applicant.lastname}}</td>
+                <td class="appColumn">{{this.job.employer}}</td>
+                <td class="appColumn">{{this.job.jobTitle}}</td>
+                <td class="appColumn">{{this.createTime}}</td>
+                <td class="appColumn">
+                    <a href="/applications/{{this._id}}">
+                        <button class="viewApp">VIEW</button>
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
 
     
 </section>

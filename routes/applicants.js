@@ -5,42 +5,49 @@ const data = require("../data");
 const helpers = require("../helper/helpers");
 const userData = data.users;
 const appData = data.applications;
-const jobData=data.jobposts;
+const jobData = data.jobposts;
 const resumeData = data.resumes;
 
-
-router.route("/jobmarket").get(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
-      return res.render("jobMarket", {
-        jobs:req.session.searchArray,
-        title: "Homepage",
-        isHomepage: true,
-        isApplicant: true,
-      });
+router
+  .route("/jobmarket")
+  .get(async (req, res) => {
+    if (req.session.userType === true) {
+      if (req.session.basicInfo === true) {
+        return res.render("jobMarket", {
+          title: "Homepage",
+          isHomepage: true,
+          isApplicant: true,
+        });
+      } else {
+        res.render("applicantBasicInfo", {
+          title: "Applicant Basic Info",
+        });
+      }
     } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
+      return res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
       });
     }
-  } else {
-    return res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-})
-.post(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
-      if(req.body.formid=="jobmarket-form"){
-        try{
-        req.session.searchinput=req.body.input;
-        req.session.searchtype=req.body.type;
-        let array = await jobData.findjobs(req.session.searchinput,req.session.searchtype);
-        req.session.searchArray=array;
+  })
+  .post(async (req, res) => {
+    if (req.session.userType === true) {
+      if (req.session.basicInfo === true) {
+        if (req.body.formid == "jobmarket-form") {
+          try {
+            req.session.searchinput = req.body.input;
+            req.session.searchtype = req.body.type;
+            helpers.checkEmpty(req.session.searchinput);
+            helpers.checkEmpty(req.session.searchtype);
+            let array = await jobData.findjobs(
+              req.session.searchinput,
+              req.session.searchtype
+            );
+            req.session.searchArray = array;
 
-        const resu = await resumeData.getResumesByApplicantId(req.session.userId);
+            const resu = await resumeData.getResumesByApplicantId(
+              req.session.userId
+            );
 
          res.render("jobMarket",{
            jobs:req.session.searchArray,
@@ -81,10 +88,7 @@ router.route("/jobmarket").get(async (req, res) => {
         }
        }
        else if(req.body.formid=="sort-form"){
-        if(!req.session.searchArray){
-          res.redirect("/applicant/jobmarket");
-        }
-        else{
+        console.log(req.body.sortby)
         if(req.body.sortby=="LowHigh"){
         req.session.searchArray=helpers.sortedbysalrayformlowtohigh(req.session.searchArray);
         console.log(req.session.searchArray)
@@ -101,7 +105,6 @@ router.route("/jobmarket").get(async (req, res) => {
         isHomepage: true,
         isApplicant: true});
         }
-      }
        }
     } else {
       res.render("applicantBasicInfo", {
@@ -124,7 +127,7 @@ router
         error: "Error: 403, You are NOT logged in yet!",
       });
     }
-    if (req.session.basicInfo ==true) {
+    if (req.session.basicInfo == true) {
       res.redirect("/");
     }
   })
@@ -168,7 +171,7 @@ router
       let state = req.body.stateInput;
       let country = req.body.countryInput;
       let phone = req.body.phoneInput;
-    
+
       const addInfo = await userData.addBasicInfo(
         req.session.userId,
         firstname,
@@ -195,49 +198,49 @@ router
     }
   });
 
-  router.route("/profile").get(async (req, res) => {
-    if (req.session.userType === true) {
-      if (req.session.basicInfo === true) {
-        let array=[];
-        let user = await userData.getUserById(req.session.userId);
-        user.Type="applicant"
-        if (user.gender === 0) {
-          user.gender = 'Male'
-        }
-        else if (user.gender === 1){
-          user.gender = 'Female'
-        }
-        else {
-          user.gender = 'Not to tell'
-        }
-        array.push(user);
-        console.log(user)
-        res.render("applicantProfile",{
-          isHomepage: true,
-          isApplicant: true,
-          user:array
-        }) 
+router.route("/profile").get(async (req, res) => {
+  if (req.session.userType === true) {
+    if (req.session.basicInfo === true) {
+      let array = [];
+      let user = await userData.getUserById(req.session.userId);
+      user.Type = "applicant";
+      if (user.gender === 0) {
+        user.gender = "Male";
+      } else if (user.gender === 1) {
+        user.gender = "Female";
       } else {
-        res.render("applicantBasicInfo", {
-          title: "Applicant Basic Info",
-        });
+        user.gender = "Not to tell";
       }
+      array.push(user);
+      console.log(user);
+      res.render("applicantProfile", {
+        isHomepage: true,
+        isApplicant: true,
+        user: array,
+      });
     } else {
-      return res.status(403).render("forbiddenAccess", {
-        title: "Forbidden Access",
-        error: "Error: 403, You are NOT logged in yet!",
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
       });
     }
-  })
-  router.route("/updateInfo").get(async (req, res) => {
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+});
+router
+  .route("/updateInfo")
+  .get(async (req, res) => {
     if (req.session.userType === true) {
       if (req.session.basicInfo === true) {
         let user = await userData.getUserById(req.session.userId);
-        res.render("updateInfo",{
+        res.render("updateInfo", {
           isHomepage: true,
           isApplicant: true,
-          user:user,
-        }) 
+          user: user,
+        });
       } else {
         res.render("applicantBasicInfo", {
           title: "Applicant Basic Info",
@@ -254,46 +257,151 @@ router
     if (req.session.userType === true) {
       if (req.session.basicInfo === true) {
         try {
-        let firstname = req.body.firstnameInput;
-        let lastname = req.body.lastnameInput;
-        let gender = req.body.genderInput;
-        let age = req.body.ageInput;
-        let city = req.body.cityInput;
-        let state = req.body.stateInput;
-        let country = req.body.countryInput;
-        let phone = req.body.phoneInput;
-        helpers.checkName(firstname);
-        helpers.checkName(lastname);
-        helpers.checkPlace(city);
-        helpers.checkPlace(state);
-        helpers.checkPlace(country);
-        helpers.checkPhone(phone);
-        helpers.checkAge(age);  
-        const addInfo = await userData.addBasicInfo(
-          req.session.userId,
-          firstname,
-          lastname,
-          gender,
-          age,
-          city,
-          state,
-          country,
-          phone
-        );
-        
-        if (addInfo) {
-          req.session.basicInfo = addInfo.basicInfo;
-          res.redirect("/applicant/profile");
-        } else {
-          return res.status(500).json({ error: "Internal Server Error" });
+          let firstname = req.body.firstnameInput;
+          let lastname = req.body.lastnameInput;
+          let gender = req.body.genderInput;
+          let age = req.body.ageInput;
+          let city = req.body.cityInput;
+          let state = req.body.stateInput;
+          let country = req.body.countryInput;
+          let phone = req.body.phoneInput;
+          helpers.checkName(firstname);
+          helpers.checkName(lastname);
+          helpers.checkPlace(city);
+          helpers.checkPlace(state);
+          helpers.checkPlace(country);
+          helpers.checkPhone(phone);
+          helpers.checkAge(age);
+          const addInfo = await userData.addBasicInfo(
+            req.session.userId,
+            firstname,
+            lastname,
+            gender,
+            age,
+            city,
+            state,
+            country,
+            phone
+          );
+
+          if (addInfo) {
+            req.session.basicInfo = addInfo.basicInfo;
+            res.redirect("/applicant/profile");
+          } else {
+            return res.status(500).json({ error: "Internal Server Error" });
+          }
+        } catch (e) {
+          let array = [];
+          let user = await userData.getUserById(req.session.userId);
+          array.push(user);
+          console.log(user);
+          res.render("updateInfo", { error: e, user: array });
         }
-      }catch(e){
-        let array=[];
-        let user = await userData.getUserById(req.session.userId);
-        array.push(user);
-        console.log(user)
-        res.render("updateInfo",{error:e,user:array});
+      } else {
+        res.render("applicantBasicInfo", {
+          title: "Applicant Basic Info",
+        });
       }
+    } else {
+      return res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
+      });
+    }
+  });
+
+router
+  .route("/createResume")
+  .get(async (req, res) => {
+    if (req.session.userType != true) {
+      return res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
+      });
+    }
+    if (req.session.basicInfo != true) {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+    res.render("createResume", {
+      title: "Create Resume",
+      isHomepage: true,
+      isApplicant: true,
+    });
+  })
+  .post(async (req, res) => {
+    if (req.session.userType != true) {
+      return res.status(403).render("forbiddenAccess", {
+        title: "Forbidden Access",
+        error: "Error: 403, You are NOT logged in yet!",
+      });
+    }
+    if (req.session.basicInfo != true) {
+      res.render("applicantBasicInfo", {
+        title: "Applicant Basic Info",
+      });
+    }
+    try {
+      let resumeName = req.body.resumeNameInput;
+      let firstname = req.body.firstnameInput;
+      let lastname = req.body.lastnameInput;
+      let email = req.body.emailInput;
+      let gender = req.body.genderInput;
+      let city = req.body.cityInput;
+      let state = req.body.stateInput;
+      let country = req.body.countryInput;
+      let age = req.body.ageInput;
+      let phone = req.body.phoneInput;
+      let address = req.body.addrInput;
+      let website = req.body.websiteInput;
+      let skills = req.body.skills;
+      let edu = req.body.Edu;
+      let emp = req.body.Emp;
+      let pro = req.body.Pro;
+
+      
+      const createInfo = await resumeData.createResume(
+        req.session.userId,
+        resumeName,
+        firstname,
+        lastname,
+        email,
+        gender,
+        city,
+        state,
+        country,
+        age,
+        phone,
+        address,
+        website,
+        skills,
+        edu,
+        emp,
+        pro
+      );
+
+      if (createInfo) {
+        res.redirect("/applicant/reviewResumes");
+      } else {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+    } catch (e) {
+      res.render("createResume", { error: e });
+    }
+  });
+
+router
+  .route("/updatePassword")
+  .get(async (req, res) => {
+    if (req.session.userType === true) {
+      if (req.session.basicInfo === true) {
+        return res.render("updatePassword", {
+          title: "Homepage",
+          time: new Date().toUTCString(),
+          isHomepage: true,
+          isApplicant: true,
+        });
       } else {
         res.render("applicantBasicInfo", {
           title: "Applicant Basic Info",
@@ -306,123 +414,28 @@ router
       });
     }
   })
-
-router.route("/createResume").get(async (req, res) => {
-  if (req.session.userType != true) {
-    return res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-  if (req.session.basicInfo != true) {
-    res.render("applicantBasicInfo", {
-      title: "Applicant Basic Info",
-    });
-  }
-  res.render("createResume", {
-    title: "Create Resume",
-    isHomepage: true,
-    isApplicant: true,
-  });
-})
-.post(async (req, res) => {
-  if (req.session.userType != true) {
-    return res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-  if (req.session.basicInfo != true) {
-    res.render("applicantBasicInfo", {
-      title: "Applicant Basic Info",
-    });
-  }
-  try {
-    let resumeName = req.body.resumeNameInput;
-    let firstname = req.body.firstnameInput;
-    let lastname = req.body.lastnameInput;
-    let email = req.body.emailInput;
-    let gender = req.body.genderInput;
-    let city = req.body.cityInput;
-    let state = req.body.stateInput;
-    let country = req.body.countryInput;
-    let age = req.body.ageInput;
-    let phone = req.body.phoneInput;
-    let address = req.body.addrInput;
-    let website = req.body.websiteInput;
-    let skills = req.body.skills;
-    let edu = req.body.Edu;
-    let emp = req.body.Emp;
-    let pro = req.body.Pro;
-
-    const createInfo = await resumeData.createResume(
-      req.session.userId,
-      resumeName,
-      firstname,
-      lastname,
-      email,
-      gender,
-      city,
-      state,
-      country,
-      age,
-      phone,
-      address,
-      website,
-      skills,
-      edu,
-      emp,
-      pro
-    );
-
-    if (createInfo) {
-      res.redirect("/applicant/reviewResumes");
-    } else {
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-  } catch (e) {
-    res.render("createResume", { error: e });
-  }
-});
-
-router.route("/updatePassword").get(async (req, res) => {
-  if (req.session.userType === true) {
-    if (req.session.basicInfo === true) {
+  .post(async (req, res) => {
+    try {
+      helpers.checkPassword(req.body.NewpasswordInput);
+      helpers.checkPassword(req.body.passwordInputFirst);
+      helpers.checkPassword(req.body.passwordInputSecond);
+      const updatepassword = await userData.UpdatePassword(
+        req.body.passwordInputFirst,
+        req.body.passwordInputSecond,
+        req.body.NewpasswordInput,
+        req.session.userId
+      );
+      res.redirect("/applicant/profile");
+    } catch (error) {
       return res.render("updatePassword", {
         title: "Homepage",
         time: new Date().toUTCString(),
         isHomepage: true,
         isApplicant: true,
-      });
-    } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
+        error: error,
       });
     }
-  } else {
-    return res.status(403).render("forbiddenAccess", {
-      title: "Forbidden Access",
-      error: "Error: 403, You are NOT logged in yet!",
-    });
-  }
-})
-.post(async (req, res) => {
-  try {
-  helpers.checkPassword(req.body.NewpasswordInput);
-  helpers.checkPassword(req.body.passwordInputFirst);
-  helpers.checkPassword(req.body.passwordInputSecond);
-  const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
-  res.redirect("/applicant/profile");
-  }catch(error){
-    return res.render("updatePassword", {
-      title: "Homepage",
-      time: new Date().toUTCString(),
-      isHomepage: true,
-      isApplicant: true,
-      error:error
-    });
-  }
-})
+  });
 
 router.route("/applied").get(async (req, res) => {
   if (req.session.userType != true) {
@@ -438,12 +451,14 @@ router.route("/applied").get(async (req, res) => {
   }
   try {
     let applied = await appData.getAllApplied(req.session.userId);
-    if (!applied) { return res.status(500).json({ error: "Internal Server Error" }); }
+    if (!applied) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     res.render("applied", {
       title: "Applied Jobs",
       isHomepage: true,
       isApplicant: true,
-      applications: applied
+      applications: applied,
     });
   } catch (e) {
     res.render("applied", {
@@ -470,7 +485,9 @@ router.route("/reviewResumes").get(async (req, res) => {
   try {
     let resumes = await resumeData.getAllresumes(req.session.userId);
     console.log(resumes);
-    if (!resumes) { return res.status(500).json({ error: "Internal Server Error" }); }
+    if (!resumes) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     res.render("reviewResumes", {
       title: "Review Resumes",
       isHomepage: true,
@@ -496,7 +513,9 @@ router.route("/readResume/:id").get(async (req, res) => {
   }
   try {
     let resume = await resumeData.getResumeById(req.params.id);
-    if (!resume) { return res.status(500).json({ error: "Internal Server Error" }); }
+    if (!resume) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     console.log(resume);
     res.render("reviewOneResume", {
       title: "Review Resumes",
@@ -524,13 +543,13 @@ router.route("/deleteResume/:id").get(async (req, res) => {
   try {
     let result = await resumeData.deleteResume(req.params.id);
     console.log(result);
-    if (!result) { return res.status(500).json({ error: "Internal Server Error" }); }
+    if (!result) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
     res.redirect("/applicant/reviewResumes");
   } catch (e) {
     res.redirect("/applicant/reviewResumes");
   }
 });
-
-
 
 module.exports = router;
