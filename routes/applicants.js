@@ -13,6 +13,7 @@ router.route("/jobmarket").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
       return res.render("jobMarket", {
+        jobs:req.session.searchArray,
         title: "Homepage",
         isHomepage: true,
         isApplicant: true,
@@ -80,7 +81,10 @@ router.route("/jobmarket").get(async (req, res) => {
         }
        }
        else if(req.body.formid=="sort-form"){
-        console.log(req.body.sortby)
+        if(!req.session.searchArray){
+          res.redirect("/applicant/jobmarket");
+        }
+        else{
         if(req.body.sortby=="LowHigh"){
         req.session.searchArray=helpers.sortedbysalrayformlowtohigh(req.session.searchArray);
         console.log(req.session.searchArray)
@@ -97,6 +101,7 @@ router.route("/jobmarket").get(async (req, res) => {
         isHomepage: true,
         isApplicant: true});
         }
+      }
        }
     } else {
       res.render("applicantBasicInfo", {
