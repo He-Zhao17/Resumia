@@ -13,6 +13,9 @@ const getAllJobPost = async () => {
 };
 const findjobs= async (string,type) => {
     const jobs = await getAllJobPost();
+    if(!type&&(!string||string.trim().length === 0)){
+        return jobs;
+    }
     if (typeof string != "string" ||string == null ||string.trim().length === 0){
         throw "Error: Invalid Input";
     }
