@@ -138,7 +138,7 @@ router
             res.status(200).redirect(`/applications/${req.params.id}`);
 
         } catch (error) {
-            return res.status(403).render("application",{
+            return res.status(403).render("forbiddenAccess",{
                 isHomepage: true,
                 isApplicant: req.session.userType,
                 error: error});
