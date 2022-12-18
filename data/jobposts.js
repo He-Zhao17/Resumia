@@ -13,6 +13,10 @@ const getAllJobPost = async () => {
 };
 const findjobs= async (string,type) => {
     const jobs = await getAllJobPost();
+    if (typeof string != "string" ||string == null ||string.trim().length === 0){
+        throw "Error: Invalid Input";
+    }
+    string=string.trim();
     let result=[];
     for(let i=0;i<jobs.length;i++){
         if(type=="salary"&&helpers.ismatched(jobs[i].salary,string)){

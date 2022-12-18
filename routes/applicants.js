@@ -33,6 +33,7 @@ router.route("/jobmarket").get(async (req, res) => {
   if (req.session.userType === true) {
     if (req.session.basicInfo === true) {
       if(req.body.formid=="jobmarket-form"){
+        try{
         req.session.searchinput=req.body.input;
         req.session.searchtype=req.body.type;
         let array = await jobData.findjobs(req.session.searchinput,req.session.searchtype);
@@ -52,6 +53,13 @@ router.route("/jobmarket").get(async (req, res) => {
           console.log(resu[i].resumeName);
          }
          console.log(req.session.searchArray)
+        }catch (error) {
+          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          time: new Date().toUTCString(),
+          isHomepage: true,
+          isApplicant: true,
+          error:error}) 
+        }
        }
        else if(req.body.formid=="jobpost-form"){
         try{
