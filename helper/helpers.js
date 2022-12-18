@@ -65,7 +65,7 @@ function ismatched(fullString, substring) {
 
 const checkName = function (name) {
   if (typeof name != "string" || name == null || name.trim().length === 0)
-    throw "Error: Invalid Name";
+    throw "Error: Name can not be empty";
   name = name.trim();
   let reg = /^[a-z']+$/i;
   let regWrong = /^.*(''+).*$/; // if there is a consecutive ''''', even more than 2, it's wrong
@@ -81,7 +81,7 @@ const checkName = function (name) {
 
 const checkPlace = function (place) {
   if (typeof place != "string" || place == null || place.trim().length === 0)
-    throw "Error: Invalid Place Name";
+    throw "Error: Place Name can not be empty";
   place = place.trim();
   return place;
 };
@@ -102,6 +102,7 @@ const checkId = function (id) {
 };
 
 const sortedbysalrayformlowtohigh = function (array) {
+  if (array === undefined) throw "Error: You have to enter the salary first."
 for(let i=0;i<array.length;i++){
   let index=i;
   for(let j=i+1;j<array.length;j++){
@@ -181,6 +182,10 @@ if (!reg.test(age)) {
   return Number(age);
 };
 
+const checkEmpty = function (input) {
+  if (typeof input == "undefined" || input == null || input.trim().length === 0)
+  throw "Error: Input can not be empty";
+}
 module.exports = {
   checkUserEmail,
   checkPassword,
@@ -197,4 +202,5 @@ module.exports = {
   sortedbysalrayformhightolow,
   checkGender,
   checkAge,
+  checkEmpty,
 };
