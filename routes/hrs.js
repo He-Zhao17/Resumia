@@ -366,6 +366,8 @@ router.route("/updateInfo").get(async (req, res) => {
   }
 });
 
+
+
 router.route("/readResume/:id").get(async (req, res) => {
   if (req.session.userType === true) {
     return res.status(403).render("forbiddenAccess", {

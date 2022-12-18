@@ -27,6 +27,12 @@ router
             }
             let id = checkId(req.params.id);
             let appFound = await appData.getAppById(id);
+            if (req.session.userId !== appFound.user_id && req.session.userId !== appFound.hr_id) {
+                return res.status(403).render("forbiddenAccess", {
+                    title: "Forbidden Access",
+                    error: "Error: 403, You are NOT logged in yet!",
+                });
+            }
             const userInfo = await userData.getUserById(req.session.userId);
             let hideOrNot = false;
             if (!req.session.userType && appFound.status === "Pending") {
@@ -119,6 +125,14 @@ router
                 newNote.from = "HR";
                 type = false;
             }
+            let id = checkId(req.params.id);
+            let appFound = await appData.getAppById(id);
+            if (req.session.userId !== appFound.user_id && req.session.userId !== appFound.hr_id) {
+                return res.status(403).render("forbiddenAccess", {
+                    title: "Forbidden Access",
+                    error: "Error: 403, You are NOT logged in yet!",
+                });
+            }
 
             const updateInfo = await appData.sendNote(req.params.id, newNote);
             res.status(200).redirect(`/applications/${req.params.id}`);
@@ -159,6 +173,15 @@ router.route("/updateStatus/:id")
             }
             decision = decision === "true" ? true : false;
 
+            let id = checkId(req.params.id);
+            let appFound = await appData.getAppById(id);
+            if (req.session.userId !== appFound.hr_id) {
+                return res.status(403).render("forbiddenAccess", {
+                    title: "Forbidden Access",
+                    error: "Error: 403, You are NOT logged in yet!",
+                });
+            }
+
             const updateInfo = await appData.updateStatus(req.params.id, decision);
             res.status(200).redirect(`/applications/${req.params.id}`);
 
@@ -171,7 +194,54 @@ router.route("/updateStatus/:id")
 
     })
 
+router.route("/cancelApp/:id")
+    .post(async (req, res) => {
+        if (!req.session.userType) {
+            return res.status(403).render("forbiddenAccess", {
+                title: "Forbidden Access",
+                error: "Error: 403, You are NOT logged in yet!",
+            });
+        }
+        try {
+            if (!req.params.id) {
+                throw "Application Id not provided";
+            }
+            const userInfo = await userData.getUserById(req.session.userId);
+            if (!userInfo.type) {
+                throw "Hr cannot update the status.";
+            }
 
+
+            helpers.checkId(req.params.id);
+            if (!req.body.adOrNot) {
+                throw "no decision";
+            }
+            let decision = req.body.adOrNot;
+            if (!(decision === "true" || decision === "false")) {
+                throw "invalid ad/rej"
+            }
+            decision = decision === "true" ? true : false;
+
+            let id = checkId(req.params.id);
+            let appFound = await appData.getAppById(id);
+            if (req.session.userId !== appFound.user_id) {
+                return res.status(403).render("forbiddenAccess", {
+                    title: "Forbidden Access",
+                    error: "Error: 403, You are NOT logged in yet!",
+                });
+            }
+
+            const updateInfo = await appData.deleteApp(req.params.id);
+            res.status(200).redirect(`/applicant/applied`);
+
+        } catch (error) {
+            return res.status(403).render("application",{
+                isHomepage: true,
+                isApplicant: req.session.userType,
+                error: error});
+        }
+
+    })
 
 
 module.exports = router;

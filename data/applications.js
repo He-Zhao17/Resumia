@@ -73,6 +73,28 @@ const getAllAppByHRId = async (HRId) => {
 
 }
 
+const getAllAppByJobId = async (JobId) => {
+    HRId = helpers.checkId(JobId);
+    const appCollection = await app();
+    const appList = await appCollection.find({job_id: JobId}).toArray();
+    if (!appList) throw "Error: Getting all appList failed";
+    for (let app of appList) {
+        app._id = app._id.toString();
+        app.applicant_id = app.user_id.toString();
+        let getJob = await jobposts.getJobPostById(app.job_id);
+        let getApplicant = await users.getUserById(app.user_id);
+        let getHr = await users.getUserById(app.hr_id);
+        let getResume = await resumes.getResumeById(app.resume_id);
+        app.applicant = getApplicant;
+        app.hr = getHr;
+        app.resume = getResume;
+        app.job = getJob
+        app.status = app.status == 0 ? "Pending" : app.status == 1 ? "Admitted" : "Rejected";
+    }
+    return appList;
+
+}
+
 const getAllApplied = async (applicantId) => {
   helpers.checkId(applicantId);
   const appCollection = await app();
@@ -108,6 +130,14 @@ const sendNote = async (appId, noteObj) => {
     return true;
 }
 
+const deleteApp = async (appId) => {
+    helpers.checkId(appId);
+    const appCollection = await app();
+    const updateInfo = await appCollection.deleteOne({_id: ObjectId(appId)});
+    if (updateInfo.deletedCount === 0) throw `Could not delete the application.`;
+    return true;
+}
+
 const updateStatus = async (appId, adOrNot) => {
     helpers.checkId(appId);
     const appCollection = await app();
@@ -123,5 +153,5 @@ const updateStatus = async (appId, adOrNot) => {
     createApplication,
     getAllApplied,
     getAppById,
-    getAllAppByHRId, sendNote, updateStatus
+    getAllAppByHRId, sendNote, updateStatus, getAllAppByJobId, deleteApp
 };

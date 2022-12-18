@@ -1,6 +1,16 @@
 <section class="MainPage">
     <h1>{{application.jobPost.employer}}, {{application.jobPost.jobTitle}}, {{application.jobPost.city}}</h1>
     <table id="appDetail" border="1">
+        {{#if isApplicant}}
+            <form action="/applications/cancelApp/{{application._id}}" method="post">
+                <div id="isAccept">
+                    <p>Cancel this application?</p>
+                    <div id="acceptBtn">
+                        <button type="submit" name="adOrNot" value="true">Yes</button>
+                    </div>
+                </div>
+            </form>
+        {{/if}}
 
         {{#if hideOrNot}}
             <form action="/applications/updateStatus/{{application._id}}" method="post">
