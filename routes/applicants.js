@@ -104,7 +104,7 @@ router
           res.redirect("/applicant/jobmarket");
         }
         else{
-        if(req.body.sortby=="LowHigh"){
+        if(req.body.sorted=="LowHigh"){
         req.session.searchArray=helpers.sortedbysalrayformlowtohigh(req.session.searchArray);
         console.log(req.session.searchArray)
         res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
@@ -112,7 +112,7 @@ router
         isHomepage: true,
         isApplicant: true});
         }
-        else if(req.body.sortby=="HighLow"){
+        else if(req.body.sorted=="HighLow"){
         req.session.searchArray=helpers.sortedbysalrayformhightolow(req.session.searchArray);
         console.log(req.session.searchArray)
         res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",

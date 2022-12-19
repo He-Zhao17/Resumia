@@ -5,20 +5,13 @@
 <div id="jobSearch">
   <form id="sort-form" name="sort-form" method="POST">
       <input type = "hidden" id="formid" name="formid" value="sort-form">
-          <label for="sortby">
               Sort By
-              <select onclick="submit_form()" id = "sortby" name="sortby">
-                  <option  value="LowHigh">Low to High</option>
-                  <option  value="HighLow">High to Low</option>
-              </select>
-              <input type="radio" onclick="submit_form()" value="LowHigh">Sort salary from low to high
+              <input type="radio" name ="sorted"value="LowHigh">Sort salary from low to high
               <br>
-              <input type="radio" onclick="submit_form()" value="HighLow">Sort salary from high to low
-          </label>
-
+              <input type="radio" name ="sorted"value="HighLow">Sort salary from high to low
+    <button class="submitButton" type="submit">sort</button>
   </form>
     <p>{{error}}</p>
-    
     <h2 id="category">Category</h2>
     <form id="jobmarket-form" name="jobmarket-form" method="POST">
     <input type = "hidden" id="formid1" name="formid" value="jobmarket-form">
