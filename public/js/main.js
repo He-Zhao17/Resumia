@@ -62,7 +62,7 @@ function show(input) {
   document.getElementById("hidebox").style.display = "block";
   // Transfer the data of jobId to routes together with resume
   let jobInput = document.getElementById("jobInput");
-  jobInput.value = input;
+  jobInput.setAttribute("value", input);
   console.log(jobInput.value);
 }
 function hide() {
