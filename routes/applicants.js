@@ -100,7 +100,7 @@ router
         }
        }
        else if(req.body.formid=="sort-form"){
-        if(!req.session.searchArray){
+        if(!req.session.searchArray ||!req.body.sorted){
           res.redirect("/applicant/jobmarket");
         }
         else{
