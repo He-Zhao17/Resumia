@@ -63,7 +63,8 @@ router
 
          res.render("jobMarket",{
            jobs:req.session.searchArray,
-           title: "Homepage",
+           title: "Job Market",
+         time: new Date().toUTCString(),
          isHomepage: true,
          isApplicant: true, 
          resumes: resu
@@ -73,7 +74,11 @@ router
          }
          console.log(req.session.searchArray)
         }catch (error) {
-          res.redirect("/");
+          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          time: new Date().toUTCString(),
+          isHomepage: true,
+          isApplicant: true,
+          error:error}) 
         }
        }
        else if(req.body.formid=="jobpost-form"){
@@ -82,11 +87,13 @@ router
          console.log(resume)
          let array = await appData.createApplication(req.body.posterid,req.session.userId,resume._id.toString(),req.body.jobid);
          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          time: new Date().toUTCString(),
           isHomepage: true,
           isApplicant: true}) 
          console.log(req.body);
         }catch (error) {
           res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          time: new Date().toUTCString(),
           isHomepage: true,
           isApplicant: true,
           error:error}) 
@@ -229,7 +236,8 @@ router
         res.render("applicantProfile",{
           isHomepage: true,
           isApplicant: true,
-          user:array
+          user:array,
+          title: "profile",
         }) 
       } else {
         res.render("applicantBasicInfo", {
@@ -251,6 +259,7 @@ router
           isHomepage: true,
           isApplicant: true,
           user:user,
+          title:"updateinfo"
         }) 
       } else {
         res.render("applicantBasicInfo", {
@@ -308,7 +317,8 @@ router
           error:e,
           isHomepage:true,
           isApplicant:true,
-          user:user});
+          user:user,
+          title:"updateinfo"});
       }
       } else {
         res.render("applicantBasicInfo", {
@@ -455,6 +465,7 @@ router.route("/updatePassword").get(async (req, res) => {
         time: new Date().toUTCString(),
         isHomepage: true,
         isApplicant: true,
+        title: "Update password"
       });
     } else {
       res.render("applicantBasicInfo", {
@@ -481,7 +492,8 @@ router.route("/updatePassword").get(async (req, res) => {
       time: new Date().toUTCString(),
       isHomepage: true,
       isApplicant: true,
-      error:error
+      error:error,
+      title: "User profile"
     });
   }
 })
