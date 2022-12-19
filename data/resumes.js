@@ -22,17 +22,46 @@ const createResume = async (
     emp,
     pro) => {
   creatorId = helpers.checkId(creatorId);
+  helpers.checkEmpty(resumeName, "resumeName");
   helpers.checkName(firstname);
   helpers.checkName(lastname);
   helpers.checkUserEmail(email);
   gender = helpers.checkGender(gender);
-
   helpers.checkPlace(city);
   helpers.checkPlace(state);
   helpers.checkPlace(country);
   age = helpers.checkAge(age);
   phone = helpers.checkPhone(phone);
   address = helpers.checkPlace(address);
+
+  edu.forEach(element => {
+    helpers.checkEmpty(element.schoolInput, "schoolInput");
+    helpers.checkEmpty(element.startDateInput, "startDateInput");
+    helpers.checkEmpty(element.gpaInput, "gpaInput");
+    helpers.checkEmpty(element.degreeInput, "degreeInput");
+    helpers.checkEmpty(element.majorInput, "majorInput");
+    helpers.checkEmpty(element.countryInput, "countryInput");
+    helpers.checkEmpty(element.stateInput, "stateInput");
+    helpers.checkEmpty(element.cityInput, "cityInput");
+    helpers.checkEmpty(element.descriptionInput, "descriptionInput");
+  });
+
+  emp.forEach(element => {
+    helpers.checkEmpty(element.employerInput, "employerInput");
+    helpers.checkEmpty(element.jobTitleInput, "jobTitleInput");
+    helpers.checkEmpty(element.startDateInput, "startDateInput");
+    helpers.checkEmpty(element.countryInput, "countryInput");
+    helpers.checkEmpty(element.stateInput, "stateInput");
+    helpers.checkEmpty(element.cityInput, "cityInput");
+    helpers.checkEmpty(element.descriptionInput, "descriptionInput");
+  });
+
+  emp.forEach(element => {
+    helpers.checkEmpty(element.titleInput, "titleInput");
+    helpers.checkEmpty(element.roleInput, "roleInput");
+    helpers.checkEmpty(element.descriptionInput, "descriptionInput");
+  });
+
   if(gender==0){
     gender="Male";
   }

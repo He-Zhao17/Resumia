@@ -88,8 +88,12 @@ const checkPlace = function (place) {
 
 const checkPhone = function (phone) {
   if (typeof phone != "string" || phone == null || phone.trim().length === 0)
-    throw "Error: Invalid Phone Number";
+    throw "Error: Invalid American Phone Number";
   phone = phone.trim();
+  let reg = /^[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$/;
+  if (!reg.test(phone)) {
+    throw "Error: Invalid American phone number";
+  }
   return phone;
 };
 
@@ -102,7 +106,7 @@ const checkId = function (id) {
 };
 
 const sortedbysalrayformlowtohigh = function (array) {
-  if (array === undefined) throw "Error: You have to enter the salary first."
+if (array === undefined) throw "Error: You have to select a type and search frist."
 for(let i=0;i<array.length;i++){
   let index=i;
   for(let j=i+1;j<array.length;j++){
@@ -118,6 +122,7 @@ return array;
 };
 
 const sortedbysalrayformhightolow = function (array) {
+  if (array === undefined) throw "Error: You have to select a type and search frist."
   for(let i=0;i<array.length;i++){
     let index=i;
     for(let j=i+1;j<array.length;j++){
@@ -165,26 +170,23 @@ function checkSalary(s) {
 
 const checkGender = function (gender) {
   if (typeof gender != "string") throw "Error: Invalid Gender";
-  // if the input is null, it means user doesnt want to tell
   if (gender == null || gender.trim().length === 0) return null;
   if (gender != '0' && gender != '1' && gender != '2') throw "Error: Invalid Gender";
   return Number(gender);
 };
 
 const checkAge = function (age) {
-  if (typeof age != "string") throw "Error: Invalid Age";
-  // if the input is null, it means user doesnt want to tell
-  if (age == null || age.trim().length === 0) return null;
+  if (typeof age == "undefined" || age == null || age.trim().length === 0) throw "Error: Invalid Age";
   let reg = /^[1-8][0-9]$/;
-if (!reg.test(age)) {
-  throw "Error: Invalid Age";
-}
+  if (!reg.test(age)) {
+    throw "Error: Invalid Age";
+  }
   return Number(age);
 };
 
-const checkEmpty = function (input) {
+const checkEmpty = function (input, inputName) {
   if (typeof input == "undefined" || input == null || input.trim().length === 0)
-  throw "Error: Input can not be empty";
+  throw `Error: ${inputName} can not be empty`;
 }
 module.exports = {
   checkUserEmail,

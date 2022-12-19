@@ -156,6 +156,7 @@ router.route("/updatePassword").get(async (req, res) => {
 })
     .post(async (req, res) => {
       try {
+        helpers.checkPassword(newpassword);
         const updatepassword = await userData.UpdatePassword(req.body.passwordInputFirst,req.body.passwordInputSecond,req.body.NewpasswordInput,req.session.userId)
         console.log(updatepassword)
         res.redirect("/hr/profile");
@@ -221,13 +222,17 @@ router
     try {
       let firstname = req.body.firstnameInput;
       let lastname = req.body.lastnameInput;
+      let gender = req.body.genderInput;
       let city = req.body.cityInput;
       let state = req.body.stateInput;
       let country = req.body.countryInput;
+      let age = req.body.ageInput;
       let phone = req.body.phoneInput;
 
       helpers.checkName(firstname);
       helpers.checkName(lastname);
+      helpers.checkGender(gender);
+      helpers.checkAge(age);
       helpers.checkPlace(city);
       helpers.checkPlace(state);
       helpers.checkPlace(country);
@@ -235,7 +240,6 @@ router
     } catch (error) {
       return res.status(403).render("HRBasicInfo", {
         title: "HR Basic Info",
-        isHomepage: true,
         error: error,
       });
     }
@@ -270,7 +274,6 @@ router
     } catch (error) {
       return res.status(403).render("HRBasicInfo", {
         title: "HR Basic Info",
-        isHomepage: true,
         error: error,
       });
     }
@@ -364,7 +367,68 @@ router.route("/updateInfo").get(async (req, res) => {
       error: "Error: 403, You are NOT logged in yet!",
     });
   }
-});
+})
+.post(async (req, res) => {
+  if (req.session.userType === false) {
+    if (req.session.basicInfo === true) {
+      try {
+      let firstname = req.body.firstnameInput;
+      let lastname = req.body.lastnameInput;
+      let gender = req.body.genderInput;
+      let age = req.body.ageInput;
+      let city = req.body.cityInput;
+      let state = req.body.stateInput;
+      let country = req.body.countryInput;
+      let phone = req.body.phoneInput;
+
+      helpers.checkName(firstname);
+      helpers.checkName(lastname);
+      helpers.checkPlace(city);
+      helpers.checkPlace(state);
+      helpers.checkPlace(country);
+      helpers.checkPhone(phone);
+      helpers.checkAge(age);
+      helpers.checkGender(gender);
+
+      const addInfo = await userData.addBasicInfo(
+        req.session.userId,
+        firstname,
+        lastname,
+        gender,
+        age,
+        city,
+        state,
+        country,
+        phone
+      );
+      
+      if (addInfo) {
+        req.session.basicInfo = addInfo.basicInfo;
+        res.redirect("/hr/profile");
+      } else {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+    }catch(e){
+      let user = await userData.getUserById(req.session.userId);
+      console.log(user)
+      res.render("HRUpdateInfo",{
+        error:e,
+        isHomepage:true,
+        isApplicant:false,
+        user:user});
+    }
+    } else {
+      res.render("HRBasicInfo", {
+        title: "HR Basic Info",
+      });
+    }
+  } else {
+    return res.status(403).render("forbiddenAccess", {
+      title: "Forbidden Access",
+      error: "Error: 403, You are NOT logged in yet!",
+    });
+  }
+})
 
 
 
@@ -419,6 +483,14 @@ router.route("/:id").get(async (req, res) => {
       let country = req.body.countryInput;
       let phone = req.body.phoneInput;
 
+      helpers.checkName(firstname);
+      helpers.checkName(lastname);
+      helpers.checkGender(gender);
+      helpers.checkPlace(city);
+      helpers.checkPlace(state);
+      helpers.checkPlace(country);
+      helpers.checkPhone(phone);
+
       let addInfo = await userData.addBasicInfo(
         req.session.userId,
         firstname,
@@ -449,11 +521,15 @@ router.route("/:id").get(async (req, res) => {
       }
     }catch(e){
       let user = await userData.getUserById(req.session.userId);
-      res.render("updateInfo",{error:e,HRProfile:user});
+      res.render("updateInfo",{
+        isHomepage:true,
+        isApplicant:false,
+        error:e,
+        HRProfile:user});
     }
     } else {
-      res.render("applicantBasicInfo", {
-        title: "Applicant Basic Info",
+      res.render("HRBasicInfo", {
+        title: "HR Basic Info",
       });
     }
   } else {

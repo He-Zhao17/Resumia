@@ -109,6 +109,7 @@ const removeJobPostById = async (id) => {
 }
 module.exports = {
     findjobs,
+    getAllJobPost,
     createJobPost,
     getJobPostById,
     removeJobPostById
