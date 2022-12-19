@@ -6,46 +6,46 @@
         </label>
         <br>
         <p style="color: red;">{{error}}</p>
-        <label for="firstname">
+        <label for="firstnameInput">
             Firstname
-            <input type="firstname" id = "firstnameInput" name="firstnameInput" value={{user.firstname}}>
+            <input type="text" id = "firstnameInput" name="firstnameInput" value={{user.firstname}}>
         </label>
         <br>
-        <label for="lastname">
+        <label for="lastnameInput">
             Lastname
-            <input type="lastname" id = "lastnameInput" name="lastnameInput"  value={{user.lastname}}>
+            <input type="text" id = "lastnameInput" name="lastnameInput"  value={{user.lastname}}>
         </label>
         <br>
         <label for="genderInput">
             Type
-            <select id = "genderInput" name="genderInput" value={{user.gender}}>
+            <select id = "genderInput" name="genderInput">
                 <option value="0">Male</option>
                 <option value="1">Female</option>
                 <option value="2">Others</option>
             </select>
         </label>
         <br>
-        <label for="city">
+        <label for="cityInput">
             City
-            <input type="city" id = "cityInput" name="cityInput" value={{user.city}}>
+            <input type="text" id = "cityInput" name="cityInput" value={{user.city}}>
         </label>
-        <label for="state">
+        <label for="stateInput">
             State
-            <input type="state" id = "stateInput" name="stateInput" value={{user.state}}>
+            <input type="text" id = "stateInput" name="stateInput" value={{user.state}}>
         </label>
-        <label for="country">
+        <label for="countryInput">
             Country
-            <input type="country" id = "countryInput" name="countryInput"  value={{user.country}}>
+            <input type="text" id = "countryInput" name="countryInput"  value={{user.country}}>
         </label>
         <br>
-        <label for="age">
+        <label for="ageInput">
             Age
-            <input type="age" id = "ageInput" name="ageInput" placeholder="age" value={{user.age}}>
+            <input type="text" id = "ageInput" name="ageInput" placeholder="age" value={{user.age}}>
         </label>
         <br>
-        <label for="phone">
+        <label for="phoneInput">
             Phone (US only)
-            <input type="phone" id = "phoneInput" name="phoneInput" value={{user.phone}}>
+            <input type="text" id = "phoneInput" name="phoneInput" value={{user.phone}}>
         </label>
         <br>
         <button class="submitButton updateButton" type="submit">Update</button>

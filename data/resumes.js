@@ -56,7 +56,7 @@ const createResume = async (
     helpers.checkEmpty(element.descriptionInput, "descriptionInput");
   });
 
-  emp.forEach(element => {
+  pro.forEach(element => {
     helpers.checkEmpty(element.titleInput, "titleInput");
     helpers.checkEmpty(element.roleInput, "roleInput");
     helpers.checkEmpty(element.descriptionInput, "descriptionInput");

@@ -1,6 +1,6 @@
 <section class="MainPage">
     <h1>{{application.jobPost.employer}}, {{application.jobPost.jobTitle}}, {{application.jobPost.city}}</h1>
-    <table id="appDetail" border="1">
+    <table id="appDetail" style="border: 1px solid gray">
         {{#if isApplicant}}
             <form action="/applications/cancelApp/{{application._id}}" method="post">
                 <div id="isAccept">
@@ -59,22 +59,7 @@
             </td>
         </tr>
         
-        <div id="sendPanel">
-            <div id="NotesTitle">Notes</div>
-            <div id="NotesContent">
-                {{#each application.notes}}
-                    <p class="author">{{this.from}} <sub>({{this.postDate}})</sub></p>
-                    <p>{{this.notes}}</p>
-                {{/each}}
-            </div>
-            <form action="/applications/sendNotes/{{application._id}}" method="post">
-                <div id="sendContent">
-                    <textarea name="notes" cols="30" rows="8" placeholder="Type your text here"></textarea>
-                    <button>Send👆</button>
-                </div>
-                
-            </form>
-        </div>
+
     </table>
     <p style="color: red;">{{error}}</p>
     {{#if isApplicant}}
@@ -82,6 +67,23 @@
     {{else}}
         <a href="/hr/received" id="return"> ← Back to List</a>
     {{/if}}
+
+    <div id="sendPanel">
+    <div id="NotesTitle">Notes</div>
+    <div id="NotesContent">
+        {{#each application.notes}}
+            <p class="author">{{this.from}} <sub>({{this.postDate}})</sub></p>
+            <p>{{this.notes}}</p>
+        {{/each}}
+    </div>
+    <form action="/applications/sendNotes/{{application._id}}" method="post">
+        <div id="sendContent">
+            <textarea name="notes" cols="30" rows="8" placeholder="Type your text here"></textarea>
+            <button>Send👆</button>
+        </div>
+        
+    </form>
+</div>
 
 
 </section>

@@ -387,7 +387,7 @@ router
       helpers.checkName(firstname);
       helpers.checkName(lastname);
       helpers.checkUserEmail(email);
-      gender = helpers.checkGender(gender);
+      helpers.checkGender(gender);
     
       helpers.checkPlace(city);
       helpers.checkPlace(state);
@@ -418,6 +418,7 @@ router
         helpers.checkEmpty(element.descriptionInput, "descriptionInput");
       });
 
+      console.log(pro);
       pro.forEach(element => {
         helpers.checkEmpty(element.titleInput, "titleInput");
         helpers.checkEmpty(element.roleInput, "roleInput");
