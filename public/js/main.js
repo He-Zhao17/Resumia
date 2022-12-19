@@ -106,3 +106,8 @@ document.getElementById("deleteButton").onclick = function () {
   box.removeChild(box.lastChild);
   skillCounter--;
 };
+
+function submit_form(){
+  var form = document.getElementById("sort-form");
+  form.submit();
+}

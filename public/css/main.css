@@ -539,3 +539,13 @@ footer{
     font-weight: bold;
     font-size: 18px;
 }
+
+#jobmarket-form{
+    line-height: 40px;
+}
+
+#category{
+    color: #0077b5;
+    margin-left: -10px;
+    margin-bottom: 10px;
+}

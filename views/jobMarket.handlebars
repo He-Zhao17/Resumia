@@ -3,7 +3,7 @@
   <h1>Job Market</h1>
 <div id="jobPlatform">
 <div id="jobSearch">
-  <form id="sort-form" name="sort-form" action="" method="POST">
+  <form id="sort-form" name="sort-form" method="POST">
       <input type = "hidden" id="formid" name="formid" value="sort-form">
           <label for="sortby">
               Sort By
@@ -11,31 +11,33 @@
                   <option  value="LowHigh">Low to High</option>
                   <option  value="HighLow">High to Low</option>
               </select>
+              <input type="radio" onclick="submit_form()" value="LowHigh">Sort salary from low to high
+              <br>
+              <input type="radio" onclick="submit_form()" value="HighLow">Sort salary from high to low
           </label>
+
   </form>
-      <script>
-      function submit_form(){
-          var form = document.getElementById("sort-form");
-          form.submit();
-      }
-      </script>
     <p>{{error}}</p>
-    <form id="jobmarket-form" name="jobmarket-form" action="" method="POST">
-    <input type = "hidden" id="formid" name="formid" value="jobmarket-form">
-      <input type="radio" id="type" name="type" value="employer">
-      <label>employer</label><br>
-      <input type="radio" id="type" name="type" value="country">
-      <label>country</label><br>
-      <input type="radio" id="type" name="type" value="state">
-      <label>state</label><br>
-      <input type="radio" id="type" name="type" value="city">
-      <label>city</label><br>
-      <input type="radio" id="type" name="type" value="salary">
-      <label>salary</label><br>
-      <input type="radio" id="type" name="type" value="jobTitle">
-      <label>jobTitle</label><br>
-      <input type="input" id = "input" name="input" placeholder="input">
-      <label>input</label>
+    
+    <h2 id="category">Category</h2>
+    <form id="jobmarket-form" name="jobmarket-form" method="POST">
+    <input type = "hidden" id="formid1" name="formid" value="jobmarket-form">
+      <input type="radio" id="6" name="type" value="jobTitle">
+      <label>Job Title</label><br>
+      <input type="radio" id="1" name="type" value="employer">
+      <label>Employer</label><br>
+      <input type="radio" id="2" name="type" value="country">
+      <label>Country</label><br>
+      <input type="radio" id="3" name="type" value="state">
+      <label>State</label><br>
+      <input type="radio" id="4" name="type" value="city">
+      <label>City</label><br>
+      <input type="radio" id="5" name="type" value="salary">
+      <label>Salary</label><br><br>
+      
+    <label>Type a name of submitted category:</label>
+      <input type="text" id = "7" name="input" placeholder="input">
+      <br>
       <br>  
       <button class="submitButton" type="submit">search</button>
     </form>
@@ -45,8 +47,8 @@
   {{#each jobs}}
   
     <div class="jobList">
-  <input type = "hidden" id="formid" name="formid" value="jobpost-form">
-    <label><h3>{{jobTitle}}</h3></label>
+  <input type = "hidden" id="formid2" name="formid" value="jobpost-form">
+    <h3>{{jobTitle}}</h3>
     <label>Employer:{{employer}}</label>
     <br>
     <label>salary:{{salary}}</label>
@@ -57,8 +59,8 @@
     <br>
     <label>Description:{{jobDescription}}</label>
     <br>
-    <input type = "hidden" id="jobid" name="jobid" value={{_id}}>
-    <input type = "hidden" id="posterid" name="posterid" value={{posterId}}>
+    <input type = "hidden" name="jobid" value={{_id}}>
+    <input type = "hidden" name="posterid" value={{posterId}}>
         
     <button id="{{_id}}" class="submitButton" type="submit" onClick="show(this.id);">
       submit resume
