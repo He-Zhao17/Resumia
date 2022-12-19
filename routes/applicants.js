@@ -259,6 +259,7 @@ router
           isHomepage: true,
           isApplicant: true,
           user:user,
+          title:"updateinfo"
         }) 
       } else {
         res.render("applicantBasicInfo", {
@@ -316,7 +317,8 @@ router
           error:e,
           isHomepage:true,
           isApplicant:true,
-          user:user});
+          user:user,
+          title:"updateinfo"});
       }
       } else {
         res.render("applicantBasicInfo", {
