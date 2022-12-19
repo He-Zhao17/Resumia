@@ -44,7 +44,7 @@ router.route("/jobmarket").get(async (req, res) => {
 
          res.render("jobMarket",{
            jobs:req.session.searchArray,
-           title: "Homepage",
+           title: "Job Market",
          time: new Date().toUTCString(),
          isHomepage: true,
          isApplicant: true, 
@@ -55,7 +55,7 @@ router.route("/jobmarket").get(async (req, res) => {
          }
          console.log(req.session.searchArray)
         }catch (error) {
-          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          res.render("jobMarket",{jobs:req.session.searchArray,title: "Job Market",
           time: new Date().toUTCString(),
           isHomepage: true,
           isApplicant: true,
@@ -67,13 +67,13 @@ router.route("/jobmarket").get(async (req, res) => {
          let resume = await resumeData.getResumeByUserId(req.session.userId);
          console.log(resume)
          let array = await appData.createApplication(req.body.posterid,req.session.userId,resume._id.toString(),req.body.jobid);
-         res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+         res.render("jobMarket",{jobs:req.session.searchArray,title: "Job Market",
           time: new Date().toUTCString(),
           isHomepage: true,
           isApplicant: true}) 
          console.log(req.body);
         }catch (error) {
-          res.render("jobMarket",{jobs:req.session.searchArray,title: "Homepage",
+          res.render("jobMarket",{jobs:req.session.searchArray,title: "Job Market",
           time: new Date().toUTCString(),
           isHomepage: true,
           isApplicant: true,
@@ -215,7 +215,8 @@ router
         res.render("applicantProfile",{
           isHomepage: true,
           isApplicant: true,
-          user:array
+          user:array,
+          title: "profile",
         }) 
       } else {
         res.render("applicantBasicInfo", {
@@ -393,6 +394,7 @@ router.route("/updatePassword").get(async (req, res) => {
         time: new Date().toUTCString(),
         isHomepage: true,
         isApplicant: true,
+        title: "Update password"
       });
     } else {
       res.render("applicantBasicInfo", {
@@ -419,7 +421,8 @@ router.route("/updatePassword").get(async (req, res) => {
       time: new Date().toUTCString(),
       isHomepage: true,
       isApplicant: true,
-      error:error
+      error:error,
+      title: "User profile"
     });
   }
 })
