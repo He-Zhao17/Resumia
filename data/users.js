@@ -88,15 +88,15 @@ const addBasicInfo = async (
   country,
   phone
 ) => {
-  console.log("")
-  console.log(firstname);
-  console.log(lastname);
-  console.log(gender);
-  console.log(age);
-  console.log(city);
-  console.log(state);
-  console.log(country);
-  console.log(phone);
+  // console.log("")
+  // console.log(firstname);
+  // console.log(lastname);
+  // console.log(gender);
+  // console.log(age);
+  // console.log(city);
+  // console.log(state);
+  // console.log(country);
+  // console.log(phone);
   helpers.checkName(firstname);
   helpers.checkName(lastname);
   gender = helpers.checkGender(gender);
