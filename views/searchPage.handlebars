@@ -1,0 +1,37 @@
+<section class="MainPage">
+
+    <h1>Posted successfully!</h1>
+    <div class="JobInfo">
+        <h3>{{jobPost.jobTitle}}</h3>
+        Employer: {{jobPost.employer}}<br>
+        Country: {{jobPost.country}}<br>
+        State: {{jobPost.state}}<br>
+        City: {{jobPost.city}}<br>
+        Salary: {{jobPost.salary}}<br>
+        Job Description: {{jobPost.jobDescription}}<br>
+        Is Available: {{jobPost.isAvailable}}
+        <p style="color: red;">{{error}}</p>
+    </div>
+    <table class="applicationTable" style="border: 1px solid gray">
+        <tr class="applicationNav">
+            <td>Applicant Name</td>
+            <td>Company Name</td>
+            <td>Job Position</td>
+            <td>Submission date</td>
+            <td>Operation</td>
+        </tr>
+        {{#each applications}}
+            <tr>
+                <td class="appColumn">{{this.applicant.firstname}} {{this.applicant.lastname}}</td>
+                <td class="appColumn">{{this.job.employer}}</td>
+                <td class="appColumn">{{this.job.jobTitle}}</td>
+                <td class="appColumn">{{this.createTime}}</td>
+                <td class="appColumn">
+                    <button class="viewApp" onclick="window.location.href = '/applications/{{this._id}}'">VIEW</button>
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+
+
+</section>
